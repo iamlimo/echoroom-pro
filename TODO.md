@@ -1,0 +1,5 @@
+- [ ] Brainstorm + confirm plan for implementing functional dark mode (theme tokens + toggle wiring)
+- [ ] Update `src/styles/theme.css` so `.dark` actually changes variables (currently identical to `:root`)
+- [ ] Ensure `ThemeToggle` is rendered somewhere in `src/app/Layout.tsx` (it exists but isn’t wired in Layout/App)
+- [ ] Run build/dev to verify theme switching and no CSS breakage
+- [ ] Create/copy self-hosted hero video to `public/assets/home-back.mp4` (used by `src/app/pages/Home.tsx`)
