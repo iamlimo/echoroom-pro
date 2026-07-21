@@ -411,9 +411,12 @@ function Footer() {
       <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
         <div>
           <div className="flex items-center gap-0 select-none">
-            <span className="font-display text-xl font-black tracking-tight text-foreground">echo</span>
-            <span className="font-display text-xl font-black text-primary tracking-tight">O</span>
-            <span className="font-display text-xl font-black tracking-tight text-foreground">ROOM</span>
+         <img
+            src="/dist/assets/echoroom-logo.png"
+            alt="EchoRoom"
+            className="h-10 w-auto md:h-11 drop-shadow-[0_2px_10px_rgba(0,0,0,0.35)]"
+            style={{ filter: "brightness(0) invert(1)" }}
+          />
           </div>
           <p className="text-xs text-muted-foreground mt-2 font-mono tracking-wide">EchooRoom Studio Ltd</p>
         </div>
