@@ -5,12 +5,12 @@ import { Menu, X, ArrowRight } from "lucide-react";
 import ThemeToggle from "./components/theme/ThemeToggle";
 
 const NAV_LINKS = [
-  { label: "Services", to: "/services" },
-  { label: "About", to: "/about" },
-  { label: "Team", to: "/team" },
-  { label: "Studio", to: "/studio" },
-  { label: "Shows", to: "/shows" },
-  { label: "Contact", to: "/", hash: "#contact" },
+    { label: "About", to: "/about" },
+  // { label: "Services", to: "/services" },
+  // { label: "Team", to: "/team" },
+  // { label: "Studio", to: "/studio" },
+  // { label: "Shows", to: "/shows" },
+  // { label: "Contact", to: "/", hash: "#contact" },
 ];
 
 function Nav() {
@@ -65,7 +65,7 @@ function Nav() {
           className="flex items-center gap-0 select-none"
         >
           <img
-            src="/dist/assets/echoroom-logo.png"
+            src="/assets/echoroom-logo.png"
             alt="EchoRoom"
             className="h-10 w-auto md:h-11 drop-shadow-[0_2px_10px_rgba(0,0,0,0.35)]"
             style={{ filter: "brightness(0) invert(1)" }}
