@@ -47,7 +47,7 @@ var ADVANTAGES = [
     { num: "2.4", title: "One Partner. One Invoice. Zero Micro-Management.", desc: "All 11 marketing and media services under one roof. One account manager, one invoice. Your team stops chasing suppliers and freelancers — permanently.", icon: "✦" },
 ];
 var STATS = [
-    { value: "11", label: "Core service pillars" },
+    { value: "13", label: "Core service pillars" },
     { value: "85%", label: "Drop in negative mentions within 24hrs" },
     { value: "98.2%", label: "Client retention rate" },
     { value: "3×", label: "Share of Voice increase post-crisis" },
@@ -80,7 +80,9 @@ function Hero() {
                             "Great Brands Don't Compete for  ",
                             React.createElement("em", { className: "not-italic text-primary" }, "Attention"),
                             React.createElement("br", null),
-                            ", They Earn Influence")),
+                            " They Earn ",
+                            React.createElement("em", { className: "not-italic text-primary" }, "Influence"),
+                            ".")),
                     React.createElement("div", { className: "lg:max-w-sm pb-2" },
                         React.createElement("p", { className: "text-foreground/90 text-lg leading-relaxed mb-8" }, "EchooRoom is an integrated creative company that helps ambitious organisations build influential brands, create meaningful experiences, and accelerate growth through strategy, storytelling, media, marketing, and technology."),
                         React.createElement("div", { className: "flex flex-col sm:flex-row gap-3" },
@@ -101,7 +103,7 @@ function Services() {
             React.createElement("p", { className: "font-mono text-xs text-primary tracking-[0.2em] uppercase mb-4" }, "Section 3"),
             React.createElement("div", { className: "flex items-end justify-between gap-8" },
                 React.createElement("h2", { className: "font-display text-4xl md:text-6xl font-black leading-tight text-foreground" },
-                    "The 11 Core",
+                    "The 13 Core",
                     React.createElement("br", null),
                     "Service Pillars"),
                 React.createElement("p", { className: "hidden md:block max-w-xs text-muted-foreground text-sm leading-relaxed" }, "Explore our specialised services below to turn your brand identity into a high-yielding corporate asset."))),

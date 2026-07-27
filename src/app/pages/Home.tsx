@@ -31,7 +31,7 @@ const ADVANTAGES = [
 ];
 
 const STATS = [
-  { value: "11", label: "Core service pillars" },
+  { value: "13", label: "Core service pillars" },
   { value: "85%", label: "Drop in negative mentions within 24hrs" },
   { value: "98.2%", label: "Client retention rate" },
   { value: "3×", label: "Share of Voice increase post-crisis" },
@@ -98,7 +98,7 @@ function Hero() {
                 Strategic Capability — Enterprise Profile & Service Catalogue
               </p>
               <h3 className="font-display text-[clamp(3.2rem,9vw,8.5rem)] font-black leading-[0.92] tracking-tight text-foreground">
-                Great Brands Don't Compete for  <em className="not-italic text-primary">Attention</em><br />, They Earn Influence
+                Great Brands Don't Compete for  <em className="not-italic text-primary">Attention</em><br /> They Earn <em className="not-italic text-primary">Influence</em>.
 
                
               </h3>
@@ -141,7 +141,7 @@ function Services() {
         <p className="font-mono text-xs text-primary tracking-[0.2em] uppercase mb-4">Section 3</p>
         <div className="flex items-end justify-between gap-8">
           <h2 className="font-display text-4xl md:text-6xl font-black leading-tight text-foreground">
-            The 11 Core<br />Service Pillars
+            The 13 Core<br />Service Pillars
           </h2>
           <p className="hidden md:block max-w-xs text-muted-foreground text-sm leading-relaxed">
             Explore our specialised services below to turn your brand identity into a high-yielding corporate asset.
