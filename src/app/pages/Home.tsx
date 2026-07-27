@@ -8,17 +8,19 @@ const INDUSTRIES = [
 ];
 
 const SERVICES = [
-  { num: "01", title: "Video Production & Commercials", desc: "Cinema-grade visual storytelling engineered to command attention on television, digital advertising channels, and global corporate networks." },
-  { num: "02", title: "Motion Graphics & Digital Design", desc: "Transforming complex data, user journeys, and brand assets into beautiful, conversion-focused visuals across every channel." },
-  { num: "03", title: "Audio Engineering & Podcast Production", desc: "Studio-grade acoustic solutions designed to give enterprise brands a clear, commanding voice on every platform." },
-  { num: "04", title: "Influencer & PR Management", desc: "Strategic communication architecture and media orchestration designed to build credibility and insulate market reputation." },
+  { num: "01", title: "Media Production", desc: "Every brand has a story. The most successful brands know how to tell it. We create premium media productions—from television commercials and brand films to documentaries, digital content, podcasts, and live broadcasts—that help organisations build trust, inspire action, and create lasting business impact." },
+  { num: "02", title: "Brand Strategy", desc: "Great brands are built on clarity, not coincidence. We help organisations define who they are, what they stand for, and how they create value—building distinctive brands that earn trust, inspire loyalty, and drive long-term growth." },
+  { num: "03", title: "Creative Strategy", desc: "Creativity is most powerful when it solves business problems. We develop insight-driven creative strategies that transform ideas into campaigns, experiences, and stories that connect with audiences and deliver measurable results." },
+  { num: "04", title: "Digital Marketing", desc: "Growth doesn't happen by chance. It happens through strategy. We design integrated digital marketing campaigns that combine data, creativity, and technology to increase visibility, generate demand, and accelerate business performance across every digital touchpoint." },
   { num: "05", title: "White-Label Enterprise Solutions", desc: "Backend creative execution engineered to scale content production without increasing internal headcount — under your brand name." },
-  { num: "06", title: "High-Value Event IP Monetization", desc: "Designing, executing, and fully monetizing proprietary event properties that command premium market attention." },
-  { num: "07", title: "Entertainment Marketing & Brand Partnerships", desc: "Connecting corporate brands with premium entertainment assets to drive cultural relevance and commercial alignment." },
-  { num: "08", title: "Experiential & BTL Marketing", desc: "Designing high-impact physical touchpoints that bridge the gap between corporate brands and real-world consumers." },
-  { num: "09", title: "Content Distribution & Amplification", desc: "Bypassing low-reach organic algorithms to guarantee high-volume visibility and direct conversion across established media networks." },
-  { num: "10", title: "Influencer Marketing & Network", desc: "Building, managing, and scaling high-yield creator networks to drive authentic consumer engagement." },
-  { num: "11", title: "Strategic & Brand Identity Solutions", desc: "Corporate rebranding, GTM strategy engineering, and market research — unifying every visual and communication asset." },
+  { num: "06", title: "Media Buying", desc: "The right message deserves the right audience. We plan, negotiate, and optimise media investments across digital, broadcast, print, and outdoor channels—maximising reach, improving efficiency, and delivering measurable campaign performance."},
+  { num: "07", title: "Social Media Management", desc: "Conversations shape brands every day. We help organisations build meaningful relationships through strategic content, community management, platform growth, and social media campaigns that strengthen brand presence and drive engagement." },
+  { num: "08", title: "PR & Communications", desc: "Reputation is earned through every conversation. We help organisations communicate with confidence, build credibility, manage public perception, and strengthen relationships through strategic public relations and corporate communications." },
+  { num: "09", title: "Experiential Marketing", desc: "People remember how brands make them feel. We create immersive brand experiences that bring ideas to life, deepen audience engagement, and turn meaningful interactions into lasting brand loyalty." },
+  { num: "10", title: "Influencer Marketing", desc: "Influence is built on trust, not just reach. We connect brands with creators, industry voices, and cultural influencers to deliver authentic campaigns that spark conversations, build credibility, and inspire action." },
+  { num: "11", title: "BTL Activations", desc: "The strongest brand connections happen in the real world. We design below-the-line activation campaigns that bring brands closer to consumers through memorable experiences, product engagement, and measurable market impact." },
+   { num: "12", title: "Event Production", desc: "Every event is an opportunity to create influence. From executive forums and product launches to large-scale conferences and live experiences, we produce events that engage audiences, strengthen brands, and leave lasting impressions." },
+    { num: "13", title: "Research & Analytics", desc: "The best decisions begin with better insights. We transform research, market intelligence, and performance analytics into actionable strategies that help organisations understand audiences, measure impact, and make confident business decisions." },
 ];
 
 const ADVANTAGES = [
@@ -95,17 +97,16 @@ function Hero() {
               <p className="font-mono text-xs text-primary tracking-[0.22em] uppercase mb-8">
                 Strategic Capability — Enterprise Profile & Service Catalogue
               </p>
-              <h1 className="font-display text-[clamp(3.2rem,9vw,8.5rem)] font-black leading-[0.92] tracking-tight text-foreground">
-                We make<br />
-                brands<br />
-                <em className="not-italic text-primary">impossible</em><br />
-                to ignore.
-              </h1>
+              <h3 className="font-display text-[clamp(3.2rem,9vw,8.5rem)] font-black leading-[0.92] tracking-tight text-foreground">
+                Great Brands Don't Compete for  <em className="not-italic text-primary">Attention</em><br />, They Earn Influence
+
+               
+              </h3>
             </div>
 
             <div className="lg:max-w-sm pb-2">
               <p className="text-foreground/90 text-lg leading-relaxed mb-8">
-                EchooRoom Studio Ltd is an elite, full-service creative engine, media production powerhouse, and strategic communications agency — purpose-built for organisations across all industries.
+EchooRoom is an integrated creative company that helps ambitious organisations build influential brands, create meaningful experiences, and accelerate growth through strategy, storytelling, media, marketing, and technology.
               </p>
               <div className="flex flex-col sm:flex-row gap-3">
                 <a href="#services" className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-6 py-3.5 font-bold text-sm tracking-wide hover:bg-primary/85 transition-colors">

@@ -6,11 +6,11 @@ import ThemeToggle from "./components/theme/ThemeToggle";
 
 const NAV_LINKS = [
     { label: "About", to: "/about" },
-  // { label: "Services", to: "/services" },
+  { label: "Services", to: "/services" },
   // { label: "Team", to: "/team" },
-  // { label: "Studio", to: "/studio" },
-  // { label: "Shows", to: "/shows" },
-  // { label: "Contact", to: "/", hash: "#contact" },
+  { label: "Studio", to: "/studio" },
+  { label: "Shows", to: "/shows" },
+  { label: "Contact", to: "/", hash: "#contact" },
 ];
 
 function Nav() {
