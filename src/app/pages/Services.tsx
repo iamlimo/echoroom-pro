@@ -438,16 +438,18 @@ function ServiceSection({ service }: { service: Service }) {
             <h2 className="font-display text-3xl md:text-5xl font-black text-foreground leading-tight mb-5">
               {service.title}
             </h2>
-            <p className="text-muted-foreground text-lg leading-relaxed max-w-xl">{service.tagline}</p>
+            <p className="text-muted-foreground text-base md:text-lg leading-relaxed max-w-xl">{service.tagline}</p>
             <div className="mt-8 max-w-4xl">
-              <ul className="grid gap-2 text-sm leading-relaxed text-foreground/90">
+              <div className="flex flex-wrap items-center gap-2">
                 {service.products.map((product) => (
-                  <li key={product} className="flex gap-3 items-start">
-                    <span className="mt-1 h-1.5 w-1.5 rounded-full bg-primary shrink-0" />
-                    <span>{product}</span>
-                  </li>
+                  <span
+                    key={product}
+                    className="inline-flex items-center rounded-full border border-primary/20 bg-primary/10 px-3 py-1.5 text-xs font-medium text-primary transition-colors duration-200 hover:bg-primary/15"
+                  >
+                    {product}
+                  </span>
                 ))}
-              </ul>
+              </div>
             </div>
           </div>
 
