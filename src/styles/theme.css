@@ -229,3 +229,7 @@
     line-height: 1.5;
   }
 }
+
+.hide-out{
+  display: none;
+}

@@ -8,30 +8,29 @@ const INDUSTRIES = [
 ];
 
 const SERVICES = [
-  { num: "01", title: "Media Production", desc: "Every brand has a story. The most successful brands know how to tell it. We create premium media productions—from television commercials and brand films to documentaries, digital content, podcasts, and live broadcasts—that help organisations build trust, inspire action, and create lasting business impact." },
-  { num: "02", title: "Brand Strategy", desc: "Great brands are built on clarity, not coincidence. We help organisations define who they are, what they stand for, and how they create value—building distinctive brands that earn trust, inspire loyalty, and drive long-term growth." },
-  { num: "03", title: "Creative Strategy", desc: "Creativity is most powerful when it solves business problems. We develop insight-driven creative strategies that transform ideas into campaigns, experiences, and stories that connect with audiences and deliver measurable results." },
-  { num: "04", title: "Digital Marketing", desc: "Growth doesn't happen by chance. It happens through strategy. We design integrated digital marketing campaigns that combine data, creativity, and technology to increase visibility, generate demand, and accelerate business performance across every digital touchpoint." },
-  { num: "05", title: "White-Label Enterprise Solutions", desc: "Backend creative execution engineered to scale content production without increasing internal headcount — under your brand name." },
-  { num: "06", title: "Media Buying", desc: "The right message deserves the right audience. We plan, negotiate, and optimise media investments across digital, broadcast, print, and outdoor channels—maximising reach, improving efficiency, and delivering measurable campaign performance."},
-  { num: "07", title: "Social Media Management", desc: "Conversations shape brands every day. We help organisations build meaningful relationships through strategic content, community management, platform growth, and social media campaigns that strengthen brand presence and drive engagement." },
-  { num: "08", title: "PR & Communications", desc: "Reputation is earned through every conversation. We help organisations communicate with confidence, build credibility, manage public perception, and strengthen relationships through strategic public relations and corporate communications." },
-  { num: "09", title: "Experiential Marketing", desc: "People remember how brands make them feel. We create immersive brand experiences that bring ideas to life, deepen audience engagement, and turn meaningful interactions into lasting brand loyalty." },
-  { num: "10", title: "Influencer Marketing", desc: "Influence is built on trust, not just reach. We connect brands with creators, industry voices, and cultural influencers to deliver authentic campaigns that spark conversations, build credibility, and inspire action." },
-  { num: "11", title: "BTL Activations", desc: "The strongest brand connections happen in the real world. We design below-the-line activation campaigns that bring brands closer to consumers through memorable experiences, product engagement, and measurable market impact." },
-   { num: "12", title: "Event Production", desc: "Every event is an opportunity to create influence. From executive forums and product launches to large-scale conferences and live experiences, we produce events that engage audiences, strengthen brands, and leave lasting impressions." },
-    { num: "13", title: "Research & Analytics", desc: "The best decisions begin with better insights. We transform research, market intelligence, and performance analytics into actionable strategies that help organisations understand audiences, measure impact, and make confident business decisions." },
+  { num: "01", title: "Media Production", desc: "Premium video, audio, and live production for commercials, brand films, podcasts, social content and broadcast-ready campaigns." },
+  { num: "02", title: "Digital Marketing", desc: "Integrated digital campaigns that combine data, creativity, and technology to increase visibility, demand, and growth." },
+  { num: "03", title: "Brand Strategy", desc: "Define who you are, what you stand for, and how your brand creates value in a crowded market." },
+  { num: "04", title: "Creative Strategy", desc: "Transform insight into campaigns, stories and experiences that move audiences and deliver measurable results." },
+  { num: "05", title: "Media Buying", desc: "Plan, negotiate and optimise media investments across digital, broadcast, print and outdoor channels." },
+  { num: "06", title: "Social Media Management", desc: "Build stronger relationships through content, communities, platform growth and performance-driven social campaigns." },
+  { num: "07", title: "PR & Communications", desc: "Manage reputation and public perception with confident storytelling, media relations, and crisis-ready communications." },
+  { num: "08", title: "Experiential Marketing", desc: "Design immersive brand experiences that bring ideas to life and create memorable customer moments." },
+  { num: "09", title: "Influencer Marketing", desc: "Connect brands with creators and industry voices to deliver authentic campaigns that spark action." },
+  { num: "10", title: "BTL Activations", desc: "Create real-world consumer activations, sampling, retail experiences and engagement campaigns that drive impact." },
+  { num: "11", title: "Event Production", desc: "Produce conferences, launches, hybrid events and large-format experiences that strengthen brand influence." },
+  { num: "12", title: "Research & Analytics", desc: "Turn audience insight, performance data and market intelligence into smarter brand and campaign decisions." },
 ];
 
 const ADVANTAGES = [
-  { num: "2.1", title: "Save Costs. Stop Buying Expensive Equipment.", desc: "Turn big upfront costs into a simple, predictable monthly expense. Instant access to our multi-million Naira setup — film studios, design engines, sound stages, and pre-built distribution networks.", icon: "₦" },
-  { num: "2.2", title: "No HR Stress, Hiring Hassles, or Creative Burnout.", desc: "A fully trained, expert creative department on demand. Scriptwriters, video editors, sound masters, brand partnership managers, and physical event coordinators — ready now.", icon: "⚡" },
-  { num: "2.3", title: "Bulletproof Privacy & Enterprise-Grade Security.", desc: "Encrypted data workflows, isolated file storage, and strict white-label contracts. We work completely behind the scenes — your brand reputation is completely safe.", icon: "🔒" },
-  { num: "2.4", title: "One Partner. One Invoice. Zero Micro-Management.", desc: "All 11 marketing and media services under one roof. One account manager, one invoice. Your team stops chasing suppliers and freelancers — permanently.", icon: "✦" },
+{ num: "2.1", title: "Save Costs. Stop Buying Expensive Equipment.", desc: "Turn capital-intensive production into a predictable monthly investment with access to studios, production gear, post workflows and distribution services.", icon: "₦" },
+  { num: "2.2", title: "No HR Stress, Hiring Hassles, or Creative Burnout.", desc: "A fully trained creative team on demand: writers, editors, producers, media specialists and event operators ready to execute immediately.", icon: "⚡" },
+  { num: "2.3", title: "Bulletproof Privacy & Enterprise-Grade Security.", desc: "Encrypted workflows, isolated storage and strict white-label agreements keep your brand work confidential and secure.", icon: "🔒" },
+  { num: "2.4", title: "One Partner. One Invoice. Zero Micro-Management.", desc: "All core strategy, creative, production and distribution services under one roof so your team stops chasing multiple suppliers.", icon: "✦" },
 ];
 
 const STATS = [
-  { value: "13", label: "Core service pillars" },
+  { value: "12", label: "Core service pillars" },
   { value: "85%", label: "Drop in negative mentions within 24hrs" },
   { value: "98.2%", label: "Client retention rate" },
   { value: "3×", label: "Share of Voice increase post-crisis" },
@@ -110,7 +109,7 @@ EchooRoom is an integrated creative company that helps ambitious organisations b
               </p>
               <div className="flex flex-col sm:flex-row gap-3">
                 <a href="#services" className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-6 py-3.5 font-bold text-sm tracking-wide hover:bg-primary/85 transition-colors">
-                  Explore 11 services <ArrowRight size={15} />
+                  Explore 12 services <ArrowRight size={15} />
                 </a>
                 <a href="#contact" className="inline-flex items-center gap-2 border border-white/25 text-foreground px-6 py-3.5 text-sm tracking-wide hover:border-primary/60 transition-colors">
                   <Play size={13} className="fill-current" /> Book alignment brief
@@ -139,26 +138,41 @@ function Services() {
     <section id="services" className="py-24 px-6 md:px-12 max-w-[1400px] mx-auto">
       <div className="mb-16">
         <p className="font-mono text-xs text-primary tracking-[0.2em] uppercase mb-4">Section 3</p>
-        <div className="flex items-end justify-between gap-8">
-          <h2 className="font-display text-4xl md:text-6xl font-black leading-tight text-foreground">
-            The 13 Core<br />Service Pillars
+        <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+          <h2 className="font-display text-4xl md:text-6xl font-black leading-tight text-foreground max-w-2xl">
+            The 12 Core<br />Service Pillars
           </h2>
-          <p className="hidden md:block max-w-xs text-muted-foreground text-sm leading-relaxed">
+          <p className="max-w-xs text-muted-foreground text-sm leading-relaxed">
             Explore our specialised services below to turn your brand identity into a high-yielding corporate asset.
           </p>
         </div>
       </div>
-      <div className="divide-y divide-border">
+
+      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
         {SERVICES.map((s, i) => (
-          <div key={s.num} className="group cursor-pointer" onMouseEnter={() => setActive(i)} onMouseLeave={() => setActive(null)}>
-            <div className="py-6 md:py-7 grid grid-cols-[56px_1fr_auto] md:grid-cols-[72px_1fr_340px_32px] gap-4 md:gap-8 items-center">
-              <span className="font-mono text-xs text-primary tracking-widest font-medium">{s.num}</span>
-              <h3 className={`font-display text-xl md:text-3xl font-black transition-colors duration-150 ${active === i ? "text-primary" : "text-foreground"}`}>{s.title}</h3>
-              <p className={`hidden md:block text-sm text-muted-foreground leading-relaxed transition-opacity duration-200 ${active === i ? "opacity-100" : "opacity-50"}`}>{s.desc}</p>
-              <ArrowUpRight size={18} className={`transition-all duration-200 shrink-0 ${active === i ? "text-primary rotate-0" : "text-muted-foreground -rotate-45"}`} />
+          <button
+            key={s.num}
+            type="button"
+            onMouseEnter={() => setActive(i)}
+            onMouseLeave={() => setActive(null)}
+            onFocus={() => setActive(i)}
+            onBlur={() => setActive(null)}
+            className={`group rounded-[2rem] border border-border bg-background p-6 text-left transition-all duration-500 ease-out focus:outline-none focus:ring-2 focus:ring-primary/30 hover:-translate-y-1 hover:border-primary/50 hover:bg-secondary/5 ${active === i ? "border-primary/60 bg-secondary/5 shadow-[0_24px_80px_-52px_rgba(79,70,229,0.45)]" : ""}`}
+          >
+            <div className="flex items-center justify-between gap-4">
+              <span className="font-mono text-[11px] uppercase tracking-[0.32em] text-primary">{s.num}</span>
+              <ArrowUpRight
+                size={18}
+                className={`transition-transform duration-300 ${active === i ? "rotate-0 text-primary" : "rotate-45 text-muted-foreground"}`}
+              />
             </div>
-            <p className="md:hidden text-sm text-muted-foreground leading-relaxed pb-5">{s.desc}</p>
-          </div>
+            <h3 className={`font-display text-xl md:text-2xl font-black mt-6 leading-tight transition-colors duration-300 ${active === i ? "text-primary" : "text-foreground"}`}>
+              {s.title}
+            </h3>
+            <p className="mt-4 text-sm leading-relaxed text-muted-foreground transition-all duration-300 opacity-100">
+              {s.desc}
+            </p>
+          </button>
         ))}
       </div>
     </section>
@@ -172,7 +186,7 @@ function Advantage() {
         <div className="mb-16">
           <p className="font-mono text-xs text-primary tracking-[0.2em] uppercase mb-4">Section 2</p>
           <h2 className="font-display text-4xl md:text-6xl font-black leading-tight text-foreground max-w-2xl">The Enterprise Advantage</h2>
-          <p className="text-muted-foreground mt-4 text-lg max-w-xl leading-relaxed">Four structural reasons your business stops losing time and money on fragmented marketing.</p>
+          <p className="text-muted-foreground mt-4 text-lg max-w-xl leading-relaxed">Four structural reasons your organisation stops losing time and money on fragmented marketing.</p>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-border">
           {ADVANTAGES.map((adv) => (
@@ -193,13 +207,12 @@ function Advantage() {
 
 function StudioProfile() {
   return (
-    <section className="py-24 px-6 md:px-12 max-w-[1400px] mx-auto">
+    <section className="py-24 px-6 md:px-12 max-w-[1400px] mx-auto hide-out">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
         <div>
           <p className="font-mono text-xs text-primary tracking-[0.2em] uppercase mb-6">Section 1 — The Studio Profile</p>
           <h2 className="font-display text-4xl md:text-5xl font-black leading-[1.05] text-foreground mb-8">Your fully outsourced creative department.</h2>
-          <p className="text-muted-foreground text-lg leading-relaxed mb-5">We design premium visual, auditory, and experiential assets for brands that refuse to blend into the background.</p>
-          <p className="text-muted-foreground leading-relaxed mb-10">We transform complex corporate narratives and service offerings into high-impact digital assets that capture attention, command authority, and unlock massive commercial value with zero operational friction.</p>
+          <p className="text-muted-foreground text-lg leading-relaxed mb-10">We design premium visual, auditory and experiential assets for brands that refuse to blend in. The work we create captures attention, strengthens authority and unlocks measurable commercial value without extra complexity.</p>
           <div className="space-y-3 mb-10">
             {["Cinematic Enterprise Video Production", "Dynamic Motion Graphics Animation", "Studio-Grade Branded Audio Networks", "Experiential BTL Marketing Activations", "High-Yield Content Retainers"].map((item) => (
               <div key={item} className="flex items-center gap-3">
@@ -237,9 +250,9 @@ function CaseStudy() {
         </div>
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-px bg-border mb-16">
           {[
-            { label: "The Challenge", color: "bg-card", content: "A regional corporate organisation faced an unexpected operational disruption during a critical product rollout, causing service delays and a sudden wave of negative public sentiment across major digital platforms." },
-            { label: "Our Intervention", color: "bg-secondary", content: "Within two hours, we activated a custom Crisis Management Blueprint — establishing unified response scripts, coordinating with key industry editors, briefing micro-influencers to anchor public attention on the brand's rapid resolution roadmap." },
-            { label: "The Result", color: "bg-card", content: "Harmful public mentions fell 85% within the first 24 hours. We secured 14 positive, high-authority editorial placements across top-tier networks inside five days. Customer retention stabilised at 98.2%, and Share of Voice increased threefold." },
+            { label: "The Challenge", color: "bg-card", content: "A corporate organisation faced an operational disruption during a critical rollout, triggering rapid reputational risk across digital channels." },
+            { label: "Our Intervention", color: "bg-secondary", content: "We activated a Crisis Management Blueprint with unified response scripts, media coordination, and influencer support to shift the narrative." },
+            { label: "The Result", color: "bg-card", content: "Negative mentions dropped sharply, editorial coverage improved, retention stabilised, and Share of Voice grew threefold." },
           ].map((col) => (
             <div key={col.label} className={`${col.color} p-8 md:p-10`}>
               <p className="font-mono text-[10px] text-primary tracking-widest uppercase mb-5 border-b border-border pb-4">{col.label}</p>
