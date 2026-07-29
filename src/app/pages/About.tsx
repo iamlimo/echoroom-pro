@@ -279,7 +279,7 @@ export default function About() {
         </div>
       </section>
 
-      <section id="services" className="py-20 px-6 md:px-12 max-w-[1400px] mx-auto">
+      <section id="services" className="py-20 px-6 md:px-12 max-w-[1400px] mx-auto hide-out">
         <div className="grid gap-12 lg:grid-cols-[0.95fr_1.05fr] lg:items-end">
           <RevealBlock>
             <p className="font-mono text-xs text-primary tracking-[0.22em] uppercase mb-4">

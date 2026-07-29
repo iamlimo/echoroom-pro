@@ -1,17 +1,23 @@
 import { useState, useEffect } from "react";
 import { Outlet, NavLink, useNavigate, useLocation } from "react-router";
-import { Menu, X, ArrowRight } from "lucide-react";
+import { Menu, X, ArrowRight, ChevronDown } from "lucide-react";
 
 import ThemeToggle from "./components/theme/ThemeToggle";
 import Footer from "./components/Footer";
 
 const NAV_LINKS = [
-   { label: "Home", to: "/" },
-    { label: "About", to: "/about" },
+  { label: "Home", to: "/" },
+  {
+    label: "Who We Are",
+    to: "/about",
+    children: [
+      { label: "About EchooRoom", to: "/about" },
+      { label: "Our Team", to: "/team" },
+    ],
+  },
   { label: "What We Do", to: "/services" },
-  { label: "Team", to: "/team" },
   { label: "Studio", to: "/studio" },
-  { label: "Shows", to: "/shows" },
+  // { label: "Shows", to: "/shows" },
   { label: "Contact", to: "/", hash: "#contact" },
 ];
 
@@ -77,6 +83,37 @@ function Nav() {
         <div className="hidden md:flex items-center gap-10">
           {NAV_LINKS.map((link) => {
             const isActive = !link.hash && location.pathname === link.to;
+            if (link.children) {
+              return (
+                <div key={link.label} className="relative group">
+                  <button
+                    onClick={() => handleNavClick(link)}
+                    className={`text-sm tracking-wide transition-colors duration-200 flex items-center gap-2 ${
+                      isActive
+                        ? "text-primary font-medium"
+                        : "text-muted-foreground hover:text-foreground"
+                    }`}
+                  >
+                    {link.label}
+                    <ChevronDown size={14} className="text-muted-foreground transition-transform duration-200 group-hover:-rotate-180 group-hover:text-foreground" />
+                  </button>
+
+                  {/* Dropdown */}
+                  <div className="absolute left-0 mt-3 w-44 bg-background border border-border rounded-md shadow-lg py-2 opacity-0 group-hover:opacity-100 transform scale-95 group-hover:scale-100 transition-all duration-150 z-50">
+                    {link.children.map((child) => (
+                      <button
+                        key={child.label}
+                        onClick={() => handleNavClick(child)}
+                        className="w-full text-left px-4 py-2 text-sm text-muted-foreground hover:text-foreground hover:bg-background/50"
+                      >
+                        {child.label}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              );
+            }
+
             return (
               <button
                 key={link.label}
@@ -118,13 +155,28 @@ function Nav() {
         <div className="md:hidden bg-background/70 backdrop-blur border-b border-border px-6 pb-8 pt-4 flex flex-col gap-6">
           <ThemeToggle />
           {NAV_LINKS.map((link) => (
-            <button
-              key={link.label}
-              onClick={() => handleNavClick(link)}
-              className="text-left text-2xl font-display font-black text-foreground hover:text-primary transition-colors"
-            >
-              {link.label}
-            </button>
+            <div key={link.label}>
+              <button
+                onClick={() => handleNavClick(link)}
+                className="text-left text-2xl font-display font-black text-foreground hover:text-primary transition-colors w-full"
+              >
+                {link.label}
+              </button>
+
+              {link.children && (
+                <div className="pl-4 mt-2 flex flex-col gap-2">
+                  {link.children.map((child) => (
+                    <button
+                      key={child.label}
+                      onClick={() => handleNavClick(child)}
+                      className="text-left text-lg font-display font-bold text-foreground/80 hover:text-primary transition-colors"
+                    >
+                      {child.label}
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
           ))}
           <button
             onClick={() => handleNavClick({ label: "Contact", to: "/", hash: "#contact" })}

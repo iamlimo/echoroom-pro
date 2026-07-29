@@ -8,7 +8,7 @@ const INDUSTRIES = [
 ];
 
 const SERVICES = [
-  { num: "01", title: "Media Production", desc: "Premium video, audio, and live production for commercials, brand films, podcasts, social content and broadcast-ready campaigns." },
+  { num: "01", title: "Media Production",  desc: "Premium video, audio, and live production for commercials, brand films, podcasts, social content and broadcast-ready campaigns." },
   { num: "02", title: "Digital Marketing", desc: "Integrated digital campaigns that combine data, creativity, and technology to increase visibility, demand, and growth." },
   { num: "03", title: "Brand Strategy", desc: "Define who you are, what you stand for, and how your brand creates value in a crowded market." },
   { num: "04", title: "Creative Strategy", desc: "Transform insight into campaigns, stories and experiences that move audiences and deliver measurable results." },
@@ -137,18 +137,27 @@ function Services() {
   return (
     <section id="services" className="py-24 px-6 md:px-12 max-w-[1400px] mx-auto">
       <div className="mb-16">
-        <p className="font-mono text-xs text-primary tracking-[0.2em] uppercase mb-4">Section 3</p>
         <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
-          <h2 className="font-display text-4xl md:text-6xl font-black leading-tight text-foreground max-w-2xl">
-            The 12 Core<br />Service Pillars
-          </h2>
-          <p className="max-w-xs text-muted-foreground text-sm leading-relaxed">
-            Explore our specialised services below to turn your brand identity into a high-yielding corporate asset.
-          </p>
+          <div>
+            <p className="font-mono text-xs text-primary tracking-[0.2em] uppercase mb-4">Section 3</p>
+            <h2 className="font-display text-4xl md:text-6xl font-black leading-tight text-foreground max-w-2xl">
+              The 12 Core<br />Service Pillars
+            </h2>
+            <p className="max-w-xl text-muted-foreground text-sm leading-relaxed mt-4">
+              Explore our specialised services below to turn your brand identity into a high-yielding corporate asset.
+            </p>
+          </div>
+
+          <a
+            href="/services"
+            className="inline-flex items-center justify-center gap-2 rounded-full border border-primary bg-primary/5 px-6 py-3 text-sm font-bold text-primary transition-colors duration-200 hover:bg-primary/15"
+          >
+            View our services <ArrowRight size={14} />
+          </a>
         </div>
       </div>
 
-      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+      <div className="grid gap-6 sm:grid-cols-2 xl:grid-cols-3">
         {SERVICES.map((s, i) => (
           <button
             key={s.num}
@@ -170,7 +179,7 @@ function Services() {
               {s.title}
             </h3>
             <p className="mt-4 text-sm leading-relaxed text-muted-foreground transition-all duration-300 opacity-100">
-              {s.desc}
+              {/* {s.desc} */}
             </p>
           </button>
         ))}
