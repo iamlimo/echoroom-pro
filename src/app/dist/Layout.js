@@ -4,6 +4,7 @@ var react_1 = require("react");
 var react_router_1 = require("react-router");
 var lucide_react_1 = require("lucide-react");
 var ThemeToggle_1 = require("./components/theme/ThemeToggle");
+var Footer_1 = require("./components/Footer");
 var NAV_LINKS = [
     { label: "About", to: "/about" },
     { label: "Services", to: "/services" },
@@ -79,6 +80,7 @@ function Layout() {
     return (React.createElement("div", { className: "bg-background text-foreground min-h-screen", style: { fontFamily: "'Poppins', sans-serif" } },
         React.createElement("style", null, "\n        .font-display { font-family: 'Fraunces', serif; }\n        .font-mono    { font-family: 'DM Mono', monospace; }\n      "),
         React.createElement(Nav, null),
-        React.createElement(react_router_1.Outlet, null)));
+        React.createElement(react_router_1.Outlet, null),
+        React.createElement(Footer_1["default"], null)));
 }
 exports["default"] = Layout;

@@ -3,6 +3,7 @@ import { Outlet, NavLink, useNavigate, useLocation } from "react-router";
 import { Menu, X, ArrowRight } from "lucide-react";
 
 import ThemeToggle from "./components/theme/ThemeToggle";
+import Footer from "./components/Footer";
 
 const NAV_LINKS = [
     { label: "About", to: "/about" },
@@ -148,6 +149,7 @@ export default function Layout() {
       `}</style>
       <Nav />
       <Outlet />
+      <Footer />
     </div>
   );
 }
