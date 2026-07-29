@@ -6,9 +6,10 @@ import ThemeToggle from "./components/theme/ThemeToggle";
 import Footer from "./components/Footer";
 
 const NAV_LINKS = [
+   { label: "Home", to: "/" },
     { label: "About", to: "/about" },
-  { label: "Services", to: "/services" },
-  // { label: "Team", to: "/team" },
+  { label: "What We Do", to: "/services" },
+  { label: "Team", to: "/team" },
   { label: "Studio", to: "/studio" },
   { label: "Shows", to: "/shows" },
   { label: "Contact", to: "/", hash: "#contact" },

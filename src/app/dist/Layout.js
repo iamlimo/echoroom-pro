@@ -6,8 +6,9 @@ var lucide_react_1 = require("lucide-react");
 var ThemeToggle_1 = require("./components/theme/ThemeToggle");
 var Footer_1 = require("./components/Footer");
 var NAV_LINKS = [
+    { label: "Home", to: "/" },
     { label: "About", to: "/about" },
-    { label: "Services", to: "/services" },
+    { label: "What We Do", to: "/services" },
     // { label: "Team", to: "/team" },
     { label: "Studio", to: "/studio" },
     { label: "Shows", to: "/shows" },
