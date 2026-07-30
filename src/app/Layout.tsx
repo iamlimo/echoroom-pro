@@ -197,7 +197,7 @@ export default function Layout() {
       style={{ fontFamily: "'Poppins', sans-serif" }}
     >
       <style>{`
-        .font-display { font-family: 'Fraunces', serif; }
+        .font-display { font-family: 'Poppins', sans-serif; }
         .font-mono    { font-family: 'DM Mono', monospace; }
       `}</style>
       <Nav />

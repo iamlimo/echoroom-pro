@@ -96,7 +96,7 @@ function Nav() {
 }
 function Layout() {
     return (React.createElement("div", { className: "bg-background text-foreground min-h-screen", style: { fontFamily: "'Poppins', sans-serif" } },
-        React.createElement("style", null, "\n        .font-display { font-family: 'Fraunces', serif; }\n        .font-mono    { font-family: 'DM Mono', monospace; }\n      "),
+        React.createElement("style", null, "\n        .font-display { font-family: 'Poppins', sans-serif; }\n        .font-mono    { font-family: 'DM Mono', monospace; }\n      "),
         React.createElement(Nav, null),
         React.createElement(react_router_1.Outlet, null),
         React.createElement(Footer_1["default"], null)));

@@ -39,6 +39,11 @@ var SERVICES = [
     { num: "11", title: "Event Production", desc: "Produce conferences, launches, hybrid events and large-format experiences that strengthen brand influence." },
     { num: "12", title: "Research & Analytics", desc: "Turn audience insight, performance data and market intelligence into smarter brand and campaign decisions." },
 ];
+var CAPABILITIES = {
+    Strategy: ["Brand Strategy", "Creative Strategy", "Research & Analytics"],
+    Marketing: ["Digital Marketing", "Media Buying", "Social Media", "PR & Communications", "Influencer Marketing"],
+    Experiences: ["Media Production", "Event Production", "Experiential Marketing", "BTL Activations"]
+};
 var ADVANTAGES = [
     { num: "2.1", title: "Save Costs. Stop Buying Expensive Equipment.", desc: "Turn capital-intensive production into a predictable monthly investment with access to studios, production gear, post workflows and distribution services.", icon: "₦" },
     { num: "2.2", title: "No HR Stress, Hiring Hassles, or Creative Burnout.", desc: "A fully trained creative team on demand: writers, editors, producers, media specialists and event operators ready to execute immediately.", icon: "⚡" },
@@ -75,7 +80,7 @@ function Hero() {
                 React.createElement("div", { className: "grid grid-cols-1 lg:grid-cols-[1fr_auto] gap-10 lg:gap-20 items-end" },
                     React.createElement("div", null,
                         React.createElement("p", { className: "font-mono text-xs text-primary tracking-[0.22em] uppercase mb-8" }, "Strategic Capability \u2014 Enterprise Profile & Service Catalogue"),
-                        React.createElement("h3", { className: "font-display text-[clamp(3.2rem,9vw,8.5rem)] font-black leading-[0.92] tracking-tight text-foreground" },
+                        React.createElement("h3", { className: "font-display text-[clamp(3.2rem,9vw,7rem)] font-black leading-[0.92] tracking-tight text-foreground" },
                             "Great Brands Don't Compete for  ",
                             React.createElement("em", { className: "not-italic text-primary" }, "Attention"),
                             React.createElement("br", null),
@@ -83,10 +88,10 @@ function Hero() {
                             React.createElement("em", { className: "not-italic text-primary" }, "Influence"),
                             ".")),
                     React.createElement("div", { className: "lg:max-w-sm pb-2" },
-                        React.createElement("p", { className: "text-foreground/90 text-lg leading-relaxed mb-8" }, "EchooRoom is an integrated creative company that helps ambitious organisations build influential brands, create meaningful experiences, and accelerate growth through strategy, storytelling, media, marketing, and technology."),
+                        React.createElement("p", { className: "text-foreground/90 text-lg leading-relaxed mb-8" }, "We partner with ambitious organisations to shape perception, inspire action, and accelerate growth through strategy, creativity, media, marketing, and experiences."),
                         React.createElement("div", { className: "flex flex-col sm:flex-row gap-3" },
-                            React.createElement("a", { href: "#services", className: "inline-flex items-center gap-2 bg-primary text-primary-foreground px-6 py-3.5 font-bold text-sm tracking-wide hover:bg-primary/85 transition-colors" },
-                                "Explore 12 services ",
+                            React.createElement("a", { href: "#contact", className: "inline-flex items-center gap-2 bg-primary text-primary-foreground px-6 py-3.5 font-bold text-sm tracking-wide hover:bg-primary/85 transition-colors" },
+                                "Start a Conversation ",
                                 React.createElement(lucide_react_1.ArrowRight, { size: 15 })),
                             React.createElement("a", { href: "#contact", className: "inline-flex items-center gap-2 border border-white/25 text-foreground px-6 py-3.5 text-sm tracking-wide hover:border-primary/60 transition-colors" },
                                 React.createElement(lucide_react_1.Play, { size: 13, className: "fill-current" }),
@@ -96,26 +101,23 @@ function Hero() {
                     React.createElement("div", { className: "text-xs text-muted-foreground mt-1.5 leading-snug" }, s.label))); }))))));
 }
 function Services() {
-    var _a = react_1.useState(null), active = _a[0], setActive = _a[1];
+    // Featured Capabilities: present capabilities instead of a long list
     return (React.createElement("section", { id: "services", className: "py-24 px-6 md:px-12 max-w-[1400px] mx-auto" },
-        React.createElement("div", { className: "mb-16" },
+        React.createElement("div", { className: "mb-12" },
             React.createElement("div", { className: "flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between" },
                 React.createElement("div", null,
-                    React.createElement("p", { className: "font-mono text-xs text-primary tracking-[0.2em] uppercase mb-4" }, "Section 3"),
-                    React.createElement("h2", { className: "font-display text-4xl md:text-6xl font-black leading-tight text-foreground max-w-2xl" },
-                        "The 12 Core",
-                        React.createElement("br", null),
-                        "Service Pillars"),
-                    React.createElement("p", { className: "max-w-xl text-muted-foreground text-sm leading-relaxed mt-4" }, "Explore our specialised services below to turn your brand identity into a high-yielding corporate asset.")),
+                    React.createElement("p", { className: "font-mono text-xs text-primary tracking-[0.2em] uppercase mb-4" }, "Featured Capabilities"),
+                    React.createElement("h2", { className: "font-display text-4xl md:text-6xl font-black leading-tight text-foreground max-w-2xl" }, "Present capabilities, not a long list"),
+                    React.createElement("p", { className: "max-w-xl text-muted-foreground text-sm leading-relaxed mt-4" }, "We organise our core strengths into three capability pillars to make it easy to match solutions to your objectives.")),
                 React.createElement("a", { href: "/services", className: "inline-flex items-center justify-center gap-2 rounded-full border border-primary bg-primary/5 px-6 py-3 text-sm font-bold text-primary transition-colors duration-200 hover:bg-primary/15" },
                     "View our services ",
                     React.createElement(lucide_react_1.ArrowRight, { size: 14 })))),
-        React.createElement("div", { className: "grid gap-6 sm:grid-cols-2 xl:grid-cols-3" }, SERVICES.map(function (s, i) { return (React.createElement("button", { key: s.num, type: "button", onMouseEnter: function () { return setActive(i); }, onMouseLeave: function () { return setActive(null); }, onFocus: function () { return setActive(i); }, onBlur: function () { return setActive(null); }, className: "group rounded-[2rem] border border-border bg-background p-6 text-left transition-all duration-500 ease-out focus:outline-none focus:ring-2 focus:ring-primary/30 hover:-translate-y-1 hover:border-primary/50 hover:bg-secondary/5 " + (active === i ? "border-primary/60 bg-secondary/5 shadow-[0_24px_80px_-52px_rgba(79,70,229,0.45)]" : "") },
-            React.createElement("div", { className: "flex items-center justify-between gap-4" },
-                React.createElement("span", { className: "font-mono text-[11px] uppercase tracking-[0.32em] text-primary" }, s.num),
-                React.createElement(lucide_react_1.ArrowUpRight, { size: 18, className: "transition-transform duration-300 " + (active === i ? "rotate-0 text-primary" : "rotate-45 text-muted-foreground") })),
-            React.createElement("h3", { className: "font-display text-xl md:text-2xl font-black mt-6 leading-tight transition-colors duration-300 " + (active === i ? "text-primary" : "text-foreground") }, s.title),
-            React.createElement("p", { className: "mt-4 text-sm leading-relaxed text-muted-foreground transition-all duration-300 opacity-100" }))); }))));
+        React.createElement("div", { className: "grid gap-6 sm:grid-cols-3" }, Object.entries(CAPABILITIES).map(function (_a) {
+            var k = _a[0], list = _a[1];
+            return (React.createElement("div", { key: k, className: "bg-background border border-border p-8" },
+                React.createElement("h3", { className: "font-display text-2xl font-black text-foreground mb-4" }, k),
+                React.createElement("ul", { className: "list-none m-0 p-0 space-y-2 text-sm text-foreground" }, Array.isArray(list) && list.map(function (item) { return (React.createElement("li", { key: item, className: "" }, item)); }))));
+        }))));
 }
 function Advantage() {
     return (React.createElement("section", { id: "advantage", className: "py-24 bg-card" },
@@ -196,11 +198,9 @@ function PullQuote() {
     return (React.createElement("section", { className: "py-24 bg-primary" },
         React.createElement("div", { className: "px-6 md:px-12 max-w-[1400px] mx-auto" },
             React.createElement("div", { className: "max-w-4xl" },
-                React.createElement("p", { className: "font-mono text-[10px] tracking-[0.25em] uppercase text-primary-foreground/60 mb-8" }, "Our commitment"),
-                React.createElement("p", { className: "font-display text-3xl md:text-5xl lg:text-6xl font-black text-primary-foreground leading-[1.08] mb-10" }, "\u201CWe strip the operational overhead and staffing liability out of your marketing calendar while scaling your visual and auditory presence across the market.\u201D"),
-                React.createElement("div", { className: "flex items-center gap-3" },
-                    React.createElement("div", { className: "w-1 h-8 bg-primary-foreground/30" }),
-                    React.createElement("p", { className: "font-mono text-xs text-primary-foreground/60 tracking-widest uppercase" }, "EchooRoom Studio Ltd \u2014 Enterprise Profile"))))));
+                React.createElement("p", { className: "font-mono text-[10px] tracking-[0.25em] uppercase text-primary-foreground/60 mb-8" }, "Philosophy"),
+                React.createElement("p", { className: "font-display text-3xl md:text-5xl lg:text-6xl font-black text-primary-foreground leading-[1.08] mb-6" }, "Limitless Creativity. Relentless Innovation. Fearless Exploration."),
+                React.createElement("p", { className: "text-primary-foreground/80 max-w-3xl" }, "Every great brand begins with one courageous conversation. If you're ready to shape the future of your organisation, we'd love to build it with you.")))));
 }
 function Onboarding() {
     return (React.createElement("section", { className: "py-24 px-6 md:px-12 max-w-[1400px] mx-auto" },

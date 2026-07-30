@@ -22,6 +22,12 @@ const SERVICES = [
   { num: "12", title: "Research & Analytics", desc: "Turn audience insight, performance data and market intelligence into smarter brand and campaign decisions." },
 ];
 
+const CAPABILITIES = {
+  Strategy: ["Brand Strategy", "Creative Strategy", "Research & Analytics"],
+  Marketing: ["Digital Marketing", "Media Buying", "Social Media", "PR & Communications", "Influencer Marketing"],
+  Experiences: ["Media Production", "Event Production", "Experiential Marketing", "BTL Activations"],
+};
+
 const ADVANTAGES = [
 { num: "2.1", title: "Save Costs. Stop Buying Expensive Equipment.", desc: "Turn capital-intensive production into a predictable monthly investment with access to studios, production gear, post workflows and distribution services.", icon: "₦" },
   { num: "2.2", title: "No HR Stress, Hiring Hassles, or Creative Burnout.", desc: "A fully trained creative team on demand: writers, editors, producers, media specialists and event operators ready to execute immediately.", icon: "⚡" },
@@ -96,7 +102,7 @@ function Hero() {
               <p className="font-mono text-xs text-primary tracking-[0.22em] uppercase mb-8">
                 Strategic Capability — Enterprise Profile & Service Catalogue
               </p>
-              <h3 className="font-display text-[clamp(3.2rem,9vw,8.5rem)] font-black leading-[0.92] tracking-tight text-foreground">
+              <h3 className="font-display text-[clamp(3.2rem,9vw,7rem)] font-black leading-[0.92] tracking-tight text-foreground">
                 Great Brands Don't Compete for  <em className="not-italic text-primary">Attention</em><br /> They Earn <em className="not-italic text-primary">Influence</em>.
 
                
@@ -105,11 +111,11 @@ function Hero() {
 
             <div className="lg:max-w-sm pb-2">
               <p className="text-foreground/90 text-lg leading-relaxed mb-8">
-EchooRoom is an integrated creative company that helps ambitious organisations build influential brands, create meaningful experiences, and accelerate growth through strategy, storytelling, media, marketing, and technology.
+We partner with ambitious organisations to shape perception, inspire action, and accelerate growth through strategy, creativity, media, marketing, and experiences.
               </p>
               <div className="flex flex-col sm:flex-row gap-3">
-                <a href="#services" className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-6 py-3.5 font-bold text-sm tracking-wide hover:bg-primary/85 transition-colors">
-                  Explore 12 services <ArrowRight size={15} />
+                <a href="#contact" className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-6 py-3.5 font-bold text-sm tracking-wide hover:bg-primary/85 transition-colors">
+                  Start a Conversation <ArrowRight size={15} />
                 </a>
                 <a href="#contact" className="inline-flex items-center gap-2 border border-white/25 text-foreground px-6 py-3.5 text-sm tracking-wide hover:border-primary/60 transition-colors">
                   <Play size={13} className="fill-current" /> Book alignment brief
@@ -133,55 +139,31 @@ EchooRoom is an integrated creative company that helps ambitious organisations b
 }
 
 function Services() {
-  const [active, setActive] = useState<number | null>(null);
+  // Featured Capabilities: present capabilities instead of a long list
   return (
     <section id="services" className="py-24 px-6 md:px-12 max-w-[1400px] mx-auto">
-      <div className="mb-16">
+      <div className="mb-12">
         <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
           <div>
-            <p className="font-mono text-xs text-primary tracking-[0.2em] uppercase mb-4">Section 3</p>
-            <h2 className="font-display text-4xl md:text-6xl font-black leading-tight text-foreground max-w-2xl">
-              The 12 Core<br />Service Pillars
-            </h2>
-            <p className="max-w-xl text-muted-foreground text-sm leading-relaxed mt-4">
-              Explore our specialised services below to turn your brand identity into a high-yielding corporate asset.
-            </p>
+            <p className="font-mono text-xs text-primary tracking-[0.2em] uppercase mb-4">Featured Capabilities</p>
+            <h2 className="font-display text-4xl md:text-6xl font-black leading-tight text-foreground max-w-2xl">Present capabilities, not a long list</h2>
+            <p className="max-w-xl text-muted-foreground text-sm leading-relaxed mt-4">We organise our core strengths into three capability pillars to make it easy to match solutions to your objectives.</p>
           </div>
 
-          <a
-            href="/services"
-            className="inline-flex items-center justify-center gap-2 rounded-full border border-primary bg-primary/5 px-6 py-3 text-sm font-bold text-primary transition-colors duration-200 hover:bg-primary/15"
-          >
-            View our services <ArrowRight size={14} />
-          </a>
+          <a href="/services" className="inline-flex items-center justify-center gap-2 rounded-full border border-primary bg-primary/5 px-6 py-3 text-sm font-bold text-primary transition-colors duration-200 hover:bg-primary/15">View our services <ArrowRight size={14} /></a>
         </div>
       </div>
 
-      <div className="grid gap-6 sm:grid-cols-2 xl:grid-cols-3">
-        {SERVICES.map((s, i) => (
-          <button
-            key={s.num}
-            type="button"
-            onMouseEnter={() => setActive(i)}
-            onMouseLeave={() => setActive(null)}
-            onFocus={() => setActive(i)}
-            onBlur={() => setActive(null)}
-            className={`group rounded-[2rem] border border-border bg-background p-6 text-left transition-all duration-500 ease-out focus:outline-none focus:ring-2 focus:ring-primary/30 hover:-translate-y-1 hover:border-primary/50 hover:bg-secondary/5 ${active === i ? "border-primary/60 bg-secondary/5 shadow-[0_24px_80px_-52px_rgba(79,70,229,0.45)]" : ""}`}
-          >
-            <div className="flex items-center justify-between gap-4">
-              <span className="font-mono text-[11px] uppercase tracking-[0.32em] text-primary">{s.num}</span>
-              <ArrowUpRight
-                size={18}
-                className={`transition-transform duration-300 ${active === i ? "rotate-0 text-primary" : "rotate-45 text-muted-foreground"}`}
-              />
-            </div>
-            <h3 className={`font-display text-xl md:text-2xl font-black mt-6 leading-tight transition-colors duration-300 ${active === i ? "text-primary" : "text-foreground"}`}>
-              {s.title}
-            </h3>
-            <p className="mt-4 text-sm leading-relaxed text-muted-foreground transition-all duration-300 opacity-100">
-              {/* {s.desc} */}
-            </p>
-          </button>
+      <div className="grid gap-6 sm:grid-cols-3">
+        {Object.entries(CAPABILITIES).map(([k, list]) => (
+          <div key={k} className="bg-background border border-border p-8">
+            <h3 className="font-display text-2xl font-black text-foreground mb-4">{k}</h3>
+            <ul className="list-none m-0 p-0 space-y-2 text-sm text-foreground">
+              {Array.isArray(list) && list.map((item) => (
+                <li key={item} className="">{item}</li>
+              ))}
+            </ul>
+          </div>
         ))}
       </div>
     </section>
@@ -317,14 +299,9 @@ function PullQuote() {
     <section className="py-24 bg-primary">
       <div className="px-6 md:px-12 max-w-[1400px] mx-auto">
         <div className="max-w-4xl">
-          <p className="font-mono text-[10px] tracking-[0.25em] uppercase text-primary-foreground/60 mb-8">Our commitment</p>
-          <p className="font-display text-3xl md:text-5xl lg:text-6xl font-black text-primary-foreground leading-[1.08] mb-10">
-            &ldquo;We strip the operational overhead and staffing liability out of your marketing calendar while scaling your visual and auditory presence across the market.&rdquo;
-          </p>
-          <div className="flex items-center gap-3">
-            <div className="w-1 h-8 bg-primary-foreground/30" />
-            <p className="font-mono text-xs text-primary-foreground/60 tracking-widest uppercase">EchooRoom Studio Ltd — Enterprise Profile</p>
-          </div>
+          <p className="font-mono text-[10px] tracking-[0.25em] uppercase text-primary-foreground/60 mb-8">Philosophy</p>
+          <p className="font-display text-3xl md:text-5xl lg:text-6xl font-black text-primary-foreground leading-[1.08] mb-6">Limitless Creativity. Relentless Innovation. Fearless Exploration.</p>
+          <p className="text-primary-foreground/80 max-w-3xl">Every great brand begins with one courageous conversation. If you're ready to shape the future of your organisation, we'd love to build it with you.</p>
         </div>
       </div>
     </section>
