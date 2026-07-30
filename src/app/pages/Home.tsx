@@ -175,7 +175,7 @@ function Advantage() {
     <section id="advantage" className="py-24 bg-card">
       <div className="px-6 md:px-12 max-w-[1400px] mx-auto">
         <div className="mb-16">
-          <p className="font-mono text-xs text-primary tracking-[0.2em] uppercase mb-4">Section 2</p>
+          <p className="font-mono text-xs text-primary tracking-[0.2em] uppercase mb-4"></p>
           <h2 className="font-display text-4xl md:text-6xl font-black leading-tight text-foreground max-w-2xl">The Enterprise Advantage</h2>
           <p className="text-muted-foreground mt-4 text-lg max-w-xl leading-relaxed">Four structural reasons your organisation stops losing time and money on fragmented marketing.</p>
         </div>
@@ -236,7 +236,7 @@ function CaseStudy() {
     <section id="casestudy" className="py-24 bg-card">
       <div className="px-6 md:px-12 max-w-[1400px] mx-auto">
         <div className="mb-16">
-          <p className="font-mono text-xs text-primary tracking-[0.2em] uppercase mb-4">Section 4 — Archived Impact</p>
+          <p className="font-mono text-xs text-primary tracking-[0.2em] uppercase mb-4">— Archived Impact</p>
           <h2 className="font-display text-4xl md:text-6xl font-black leading-tight text-foreground">Crisis Mitigation &<br />Reputational Recovery</h2>
         </div>
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-px bg-border mb-16">
@@ -312,7 +312,7 @@ function Onboarding() {
   return (
     <section className="py-24 px-6 md:px-12 max-w-[1400px] mx-auto">
       <div className="mb-16">
-        <p className="font-mono text-xs text-primary tracking-[0.2em] uppercase mb-4">Section 5 — Backstage Pass</p>
+        <p className="font-mono text-xs text-primary tracking-[0.2em] uppercase mb-4"> — Backstage Pass</p>
         <h2 className="font-display text-4xl md:text-6xl font-black leading-tight text-foreground">Next steps &<br />client onboarding</h2>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-border">
