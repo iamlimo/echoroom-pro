@@ -99,19 +99,23 @@ function Services() {
     var _a = react_1.useState(null), active = _a[0], setActive = _a[1];
     return (React.createElement("section", { id: "services", className: "py-24 px-6 md:px-12 max-w-[1400px] mx-auto" },
         React.createElement("div", { className: "mb-16" },
-            React.createElement("p", { className: "font-mono text-xs text-primary tracking-[0.2em] uppercase mb-4" }, "Section 3"),
             React.createElement("div", { className: "flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between" },
-                React.createElement("h2", { className: "font-display text-4xl md:text-6xl font-black leading-tight text-foreground max-w-2xl" },
-                    "The 12 Core",
-                    React.createElement("br", null),
-                    "Service Pillars"),
-                React.createElement("p", { className: "max-w-xs text-muted-foreground text-sm leading-relaxed" }, "Explore our specialised services below to turn your brand identity into a high-yielding corporate asset."))),
-        React.createElement("div", { className: "grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4" }, SERVICES.map(function (s, i) { return (React.createElement("button", { key: s.num, type: "button", onMouseEnter: function () { return setActive(i); }, onMouseLeave: function () { return setActive(null); }, onFocus: function () { return setActive(i); }, onBlur: function () { return setActive(null); }, className: "group rounded-[2rem] border border-border bg-background p-6 text-left transition-all duration-500 ease-out focus:outline-none focus:ring-2 focus:ring-primary/30 hover:-translate-y-1 hover:border-primary/50 hover:bg-secondary/5 " + (active === i ? "border-primary/60 bg-secondary/5 shadow-[0_24px_80px_-52px_rgba(79,70,229,0.45)]" : "") },
+                React.createElement("div", null,
+                    React.createElement("p", { className: "font-mono text-xs text-primary tracking-[0.2em] uppercase mb-4" }, "Section 3"),
+                    React.createElement("h2", { className: "font-display text-4xl md:text-6xl font-black leading-tight text-foreground max-w-2xl" },
+                        "The 12 Core",
+                        React.createElement("br", null),
+                        "Service Pillars"),
+                    React.createElement("p", { className: "max-w-xl text-muted-foreground text-sm leading-relaxed mt-4" }, "Explore our specialised services below to turn your brand identity into a high-yielding corporate asset.")),
+                React.createElement("a", { href: "/services", className: "inline-flex items-center justify-center gap-2 rounded-full border border-primary bg-primary/5 px-6 py-3 text-sm font-bold text-primary transition-colors duration-200 hover:bg-primary/15" },
+                    "View our services ",
+                    React.createElement(lucide_react_1.ArrowRight, { size: 14 })))),
+        React.createElement("div", { className: "grid gap-6 sm:grid-cols-2 xl:grid-cols-3" }, SERVICES.map(function (s, i) { return (React.createElement("button", { key: s.num, type: "button", onMouseEnter: function () { return setActive(i); }, onMouseLeave: function () { return setActive(null); }, onFocus: function () { return setActive(i); }, onBlur: function () { return setActive(null); }, className: "group rounded-[2rem] border border-border bg-background p-6 text-left transition-all duration-500 ease-out focus:outline-none focus:ring-2 focus:ring-primary/30 hover:-translate-y-1 hover:border-primary/50 hover:bg-secondary/5 " + (active === i ? "border-primary/60 bg-secondary/5 shadow-[0_24px_80px_-52px_rgba(79,70,229,0.45)]" : "") },
             React.createElement("div", { className: "flex items-center justify-between gap-4" },
                 React.createElement("span", { className: "font-mono text-[11px] uppercase tracking-[0.32em] text-primary" }, s.num),
                 React.createElement(lucide_react_1.ArrowUpRight, { size: 18, className: "transition-transform duration-300 " + (active === i ? "rotate-0 text-primary" : "rotate-45 text-muted-foreground") })),
             React.createElement("h3", { className: "font-display text-xl md:text-2xl font-black mt-6 leading-tight transition-colors duration-300 " + (active === i ? "text-primary" : "text-foreground") }, s.title),
-            React.createElement("p", { className: "mt-4 text-sm leading-relaxed text-muted-foreground transition-all duration-300 opacity-100" }, s.desc))); }))));
+            React.createElement("p", { className: "mt-4 text-sm leading-relaxed text-muted-foreground transition-all duration-300 opacity-100" }))); }))));
 }
 function Advantage() {
     return (React.createElement("section", { id: "advantage", className: "py-24 bg-card" },

@@ -7,11 +7,17 @@ var ThemeToggle_1 = require("./components/theme/ThemeToggle");
 var Footer_1 = require("./components/Footer");
 var NAV_LINKS = [
     { label: "Home", to: "/" },
-    { label: "About", to: "/about" },
+    {
+        label: "Who We Are",
+        to: "/about",
+        children: [
+            { label: "About EchooRoom", to: "/about" },
+            { label: "Our Team", to: "/team" },
+        ]
+    },
     { label: "What We Do", to: "/services" },
-    // { label: "Team", to: "/team" },
     { label: "Studio", to: "/studio" },
-    { label: "Shows", to: "/shows" },
+    // { label: "Shows", to: "/shows" },
     { label: "Contact", to: "/", hash: "#contact" },
 ];
 function Nav() {
@@ -59,6 +65,15 @@ function Nav() {
                 React.createElement("img", { src: "/assets/echoroom-logo.png", alt: "EchoRoom", className: "h-10 w-auto md:h-11 drop-shadow-[0_2px_10px_rgba(0,0,0,0.35)]", style: { filter: "brightness(0) invert(1)" } })),
             React.createElement("div", { className: "hidden md:flex items-center gap-10" }, NAV_LINKS.map(function (link) {
                 var isActive = !link.hash && location.pathname === link.to;
+                if (link.children) {
+                    return (React.createElement("div", { key: link.label, className: "relative group" },
+                        React.createElement("button", { onClick: function () { return handleNavClick(link); }, className: "text-sm tracking-wide transition-colors duration-200 flex items-center gap-2 " + (isActive
+                                ? "text-primary font-medium"
+                                : "text-muted-foreground hover:text-foreground") },
+                            link.label,
+                            React.createElement(lucide_react_1.ChevronDown, { size: 14, className: "text-muted-foreground transition-transform duration-200 group-hover:-rotate-180 group-hover:text-foreground" })),
+                        React.createElement("div", { className: "absolute left-0 mt-3 w-44 bg-background border border-border rounded-md shadow-lg py-2 opacity-0 group-hover:opacity-100 transform scale-95 group-hover:scale-100 transition-all duration-150 z-50" }, link.children.map(function (child) { return (React.createElement("button", { key: child.label, onClick: function () { return handleNavClick(child); }, className: "w-full text-left px-4 py-2 text-sm text-muted-foreground hover:text-foreground hover:bg-background/50" }, child.label)); }))));
+                }
                 return (React.createElement("button", { key: link.label, onClick: function () { return handleNavClick(link); }, className: "text-sm tracking-wide transition-colors duration-200 " + (isActive
                         ? "text-primary font-medium"
                         : "text-muted-foreground hover:text-foreground") }, link.label));
@@ -72,7 +87,9 @@ function Nav() {
             React.createElement("button", { className: "md:hidden text-foreground p-1", onClick: function () { return setMenuOpen(!menuOpen); }, "aria-label": "Toggle menu" }, menuOpen ? React.createElement(lucide_react_1.X, { size: 22 }) : React.createElement(lucide_react_1.Menu, { size: 22 }))),
         menuOpen && (React.createElement("div", { className: "md:hidden bg-background/70 backdrop-blur border-b border-border px-6 pb-8 pt-4 flex flex-col gap-6" },
             React.createElement(ThemeToggle_1["default"], null),
-            NAV_LINKS.map(function (link) { return (React.createElement("button", { key: link.label, onClick: function () { return handleNavClick(link); }, className: "text-left text-2xl font-display font-black text-foreground hover:text-primary transition-colors" }, link.label)); }),
+            NAV_LINKS.map(function (link) { return (React.createElement("div", { key: link.label },
+                React.createElement("button", { onClick: function () { return handleNavClick(link); }, className: "text-left text-2xl font-display font-black text-foreground hover:text-primary transition-colors w-full" }, link.label),
+                link.children && (React.createElement("div", { className: "pl-4 mt-2 flex flex-col gap-2" }, link.children.map(function (child) { return (React.createElement("button", { key: child.label, onClick: function () { return handleNavClick(child); }, className: "text-left text-lg font-display font-bold text-foreground/80 hover:text-primary transition-colors" }, child.label)); }))))); }),
             React.createElement("button", { onClick: function () { return handleNavClick({ label: "Contact", to: "/", hash: "#contact" }); }, className: "inline-flex items-center gap-2 bg-primary text-primary-foreground px-5 py-3 text-sm font-bold tracking-wide w-fit mt-2" },
                 "Start a project ",
                 React.createElement(lucide_react_1.ArrowRight, { size: 14 }))))));
