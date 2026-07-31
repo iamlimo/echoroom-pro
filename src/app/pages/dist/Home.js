@@ -44,11 +44,11 @@ var CAPABILITIES = {
     Marketing: ["Digital Marketing", "Media Buying", "Social Media", "PR & Communications", "Influencer Marketing"],
     Experiences: ["Media Production", "Event Production", "Experiential Marketing", "BTL Activations"]
 };
-var ADVANTAGES = [
-    { num: "2.1", title: "Save Costs. Stop Buying Expensive Equipment.", desc: "Turn capital-intensive production into a predictable monthly investment with access to studios, production gear, post workflows and distribution services.", icon: "₦" },
-    { num: "2.2", title: "No HR Stress, Hiring Hassles, or Creative Burnout.", desc: "A fully trained creative team on demand: writers, editors, producers, media specialists and event operators ready to execute immediately.", icon: "⚡" },
-    { num: "2.3", title: "Bulletproof Privacy & Enterprise-Grade Security.", desc: "Encrypted workflows, isolated storage and strict white-label agreements keep your brand work confidential and secure.", icon: "🔒" },
-    { num: "2.4", title: "One Partner. One Invoice. Zero Micro-Management.", desc: "All core strategy, creative, production and distribution services under one roof so your team stops chasing multiple suppliers.", icon: "✦" },
+var VALUE_PILLARS = [
+    { num: "01", title: "Brand Strategy", desc: "Creating clarity before creativity." },
+    { num: "02", title: "Creative & Content", desc: "Ideas that move people." },
+    { num: "03", title: "Marketing & Communications", desc: "Building influence across channels." },
+    { num: "04", title: "Experiences & Production", desc: "Turning ideas into unforgettable moments." },
 ];
 var STATS = [
     { value: "12", label: "Core service pillars" },
@@ -100,6 +100,17 @@ function Hero() {
                     React.createElement("div", { className: "font-display text-3xl md:text-4xl font-black text-primary" }, s.value),
                     React.createElement("div", { className: "text-xs text-muted-foreground mt-1.5 leading-snug" }, s.label))); }))))));
 }
+function EditorialStatement() {
+    return (React.createElement("section", { id: "editorial", className: "py-24 px-6 md:px-12 bg-card" },
+        React.createElement("div", { className: "max-w-[1400px] mx-auto" },
+            React.createElement("div", { className: "grid grid-cols-1 lg:grid-cols-[1fr_1.4fr] gap-12 lg:gap-24 items-start" },
+                React.createElement("div", null,
+                    React.createElement("p", { className: "font-mono text-xs text-primary tracking-[0.2em] uppercase mb-6" }, "Editorial Statement"),
+                    React.createElement("h2", { className: "font-display text-4xl md:text-6xl font-black leading-[1.05] text-foreground max-w-xl" }, "Creating Influence That Endures.")),
+                React.createElement("div", { className: "lg:pt-2" },
+                    React.createElement("p", { className: "font-mono text-xs text-primary tracking-[0.2em] uppercase mb-5" }, "Why We Exist"),
+                    React.createElement("p", { className: "text-foreground text-xl md:text-2xl leading-relaxed max-w-2xl" }, "Brands are no longer built by advertising alone. They are built through every experience they create. Every conversation, every campaign, every customer interaction, and every promise shapes perception. Echooroom exists to help organisations intentionally design those experiences."))))));
+}
 function Services() {
     // Featured Capabilities: present capabilities instead of a long list
     return (React.createElement("section", { id: "services", className: "py-24 px-6 md:px-12 max-w-[1400px] mx-auto" },
@@ -120,18 +131,20 @@ function Services() {
         }))));
 }
 function Advantage() {
-    return (React.createElement("section", { id: "advantage", className: "py-24 bg-card" },
+    return (React.createElement("section", { id: "advantage", className: "py-24 bg-card overflow-hidden" },
+        React.createElement("style", null, "\n        @keyframes value-pillar-in {\n          from { opacity: 0; transform: translateY(28px); }\n          to { opacity: 1; transform: translateY(0); }\n        }\n        .value-pillar {\n          animation: value-pillar-in 700ms cubic-bezier(.22, 1, .36, 1) both;\n        }\n        @media (prefers-reduced-motion: reduce) {\n          .value-pillar { animation: none; }\n        }\n      "),
         React.createElement("div", { className: "px-6 md:px-12 max-w-[1400px] mx-auto" },
             React.createElement("div", { className: "mb-16" },
-                React.createElement("p", { className: "font-mono text-xs text-primary tracking-[0.2em] uppercase mb-4" }, "Section 2"),
-                React.createElement("h2", { className: "font-display text-4xl md:text-6xl font-black leading-tight text-foreground max-w-2xl" }, "The Enterprise Advantage"),
-                React.createElement("p", { className: "text-muted-foreground mt-4 text-lg max-w-xl leading-relaxed" }, "Four structural reasons your organisation stops losing time and money on fragmented marketing.")),
-            React.createElement("div", { className: "grid grid-cols-1 md:grid-cols-2 gap-px bg-border" }, ADVANTAGES.map(function (adv) { return (React.createElement("div", { key: adv.num, className: "bg-card p-8 md:p-10 group hover:bg-secondary transition-colors duration-300" },
-                React.createElement("div", { className: "flex items-start justify-between mb-6" },
-                    React.createElement("span", { className: "font-mono text-[10px] text-primary tracking-widest uppercase border border-primary/30 px-2.5 py-1" }, adv.num),
-                    React.createElement("span", { className: "text-2xl opacity-40 group-hover:opacity-100 transition-opacity" }, adv.icon)),
-                React.createElement("h3", { className: "font-display text-xl md:text-2xl font-black text-foreground mb-4 leading-tight" }, adv.title),
-                React.createElement("p", { className: "text-muted-foreground text-sm leading-relaxed" }, adv.desc))); })))));
+                React.createElement("p", { className: "font-mono text-xs text-primary tracking-[0.2em] uppercase mb-4" }, "Our Approach"),
+                React.createElement("h2", { className: "font-display text-4xl md:text-6xl font-black leading-tight text-foreground max-w-2xl" }, "How We Create Value"),
+                React.createElement("p", { className: "text-muted-foreground mt-4 text-lg max-w-xl leading-relaxed" }, "From first insight to final execution, we connect the disciplines that make brands matter.")),
+            React.createElement("div", { className: "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4" }, VALUE_PILLARS.map(function (pillar, index) { return (React.createElement("article", { key: pillar.title, className: "value-pillar group relative min-h-[280px] bg-background border border-border p-8 md:p-10 flex flex-col justify-between transition-all duration-300 hover:-translate-y-2 hover:border-primary/60 hover:shadow-[0_18px_45px_-24px_hsl(var(--primary)/.8)]", style: { animationDelay: index * 120 + "ms" } },
+                React.createElement("div", { className: "flex items-start justify-between" },
+                    React.createElement("span", { className: "font-mono text-[10px] text-primary tracking-widest uppercase border border-primary/30 px-2.5 py-1" }, pillar.num),
+                    React.createElement(lucide_react_1.ArrowUpRight, { className: "text-primary/50 transition-all duration-300 group-hover:text-primary group-hover:translate-x-1 group-hover:-translate-y-1", size: 22 })),
+                React.createElement("div", null,
+                    React.createElement("h3", { className: "font-display text-2xl font-black text-foreground mb-3 leading-tight" }, pillar.title),
+                    React.createElement("p", { className: "text-muted-foreground text-sm leading-relaxed" }, pillar.desc)))); })))));
 }
 function StudioProfile() {
     return (React.createElement("section", { className: "py-24 px-6 md:px-12 max-w-[1400px] mx-auto hide-out" },
@@ -154,30 +167,39 @@ function StudioProfile() {
                     React.createElement("div", { className: "font-display text-5xl font-black text-primary-foreground leading-none" }, "11"),
                     React.createElement("div", { className: "font-mono text-[10px] text-primary-foreground/70 tracking-widest mt-2 uppercase leading-snug" }, "Core service pillars under one roof"))))));
 }
-function CaseStudy() {
-    return (React.createElement("section", { id: "casestudy", className: "py-24 bg-card" },
+function ThinkingImpact() {
+    return (React.createElement("section", { id: "thinking", className: "py-24 overflow-hidden" },
+        React.createElement("style", null, "\n        @keyframes thinking-card-in {\n          from { opacity: 0; transform: translateY(24px); }\n          to { opacity: 1; transform: translateY(0); }\n        }\n        .thinking-card {\n          animation: thinking-card-in 650ms cubic-bezier(.22, 1, .36, 1) both;\n        }\n        @media (prefers-reduced-motion: reduce) {\n          .thinking-card { animation: none; }\n        }\n      "),
         React.createElement("div", { className: "px-6 md:px-12 max-w-[1400px] mx-auto" },
-            React.createElement("div", { className: "mb-16" },
-                React.createElement("p", { className: "font-mono text-xs text-primary tracking-[0.2em] uppercase mb-4" }, "Section 4 \u2014 Archived Impact"),
-                React.createElement("h2", { className: "font-display text-4xl md:text-6xl font-black leading-tight text-foreground" },
-                    "Crisis Mitigation &",
-                    React.createElement("br", null),
-                    "Reputational Recovery")),
-            React.createElement("div", { className: "grid grid-cols-1 lg:grid-cols-3 gap-px bg-border mb-16" }, [
-                { label: "The Challenge", color: "bg-card", content: "A corporate organisation faced an operational disruption during a critical rollout, triggering rapid reputational risk across digital channels." },
-                { label: "Our Intervention", color: "bg-secondary", content: "We activated a Crisis Management Blueprint with unified response scripts, media coordination, and influencer support to shift the narrative." },
-                { label: "The Result", color: "bg-card", content: "Negative mentions dropped sharply, editorial coverage improved, retention stabilised, and Share of Voice grew threefold." },
-            ].map(function (col) { return (React.createElement("div", { key: col.label, className: col.color + " p-8 md:p-10" },
-                React.createElement("p", { className: "font-mono text-[10px] text-primary tracking-widest uppercase mb-5 border-b border-border pb-4" }, col.label),
-                React.createElement("p", { className: "text-foreground text-sm leading-relaxed" }, col.content))); })),
-            React.createElement("div", { className: "grid grid-cols-2 md:grid-cols-4 gap-6 pt-10 border-t border-border" }, [
-                { val: "85%", label: "Drop in harmful mentions within 24 hours" },
-                { val: "14", label: "High-authority editorial placements secured" },
-                { val: "98.2%", label: "Customer retention post-crisis" },
-                { val: "3×", label: "Share of Voice vs. pre-crisis baseline" },
-            ].map(function (s) { return (React.createElement("div", { key: s.label },
-                React.createElement("div", { className: "font-display text-3xl md:text-5xl font-black text-primary" }, s.val),
-                React.createElement("div", { className: "text-xs text-muted-foreground mt-2 leading-snug" }, s.label))); })))));
+            React.createElement("div", { className: "grid grid-cols-1 lg:grid-cols-[1fr_1.5fr] gap-12 lg:gap-24 mb-20" },
+                React.createElement("div", null,
+                    React.createElement("p", { className: "font-mono text-xs text-primary tracking-[0.2em] uppercase mb-5" }, "Experiences & Production"),
+                    React.createElement("h2", { className: "font-display text-4xl md:text-6xl font-black leading-[1.02] text-foreground" }, "Turning ideas into unforgettable moments.")),
+                React.createElement("div", { className: "lg:pt-2" },
+                    React.createElement("p", { className: "font-mono text-xs text-primary tracking-[0.2em] uppercase mb-5" }, "Our Thinking"),
+                    React.createElement("p", { className: "text-muted-foreground text-lg md:text-xl leading-relaxed max-w-2xl" }, "We believe the most influential brands are built where strategy meets culture, creativity meets business, and every interaction becomes an opportunity to be remembered."))),
+            React.createElement("div", { className: "grid grid-cols-1 md:grid-cols-2 gap-4 mb-20" }, [
+                "Why Brands Are Built Through Experiences",
+                "Creativity Is a Competitive Advantage",
+                "The Future of African Brands",
+                "The Business Value of Storytelling",
+            ].map(function (perspective, index) { return (React.createElement("article", { key: perspective, className: "thinking-card group bg-card border border-border p-7 md:p-9 min-h-[170px] flex items-end justify-between gap-6 hover:border-primary/60 transition-colors duration-300", style: { animationDelay: index * 100 + "ms" } },
+                React.createElement("h3", { className: "font-display text-2xl md:text-3xl font-black leading-tight text-foreground group-hover:text-primary transition-colors duration-300" }, perspective),
+                React.createElement(lucide_react_1.ArrowUpRight, { className: "shrink-0 text-primary/50 group-hover:text-primary group-hover:translate-x-1 group-hover:-translate-y-1 transition-all duration-300", size: 24 }))); })),
+            React.createElement("div", { className: "pt-10 border-t border-border" },
+                React.createElement("p", { className: "font-mono text-xs text-primary tracking-[0.2em] uppercase mb-8" }, "Impact"),
+                React.createElement("div", { className: "grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6" }, [
+                    "Campaigns delivered",
+                    "Productions completed",
+                    "Industries served",
+                    "Audience reach",
+                    "Markets reached",
+                    "Long-term partnerships",
+                ].map(function (metric, index) { return (React.createElement("div", { key: metric, className: "thinking-card", style: { animationDelay: index * 80 + "ms" } },
+                    React.createElement("div", { className: "font-display text-4xl md:text-5xl font-black text-primary leading-none" },
+                        "0",
+                        index + 1),
+                    React.createElement("div", { className: "text-xs text-muted-foreground mt-3 leading-snug" }, metric))); }))))));
 }
 function Industries() {
     return (React.createElement("section", { className: "py-24 px-6 md:px-12 max-w-[1400px] mx-auto" },
@@ -205,7 +227,7 @@ function PullQuote() {
 function Onboarding() {
     return (React.createElement("section", { className: "py-24 px-6 md:px-12 max-w-[1400px] mx-auto" },
         React.createElement("div", { className: "mb-16" },
-            React.createElement("p", { className: "font-mono text-xs text-primary tracking-[0.2em] uppercase mb-4" }, "Section 5 \u2014 Backstage Pass"),
+            React.createElement("p", { className: "font-mono text-xs text-primary tracking-[0.2em] uppercase mb-4" }, " \u2014 Backstage Pass"),
             React.createElement("h2", { className: "font-display text-4xl md:text-6xl font-black leading-tight text-foreground" },
                 "Next steps &",
                 React.createElement("br", null),
@@ -261,10 +283,11 @@ function Home() {
     return (React.createElement(React.Fragment, null,
         React.createElement(Hero, null),
         React.createElement(Ticker, null),
+        React.createElement(EditorialStatement, null),
         React.createElement(Services, null),
         React.createElement(Advantage, null),
         React.createElement(StudioProfile, null),
-        React.createElement(CaseStudy, null),
+        React.createElement(ThinkingImpact, null),
         React.createElement(Industries, null),
         React.createElement(PullQuote, null),
         React.createElement(Onboarding, null),

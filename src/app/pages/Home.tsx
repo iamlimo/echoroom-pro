@@ -28,11 +28,11 @@ const CAPABILITIES = {
   Experiences: ["Media Production", "Event Production", "Experiential Marketing", "BTL Activations"],
 };
 
-const ADVANTAGES = [
-{ num: "2.1", title: "Save Costs. Stop Buying Expensive Equipment.", desc: "Turn capital-intensive production into a predictable monthly investment with access to studios, production gear, post workflows and distribution services.", icon: "₦" },
-  { num: "2.2", title: "No HR Stress, Hiring Hassles, or Creative Burnout.", desc: "A fully trained creative team on demand: writers, editors, producers, media specialists and event operators ready to execute immediately.", icon: "⚡" },
-  { num: "2.3", title: "Bulletproof Privacy & Enterprise-Grade Security.", desc: "Encrypted workflows, isolated storage and strict white-label agreements keep your brand work confidential and secure.", icon: "🔒" },
-  { num: "2.4", title: "One Partner. One Invoice. Zero Micro-Management.", desc: "All core strategy, creative, production and distribution services under one roof so your team stops chasing multiple suppliers.", icon: "✦" },
+const VALUE_PILLARS = [
+  { num: "01", title: "Brand Strategy", desc: "Creating clarity before creativity." },
+  { num: "02", title: "Creative & Content", desc: "Ideas that move people." },
+  { num: "03", title: "Marketing & Communications", desc: "Building influence across channels." },
+  { num: "04", title: "Experiences & Production", desc: "Turning ideas into unforgettable moments." },
 ];
 
 const STATS = [
@@ -137,6 +137,29 @@ We partner with ambitious organisations to shape perception, inspire action, and
     </section>
   );
 }
+function EditorialStatement() {
+  return (
+    <section id="editorial" className="py-24 px-6 md:px-12 bg-card">
+      <div className="max-w-[1400px] mx-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.4fr] gap-12 lg:gap-24 items-start">
+          <div>
+            <p className="font-mono text-xs text-primary tracking-[0.2em] uppercase mb-6">Editorial Statement</p>
+            <h2 className="font-display text-4xl md:text-6xl font-black leading-[1.05] text-foreground max-w-xl">
+              Creating Influence That Endures.
+            </h2>
+          </div>
+
+          <div className="lg:pt-2">
+            <p className="font-mono text-xs text-primary tracking-[0.2em] uppercase mb-5">Why We Exist</p>
+            <p className="text-foreground text-xl md:text-2xl leading-relaxed max-w-2xl">
+              Brands are no longer built by advertising alone. They are built through every experience they create. Every conversation, every campaign, every customer interaction, and every promise shapes perception. Echooroom exists to help organisations intentionally design those experiences.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
 
 function Services() {
   // Featured Capabilities: present capabilities instead of a long list
@@ -172,23 +195,41 @@ function Services() {
 
 function Advantage() {
   return (
-    <section id="advantage" className="py-24 bg-card">
+    <section id="advantage" className="py-24 bg-card overflow-hidden">
+      <style>{`
+        @keyframes value-pillar-in {
+          from { opacity: 0; transform: translateY(28px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+        .value-pillar {
+          animation: value-pillar-in 700ms cubic-bezier(.22, 1, .36, 1) both;
+        }
+        @media (prefers-reduced-motion: reduce) {
+          .value-pillar { animation: none; }
+        }
+      `}</style>
       <div className="px-6 md:px-12 max-w-[1400px] mx-auto">
         <div className="mb-16">
-          <p className="font-mono text-xs text-primary tracking-[0.2em] uppercase mb-4"></p>
-          <h2 className="font-display text-4xl md:text-6xl font-black leading-tight text-foreground max-w-2xl">The Enterprise Advantage</h2>
-          <p className="text-muted-foreground mt-4 text-lg max-w-xl leading-relaxed">Four structural reasons your organisation stops losing time and money on fragmented marketing.</p>
+          <p className="font-mono text-xs text-primary tracking-[0.2em] uppercase mb-4">Our Approach</p>
+          <h2 className="font-display text-4xl md:text-6xl font-black leading-tight text-foreground max-w-2xl">How We Create Value</h2>
+          <p className="text-muted-foreground mt-4 text-lg max-w-xl leading-relaxed">From first insight to final execution, we connect the disciplines that make brands matter.</p>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-border">
-          {ADVANTAGES.map((adv) => (
-            <div key={adv.num} className="bg-card p-8 md:p-10 group hover:bg-secondary transition-colors duration-300">
-              <div className="flex items-start justify-between mb-6">
-                <span className="font-mono text-[10px] text-primary tracking-widest uppercase border border-primary/30 px-2.5 py-1">{adv.num}</span>
-                <span className="text-2xl opacity-40 group-hover:opacity-100 transition-opacity">{adv.icon}</span>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          {VALUE_PILLARS.map((pillar, index) => (
+            <article
+              key={pillar.title}
+              className="value-pillar group relative min-h-[280px] bg-background border border-border p-8 md:p-10 flex flex-col justify-between transition-all duration-300 hover:-translate-y-2 hover:border-primary/60 hover:shadow-[0_18px_45px_-24px_hsl(var(--primary)/.8)]"
+              style={{ animationDelay: `${index * 120}ms` }}
+            >
+              <div className="flex items-start justify-between">
+                <span className="font-mono text-[10px] text-primary tracking-widest uppercase border border-primary/30 px-2.5 py-1">{pillar.num}</span>
+                <ArrowUpRight className="text-primary/50 transition-all duration-300 group-hover:text-primary group-hover:translate-x-1 group-hover:-translate-y-1" size={22} />
               </div>
-              <h3 className="font-display text-xl md:text-2xl font-black text-foreground mb-4 leading-tight">{adv.title}</h3>
-              <p className="text-muted-foreground text-sm leading-relaxed">{adv.desc}</p>
-            </div>
+              <div>
+                <h3 className="font-display text-2xl font-black text-foreground mb-3 leading-tight">{pillar.title}</h3>
+                <p className="text-muted-foreground text-sm leading-relaxed">{pillar.desc}</p>
+              </div>
+            </article>
           ))}
         </div>
       </div>
@@ -231,38 +272,66 @@ function StudioProfile() {
   );
 }
 
-function CaseStudy() {
+function ThinkingImpact() {
   return (
-    <section id="casestudy" className="py-24 bg-card">
+    <section id="thinking" className="py-24 overflow-hidden">
+      <style>{`
+        @keyframes thinking-card-in {
+          from { opacity: 0; transform: translateY(24px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+        .thinking-card {
+          animation: thinking-card-in 650ms cubic-bezier(.22, 1, .36, 1) both;
+        }
+        @media (prefers-reduced-motion: reduce) {
+          .thinking-card { animation: none; }
+        }
+      `}</style>
       <div className="px-6 md:px-12 max-w-[1400px] mx-auto">
-        <div className="mb-16">
-          <p className="font-mono text-xs text-primary tracking-[0.2em] uppercase mb-4">— Archived Impact</p>
-          <h2 className="font-display text-4xl md:text-6xl font-black leading-tight text-foreground">Crisis Mitigation &<br />Reputational Recovery</h2>
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.5fr] gap-12 lg:gap-24 mb-20">
+          <div>
+            <p className="font-mono text-xs text-primary tracking-[0.2em] uppercase mb-5">Experiences & Production</p>
+            <h2 className="font-display text-4xl md:text-6xl font-black leading-[1.02] text-foreground">Turning ideas into unforgettable moments.</h2>
+          </div>
+          <div className="lg:pt-2">
+            <p className="font-mono text-xs text-primary tracking-[0.2em] uppercase mb-5">Our Thinking</p>
+            <p className="text-muted-foreground text-lg md:text-xl leading-relaxed max-w-2xl">We believe the most influential brands are built where strategy meets culture, creativity meets business, and every interaction becomes an opportunity to be remembered.</p>
+          </div>
         </div>
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-px bg-border mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-20">
           {[
-            { label: "The Challenge", color: "bg-card", content: "A corporate organisation faced an operational disruption during a critical rollout, triggering rapid reputational risk across digital channels." },
-            { label: "Our Intervention", color: "bg-secondary", content: "We activated a Crisis Management Blueprint with unified response scripts, media coordination, and influencer support to shift the narrative." },
-            { label: "The Result", color: "bg-card", content: "Negative mentions dropped sharply, editorial coverage improved, retention stabilised, and Share of Voice grew threefold." },
-          ].map((col) => (
-            <div key={col.label} className={`${col.color} p-8 md:p-10`}>
-              <p className="font-mono text-[10px] text-primary tracking-widest uppercase mb-5 border-b border-border pb-4">{col.label}</p>
-              <p className="text-foreground text-sm leading-relaxed">{col.content}</p>
-            </div>
+            "Why Brands Are Built Through Experiences",
+            "Creativity Is a Competitive Advantage",
+            "The Future of African Brands",
+            "The Business Value of Storytelling",
+          ].map((perspective, index) => (
+            <article
+              key={perspective}
+              className="thinking-card group bg-card border border-border p-7 md:p-9 min-h-[170px] flex items-end justify-between gap-6 hover:border-primary/60 transition-colors duration-300"
+              style={{ animationDelay: `${index * 100}ms` }}
+            >
+              <h3 className="font-display text-2xl md:text-3xl font-black leading-tight text-foreground group-hover:text-primary transition-colors duration-300">{perspective}</h3>
+              <ArrowUpRight className="shrink-0 text-primary/50 group-hover:text-primary group-hover:translate-x-1 group-hover:-translate-y-1 transition-all duration-300" size={24} />
+            </article>
           ))}
         </div>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 pt-10 border-t border-border">
+        <div className="pt-10 border-t border-border">
+          <p className="font-mono text-xs text-primary tracking-[0.2em] uppercase mb-8">Impact</p>
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
           {[
-            { val: "85%", label: "Drop in harmful mentions within 24 hours" },
-            { val: "14", label: "High-authority editorial placements secured" },
-            { val: "98.2%", label: "Customer retention post-crisis" },
-            { val: "3×", label: "Share of Voice vs. pre-crisis baseline" },
-          ].map((s) => (
-            <div key={s.label}>
-              <div className="font-display text-3xl md:text-5xl font-black text-primary">{s.val}</div>
-              <div className="text-xs text-muted-foreground mt-2 leading-snug">{s.label}</div>
+            "Campaigns delivered",
+            "Productions completed",
+            "Industries served",
+            "Audience reach",
+            "Markets reached",
+            "Long-term partnerships",
+          ].map((metric, index) => (
+            <div key={metric} className="thinking-card" style={{ animationDelay: `${index * 80}ms` }}>
+              <div className="font-display text-4xl md:text-5xl font-black text-primary leading-none">0{index + 1}</div>
+              <div className="text-xs text-muted-foreground mt-3 leading-snug">{metric}</div>
             </div>
           ))}
+          </div>
         </div>
       </div>
     </section>
@@ -410,10 +479,11 @@ export default function Home() {
     <>
       <Hero />
       <Ticker />
+      <EditorialStatement />
       <Services />
       <Advantage />
       <StudioProfile />
-      <CaseStudy />
+      <ThinkingImpact />
       <Industries />
       <PullQuote />
       <Onboarding />
