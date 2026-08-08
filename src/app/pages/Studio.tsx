@@ -1,344 +1,381 @@
-import { useState } from "react";
-import { Play, Pause, Volume2, VolumeX, Maximize2, ArrowUpRight, Clock, Mic, Radio, Tv, Users } from "lucide-react";
+import { useEffect, useRef, useState, type TouchEvent, type WheelEvent } from "react";
+import {
+  ArrowUpRight,
+  Volume2,
+  VolumeX,
+} from "lucide-react";
+import gsap from "gsap";
+import * as THREE from "three";
 
-// Combined data types
-type VideoItem = {
+type Slide = {
   id: string;
+  category: string;
   title: string;
-  artist: string;
-  type: "Live Session" | "Performance" | "Special" | "Behind The Scenes";
-  duration: string;
-  year: string;
-  thumb: string;
-  alt: string;
-  featured?: boolean;
   description: string;
-};
-
-type ShowCategory = "Interview" | "Podcast" | "Programme" | "Panel";
-
-type Show = {
-  id: string;
-  title: string;
-  category: ShowCategory;
-  episode: string;
-  guest: string;
-  host: string;
-  duration: string;
-  date: string;
   thumb: string;
-  alt: string;
-  excerpt: string;
-  featured?: boolean;
-  new?: boolean;
+  link: string;
+  videoUrl: string;
+  badge?: string;
 };
 
-// Videos
-const VIDEOS: VideoItem[] = [
+const SLIDES: Slide[] = [
   {
-    id: "v1",
+    id: "slide-1",
+    category: "Live Session",
     title: "Midnight Studio Session",
-    artist: "Adekunle Gold",
-    type: "Live Session",
-    duration: "42:18",
-    year: "2024",
-    thumb: "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=1200&h=675&fit=crop&auto=format",
-    alt: "Adekunle Gold studio session",
-    featured: true,
-    description: "An intimate late-night session recorded live at EchooRoom Studio. Three cameras, one take, zero edits.",
+    description: "A live session that moves through shadow, rhythm, and intimate cinematic atmosphere.",
+    thumb: "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=1600&h=900&fit=crop&auto=format",
+    link: "https://www.youtube.com/watch?v=aqz-KE-bpKQ",
+    videoUrl: "https://res.cloudinary.com/day4hpjji/video/upload/v1786149832/LEOSTAYTRILL_FT._SHODAY_TILL_THE_WHEEL_IS_FALLING_LIVE_PERFORMANCE_AT_ECHOOROOM_-_Echoo_Room_1080p_h264_youtube_oggbos.mp4",
+    badge: "Featured",
   },
-  // ... keep other video items (trimmed for brevity)
-];
-
-// Shows
-const SHOWS: Show[] = [
   {
-    id: "s1",
-    title: "The Creative Roundtable",
-    category: "Interview",
-    episode: "Ep. 24",
-    guest: "Falz & Simi",
-    host: "Kemi Adeyemi",
-    duration: "1:02:44",
-    date: "Nov 28, 2024",
-    thumb: "https://images.unsplash.com/photo-1478737270239-2f02b77fc618?w=800&h=500&fit=crop&auto=format",
-    alt: "Creative Roundtable episode",
-    excerpt: "Falz and Simi sit down with Kemi Adeyemi to discuss creative independence, the business of music, and why Nigerian artists must own their masters.",
-    featured: true,
-    new: true,
+    id: "slide-2",
+    category: "Performance",
+    title: "Afterglow Performance",
+    description: "A cinematic studio cut that lets motion, light, and sound bleed into the frame.",
+    thumb: "https://images.unsplash.com/photo-1501386761578-eac5c94b800a?w=1600&h=900&fit=crop&auto=format",
+    link: "https://www.youtube.com/watch?v=4XhR5l4U4Kk",
+    videoUrl: "https://www.w3schools.com/html/mov_bbb.mp4",
   },
-  // ... keep other shows (trimmed for brevity)
+  {
+    id: "slide-3",
+    category: "Special",
+    title: "The Neon Special",
+    description: "A bold visual experiment with texture, glow, and a subtle cinematic pulse.",
+    thumb: "https://images.unsplash.com/photo-1516280030429-27679b7f7f66?w=1600&h=900&fit=crop&auto=format",
+    link: "https://www.youtube.com/watch?v=2Vv-BfVoq4g",
+    videoUrl: "https://www.w3schools.com/html/mov_bbb.mp4",
+  },
+  {
+    id: "slide-4",
+    category: "Behind The Scenes",
+    title: "The Cut Room Diaries",
+    description: "A textured preview of the space where every frame is tuned for sound and shadow.",
+    thumb: "https://images.unsplash.com/photo-1516280440614-37939bbacd81?w=1600&h=900&fit=crop&auto=format",
+    link: "https://www.youtube.com/watch?v=VYOjWnS4cMY",
+    videoUrl: "https://www.w3schools.com/html/mov_bbb.mp4",
+  },
+  {
+    id: "slide-5",
+    category: "Interview",
+    title: "The Creative Roundtable",
+    description: "A quiet conversation that opens up the creative process and the energy behind it.",
+    thumb: "https://images.unsplash.com/photo-1478737270239-2f02b77fc618?w=1600&h=900&fit=crop&auto=format",
+    link: "https://www.youtube.com/watch?v=7QU9mvNHnKg",
+    videoUrl: "https://www.w3schools.com/html/mov_bbb.mp4",
+  },
+  {
+    id: "slide-6",
+    category: "Podcast",
+    title: "Synths & Sovereignty",
+    description: "A deep-dive into influence, ritual, and the pressure of staying iconic.",
+    thumb: "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=1600&h=900&fit=crop&auto=format",
+    link: "https://www.youtube.com/watch?v=F7rHps6VWIU",
+    videoUrl: "https://www.w3schools.com/html/mov_bbb.mp4",
+  }
 ];
-
-const FILTERS_V = ["All", "Live Session", "Performance", "Special", "Behind The Scenes"] as const;
-type FilterV = (typeof FILTERS_V)[number];
-
-const FILTERS_S = ["All", "Interview", "Podcast", "Programme", "Panel"] as const;
-type FilterS = (typeof FILTERS_S)[number];
-
-const CATEGORY_ICONS: Record<ShowCategory, typeof Mic> = {
-  Interview: Mic,
-  Podcast: Radio,
-  Programme: Tv,
-  Panel: Users,
-};
-
-const CATEGORY_COLORS: Record<ShowCategory, string> = {
-  Interview: "text-amber-400",
-  Podcast: "text-emerald-400",
-  Programme: "text-sky-400",
-  Panel: "text-violet-400",
-};
-
-// Simple Featured video player (kept lightweight)
-function FeaturedPlayer({ video }: { video: VideoItem }) {
-  const [playing, setPlaying] = useState(false);
-  const [muted, setMuted] = useState(false);
-  const [progress, setProgress] = useState(0);
-
-  return (
-    <div className="relative w-full aspect-video bg-black overflow-hidden group cursor-pointer">
-      <img src={video.thumb} alt={video.alt} className={`w-full h-full object-cover transition-all duration-700 ${playing ? "scale-105" : "scale-100"}`} style={{ filter: playing ? "brightness(0.55)" : "brightness(0.75)" }} />
-
-      <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent" />
-
-      <button onClick={() => setPlaying(!playing)} className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 transition-all duration-300 ${playing ? "opacity-0 scale-75" : "opacity-100 scale-100"}`} aria-label={playing ? "Pause" : "Play"}>
-        <div className="w-16 h-16 md:w-20 md:h-20 rounded-full bg-primary flex items-center justify-center shadow-2xl hover:scale-110 transition-transform duration-200">
-          {playing ? <Pause size={24} className="text-primary-foreground" /> : <Play size={24} className="text-primary-foreground ml-1 fill-current" />}
-        </div>
-      </button>
-
-      <div className="absolute bottom-0 left-0 right-0 px-6 md:px-10 pb-6 md:pb-8">
-        <div className="w-full h-0.5 bg-white/20 mb-5 cursor-pointer relative">
-          <div className="h-full bg-primary" style={{ width: `${progress}%` }} />
-        </div>
-
-        <div className="flex items-end justify-between">
-          <div>
-            <p className="font-mono text-[10px] text-primary tracking-widest uppercase mb-1.5">{video.type}</p>
-            <h2 className="font-display text-xl md:text-3xl font-black text-white leading-tight">{video.title}</h2>
-            <p className="text-white/60 text-sm mt-1">{video.artist}</p>
-          </div>
-          <div className="flex items-center gap-4">
-            <span className="font-mono text-xs text-white/60">{video.duration}</span>
-            <button onClick={() => setMuted(!muted)} className="text-white/60 hover:text-white transition-colors" aria-label="Toggle mute">
-              {muted ? <VolumeX size={16} /> : <Volume2 size={16} />}
-            </button>
-            <button className="text-white/60 hover:text-white transition-colors" aria-label="Fullscreen">
-              <Maximize2 size={16} />
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function VideoCard({ video, onSelect, active }: { video: VideoItem; onSelect: () => void; active: boolean }) {
-  const [hovered, setHovered] = useState(false);
-
-  return (
-    <button className={`group text-left w-full transition-all duration-200 ${active ? "opacity-100" : "opacity-80 hover:opacity-100"}`} onClick={onSelect} onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)}>
-      <div className="relative aspect-video overflow-hidden bg-muted mb-4">
-        <img src={video.thumb} alt={video.alt} className={`w-full h-full object-cover transition-all duration-500 ${hovered ? "scale-105 brightness-75" : "scale-100 brightness-60"}`} />
-        <div className={`absolute inset-0 flex items-center justify-center transition-opacity duration-200 ${hovered ? "opacity-100" : "opacity-0"}`}>
-          <div className="w-11 h-11 rounded-full bg-primary flex items-center justify-center">
-            <Play size={14} className="text-primary-foreground fill-current ml-0.5" />
-          </div>
-        </div>
-        <div className="absolute bottom-2 right-2 bg-black/80 px-2 py-0.5">
-          <span className="font-mono text-[10px] text-white tracking-wide">{video.duration}</span>
-        </div>
-        {active && <div className="absolute inset-0 border-2 border-primary pointer-events-none" />}
-      </div>
-
-      <div className="flex items-start justify-between gap-2">
-        <div className="min-w-0">
-          <p className="font-mono text-[9px] text-primary tracking-widest uppercase mb-1">{video.type}</p>
-          <h3 className={`font-display font-black text-sm leading-tight truncate transition-colors ${hovered ? "text-primary" : "text-foreground"}`}>{video.title}</h3>
-          <p className="text-muted-foreground text-xs mt-0.5">{video.artist} · {video.year}</p>
-        </div>
-        <ArrowUpRight size={14} className={`shrink-0 mt-0.5 transition-all duration-200 ${hovered ? "text-primary" : "text-muted-foreground opacity-0 group-hover:opacity-100"}`} />
-      </div>
-    </button>
-  );
-}
-
-function FeaturedShow({ show }: { show: Show }) {
-  const Icon = CATEGORY_ICONS[show.category];
-  return (
-    <div>
-      <div className="relative aspect-[16/7] overflow-hidden bg-muted mb-6">
-        <img src={show.thumb} alt={show.alt} className="w-full h-full object-cover brightness-40" />
-        <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/30 to-transparent" />
-        <div className="absolute bottom-0 left-0 p-8 md:p-10 max-w-2xl">
-          <div className="flex items-center gap-3 mb-4">
-            {show.new && (<span className="bg-primary text-primary-foreground font-mono text-[9px] tracking-widest uppercase px-2.5 py-1">New</span>)}
-            <span className={`flex items-center gap-1.5 font-mono text-[10px] tracking-widest uppercase ${CATEGORY_COLORS[show.category]}`}>
-              <Icon size={11} /> {show.category}
-            </span>
-            <span className="font-mono text-[10px] text-white/40 tracking-wide">{show.episode}</span>
-          </div>
-          <h2 className="font-display text-2xl md:text-4xl font-black text-white leading-tight mb-2">{show.title}</h2>
-          <p className="text-white/60 text-sm">with {show.guest} · hosted by {show.host}</p>
-        </div>
-        <div className="absolute top-6 right-6 flex items-center gap-1.5 bg-black/60 px-3 py-1.5">
-          <Clock size={11} className="text-white/60" />
-          <span className="font-mono text-[10px] text-white/60 tracking-wide">{show.duration}</span>
-        </div>
-      </div>
-
-      <p className="text-muted-foreground leading-relaxed max-w-3xl">{show.excerpt}</p>
-    </div>
-  );
-}
-
-function ShowCard({ show }: { show: Show }) {
-  return (
-    <article className="group cursor-pointer">
-      <div className="relative aspect-video overflow-hidden bg-muted mb-4">
-        <img src={show.thumb} alt={show.alt} className="w-full h-full object-cover brightness-60" />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-        <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-          <div className="w-12 h-12 rounded-full bg-primary flex items-center justify-center shadow-xl">
-            <Play size={14} className="text-primary-foreground fill-current ml-0.5" />
-          </div>
-        </div>
-        <div className="absolute bottom-3 left-3 right-3 flex items-end justify-between">
-          <span className="flex items-center gap-1.5 font-mono text-[9px] tracking-widest uppercase bg-black/70 px-2 py-1 text-amber-400">
-            <Mic size={9} /> Interview
-          </span>
-          <span className="font-mono text-[10px] text-white/70 bg-black/70 px-2 py-1">{show.duration}</span>
-        </div>
-      </div>
-
-      <div>
-        <div className="flex items-center justify-between mb-2">
-          <span className="font-mono text-[9px] text-muted-foreground tracking-widest">{show.episode} · {show.date}</span>
-          <ArrowUpRight size={13} className="transition-all duration-200 text-muted-foreground opacity-0 group-hover:opacity-100" />
-        </div>
-        <h3 className="font-display font-black text-base leading-tight mb-1 text-foreground">{show.title}</h3>
-        <p className="text-muted-foreground text-xs mb-2">with <span className="text-foreground">{show.guest}</span></p>
-        <p className="text-muted-foreground text-xs leading-relaxed line-clamp-2">{show.excerpt}</p>
-      </div>
-    </article>
-  );
-}
 
 export default function Studio() {
-  const [filterV, setFilterV] = useState<FilterV>("All");
-  const [featured, setFeatured] = useState<VideoItem>(VIDEOS[0]);
+  const [activeSlide, setActiveSlide] = useState(0);
+  const [loading, setLoading] = useState(true);
+  const [progress, setProgress] = useState(0);
+  const [muted, setMuted] = useState(true);
+  const [isThrottled, setIsThrottled] = useState(false);
+  const canvasRef = useRef<HTMLCanvasElement | null>(null);
+  const videoRef = useRef<HTMLVideoElement | null>(null);
+  const touchStartY = useRef<number | null>(null);
 
-  const [filterS, setFilterS] = useState<FilterS>("All");
-  const featuredShow = SHOWS.find((s) => s.featured) ?? SHOWS[0];
+  const slide = SLIDES[activeSlide];
 
-  const filteredVideos = filterV === "All" ? VIDEOS : VIDEOS.filter((v) => v.type === filterV);
-  const restShows = SHOWS.filter((s) => !s.featured);
-  const filteredShows = filterS === "All" ? restShows : restShows.filter((s) => s.category === filterS);
+  useEffect(() => {
+    const timeline = gsap.timeline({ defaults: { ease: "power3.inOut" } });
+    const duration = 4800;
+    let current = 0;
+    const interval = window.setInterval(() => {
+      current = Math.min(100, current + Math.floor(Math.random() * 7) + 4);
+      setProgress(current);
+
+      if (current >= 100) {
+        window.clearInterval(interval);
+        timeline.to(".studio-loader", { yPercent: -110, opacity: 0, duration: 1.4 });
+        timeline.fromTo(
+          ".studio-shell",
+          { opacity: 0, y: 18 },
+          { opacity: 1, y: 0, duration: 1.3, clearProps: "all" },
+          "<0.35"
+        );
+        window.setTimeout(() => setLoading(false), 500);
+      }
+    }, duration / 12);
+
+    return () => {
+      window.clearInterval(interval);
+    };
+  }, []);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+    video.pause();
+    video.load();
+    void video.play().catch(() => {
+      // Autoplay fallback handled by muted attribute
+    });
+
+    gsap.fromTo(
+      ".slide-meta",
+      { opacity: 0, y: 18 },
+      { opacity: 1, y: 0, duration: 0.9, ease: "power3.out" }
+    );
+    gsap.fromTo(
+      ".category-card",
+      { opacity: 0, x: 18 },
+      { opacity: 1, x: 0, duration: 0.75, stagger: 0.05, ease: "power3.out" }
+    );
+  }, [activeSlide]);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+
+    const renderer = new THREE.WebGLRenderer({
+      canvas,
+      alpha: true,
+      antialias: true,
+    });
+    renderer.setPixelRatio(window.devicePixelRatio);
+    renderer.setClearColor(0x000000, 0);
+
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(55, 1, 0.1, 20);
+    camera.position.z = 3;
+
+    const particleCount = 120;
+    const positions = new Float32Array(particleCount * 3);
+    const sizes = new Float32Array(particleCount);
+
+    for (let i = 0; i < particleCount; i += 1) {
+      positions[i * 3 + 0] = (Math.random() - 0.5) * 4;
+      positions[i * 3 + 1] = (Math.random() - 0.5) * 2.5;
+      positions[i * 3 + 2] = (Math.random() - 0.5) * 2;
+      sizes[i] = Math.random() * 2 + 1;
+    }
+
+    const geometry = new THREE.BufferGeometry();
+    geometry.setAttribute("position", new THREE.BufferAttribute(positions, 3));
+    geometry.setAttribute("size", new THREE.BufferAttribute(sizes, 1));
+
+    const material = new THREE.PointsMaterial({
+      color: 0xffffff,
+      size: 0.03,
+      transparent: true,
+      opacity: 0.4,
+      sizeAttenuation: true,
+    });
+
+    const points = new THREE.Points(geometry, material);
+    scene.add(points);
+
+    const clock = new THREE.Clock();
+    let frameId: number;
+
+    const resize = () => {
+      const width = canvas.clientWidth;
+      const height = canvas.clientHeight;
+      renderer.setSize(width, height, false);
+      camera.aspect = width / height;
+      camera.updateProjectionMatrix();
+    };
+
+    const animate = () => {
+      const time = clock.getElapsedTime();
+      const positionsArray = geometry.attributes.position.array as Float32Array;
+
+      for (let i = 0; i < particleCount; i += 1) {
+        const idx = i * 3;
+        positionsArray[idx + 0] += Math.sin(time + i * 0.1) * 0.0008;
+        positionsArray[idx + 1] += Math.cos(time + i * 0.12) * 0.0009;
+        positionsArray[idx + 2] += Math.sin(time + i * 0.15) * 0.0005;
+      }
+
+      geometry.attributes.position.needsUpdate = true;
+      points.rotation.y = time * 0.015;
+      points.rotation.x = Math.sin(time * 0.2) * 0.02;
+
+      renderer.render(scene, camera);
+      frameId = window.requestAnimationFrame(animate);
+    };
+
+    resize();
+    window.addEventListener("resize", resize);
+    animate();
+
+    return () => {
+      window.cancelAnimationFrame(frameId);
+      window.removeEventListener("resize", resize);
+      renderer.dispose();
+      geometry.dispose();
+      material.dispose();
+    };
+  }, []);
+
+  const clampIndex = (next: number) => {
+    if (next < 0) return 0;
+    if (next >= SLIDES.length) return SLIDES.length - 1;
+    return next;
+  };
+
+  const changeSlide = (next: number) => {
+    setActiveSlide(clampIndex(next));
+  };
+
+  const handleWheel = (event: WheelEvent<HTMLDivElement>) => {
+    event.preventDefault();
+    if (loading || isThrottled) return;
+
+    const direction = Math.sign(event.deltaY);
+    if (direction === 0) return;
+
+    setIsThrottled(true);
+    setTimeout(() => setIsThrottled(false), 600);
+    changeSlide(activeSlide + direction);
+  };
+
+  const handleTouchStart = (event: TouchEvent<HTMLDivElement>) => {
+    touchStartY.current = event.touches[0]?.clientY ?? null;
+  };
+
+  const handleTouchEnd = (event: TouchEvent<HTMLDivElement>) => {
+    if (loading || isThrottled || touchStartY.current === null) return;
+    const delta = touchStartY.current - event.changedTouches[0]?.clientY;
+    if (Math.abs(delta) < 40) {
+      touchStartY.current = null;
+      return;
+    }
+
+    setIsThrottled(true);
+    setTimeout(() => setIsThrottled(false), 600);
+    changeSlide(activeSlide + (delta > 0 ? 1 : -1));
+    touchStartY.current = null;
+  };
 
   return (
-    <div className="min-h-screen bg-background">
-      <div className="pt-24 pb-10 px-6 md:px-12 max-w-[1400px] mx-auto">
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
-          <div>
-            <p className="font-mono text-xs text-primary tracking-[0.22em] uppercase mb-3">EchooRoom Studio</p>
-            <h1 className="font-display text-4xl md:text-6xl font-black leading-tight text-foreground">The Studio</h1>
-            <p className="text-muted-foreground mt-3 max-w-md leading-relaxed">Recorded artist sessions, live performances, specials, and shows — captured in cinematic quality from our state-of-the-art studios.</p>
+    <div className="min-h-screen overflow-hidden bg-[#050505] text-white">
+      <div
+        className={`studio-loader fixed inset-0 z-[90] flex items-center justify-center bg-[#030303] transition-opacity ${loading ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0"}`}
+      >
+        <div className="w-full max-w-md px-6 text-center">
+          <p className="font-mono text-[10px] uppercase tracking-[0.4em] text-white/60">EchooRoom Studio</p>
+          <p className="mt-4 text-5xl font-black tracking-[0.24em] text-white">{progress}%</p>
+          <div className="mt-5 h-2 overflow-hidden rounded-full border border-white/20 bg-white/5">
+            <div className="h-full bg-white transition-all duration-200" style={{ width: `${progress}%` }} />
           </div>
-
-          <div className="flex flex-wrap gap-2">
-            {FILTERS_V.map((f) => (
-              <button key={f} onClick={() => setFilterV(f)} className={`px-4 py-2 font-mono text-[10px] tracking-widest uppercase transition-all duration-200 ${filterV === f ? "bg-primary text-primary-foreground" : "border border-border text-muted-foreground hover:border-primary/40 hover:text-foreground"}`}>
-                {f}
-              </button>
-            ))}
-          </div>
+          <p className="mt-4 font-mono text-[10px] uppercase tracking-[0.28em] text-white/45">Welcome to the EchooRoom experience</p>
         </div>
       </div>
 
-      <div className="px-6 md:px-12 max-w-[1400px] mx-auto pb-24">
-        <div className="grid grid-cols-1 xl:grid-cols-[1fr_380px] gap-8 items-start">
-          <div className="sticky top-20">
-            <FeaturedPlayer video={featured} />
-            <div className="mt-5 flex items-start gap-6">
-              <div className="flex-1">
-                <div className="flex items-center gap-3 mb-2">
-                  <span className="font-mono text-[9px] text-primary tracking-widest uppercase border border-primary/30 px-2 py-0.5">{featured.type}</span>
-                  <span className="flex items-center gap-1 font-mono text-[10px] text-muted-foreground"><Clock size={11} /> {featured.duration}</span>
-                  <span className="font-mono text-[10px] text-muted-foreground">{featured.year}</span>
-                </div>
-                <p className="text-muted-foreground text-sm leading-relaxed">{featured.description}</p>
-              </div>
-            </div>
+      <div
+        className={`studio-shell transition-opacity duration-500 ${loading ? "opacity-0" : "opacity-100"}`}
+        onWheel={handleWheel}
+        onTouchStart={handleTouchStart}
+        onTouchEnd={handleTouchEnd}
+      >
+        <div className="relative min-h-screen">
+          <div className="absolute inset-0 overflow-hidden">
+            <video
+              ref={videoRef}
+              key={slide.id}
+              className="absolute inset-0 h-full w-full object-cover brightness-110 contrast-105 saturate-110"
+              muted={muted}
+              loop
+              autoPlay
+              playsInline
+              preload="auto"
+              poster={slide.thumb}
+            >
+              <source src={slide.videoUrl} type="video/mp4" />
+            </video>
+            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent" />
+            <div className="absolute inset-0 bg-black/10" />
+            <canvas ref={canvasRef} className="pointer-events-none absolute inset-0 h-full w-full" />
           </div>
 
-          <div className="space-y-6">
-            <div className="flex items-center justify-between pb-3 border-b border-border">
-              <p className="font-mono text-[10px] text-muted-foreground tracking-widest uppercase">{filteredVideos.length} {filterV === "All" ? "videos" : filterV.toLowerCase() + "s"}</p>
-              <p className="font-mono text-[10px] text-muted-foreground tracking-widest uppercase">Latest first</p>
-            </div>
-
-            {filteredVideos.map((v) => (
-              <VideoCard key={v.id} video={v} active={featured.id === v.id} onSelect={() => setFeatured(v)} />
-            ))}
-          </div>
-        </div>
-      </div>
-
-      <div className="px-6 md:px-12 max-w-[1400px] mx-auto pb-24 border-t border-border pt-16">
-        <div className="flex items-end justify-between mb-10">
-          <h2 className="font-display text-3xl md:text-4xl font-black text-foreground">All Sessions & Shows</h2>
-          <p className="font-mono text-[10px] text-muted-foreground tracking-widest uppercase hidden md:block">{VIDEOS.length + SHOWS.length} recordings</p>
-        </div>
-
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          <div className="lg:col-span-2">
-            <div className="mb-6">
-              <div className="flex items-center justify-between pb-3 border-b border-border mb-6">
-                <p className="font-mono text-[10px] text-muted-foreground tracking-widest uppercase">Shows — {filteredShows.length} results</p>
-                <div className="flex flex-wrap gap-2">
-                  {FILTERS_S.map((f) => (
-                    <button key={f} onClick={() => setFilterS(f)} className={`px-4 py-1.5 font-mono text-[10px] tracking-widest uppercase transition-all duration-200 ${filterS === f ? "bg-primary text-primary-foreground" : "border border-border text-muted-foreground hover:border-primary/40 hover:text-foreground"}`}>
-                      {f}
-                    </button>
-                  ))}
+          <div className="relative z-10 mx-auto flex min-h-screen max-w-[1600px] flex-col justify-end px-4 py-10 sm:px-6 lg:px-8">
+            <div className="grid items-end gap-8 lg:grid-cols-[1.7fr_0.9fr]">
+              <section className="slide-meta max-w-3xl space-y-6 pb-1 sm:pb-3">
+                <div className="inline-flex items-center gap-3 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-[10px] uppercase tracking-[0.3em] text-white/70 backdrop-blur">
+                  <span className="h-2.5 w-2.5 rounded-full bg-white/80" />
+                  <span>{slide.category}</span>
                 </div>
-              </div>
-
-              {featuredShow && (
-                <div className="mb-8">
-                  <p className="font-mono text-[10px] text-muted-foreground tracking-widest uppercase mb-4">Latest episode</p>
-                  <FeaturedShow show={featuredShow} />
+                <div className="space-y-5">
+                  <h1 className="text-4xl font-black leading-tight tracking-[-0.04em] text-white sm:text-6xl">
+                    {slide.title}
+                  </h1>
+                  <p className="max-w-2xl text-lg leading-8 text-white/70 sm:text-xl">
+                    {slide.description}
+                  </p>
                 </div>
-              )}
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6">
-                {filteredShows.map((s) => (
-                  <ShowCard key={s.id} show={s} />
-                ))}
-              </div>
-
-              {filteredShows.length === 0 && (
-                <div className="py-24 text-center">
-                  <p className="font-display text-2xl font-black text-muted-foreground">No episodes yet</p>
-                  <p className="text-muted-foreground text-sm mt-2">Check back soon.</p>
+                <div className="flex flex-wrap items-center gap-4">
+                  <a
+                    href={slide.link}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-5 py-3 text-sm font-semibold uppercase tracking-[0.24em] text-white transition hover:border-white/40 hover:bg-white/15"
+                  >
+                    Watch
+                    <ArrowUpRight size={14} />
+                  </a>
+                  <button
+                    type="button"
+                    onClick={() => setMuted((value) => !value)}
+                    className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-black/60 px-4 py-3 text-sm text-white/80 transition hover:border-white/30 hover:bg-white/10"
+                  >
+                    {muted ? <Volume2 size={16} /> : <VolumeX size={16} />}
+                    {muted ? "Unmute" : "Mute"}
+                  </button>
                 </div>
-              )}
-            </div>
-          </div>
+                <p className="max-w-xl text-sm uppercase tracking-[0.32em] text-white/45">
+                  Scroll to move through the carousel, or tap a category to jump directly.
+                </p>
+              </section>
 
-          <div className="">
-            <div className="border-t border-border bg-card pt-6">
-              <div className="px-6 md:px-0">
-                <p className="font-mono text-xs text-primary tracking-[0.2em] uppercase mb-2">Never miss an episode</p>
-                <h3 className="font-display text-xl font-black text-foreground mb-2">Subscribe to EchooRoom Shows</h3>
-                <p className="text-muted-foreground text-sm mb-4">New interviews, podcasts, and programmes every week.</p>
-                <div className="flex flex-col sm:flex-row gap-3">
-                  {['Spotify','Apple Podcasts','YouTube'].map((p) => (
-                    <button key={p} className="px-5 py-3 border border-border text-sm text-foreground hover:border-primary/50 hover:text-primary transition-colors font-mono tracking-wide text-[11px] uppercase">{p}</button>
-                  ))}
+              <aside className="rounded-[1.5rem] border border-white/15 bg-black/45 p-4 backdrop-blur-xl lg:mb-3">
+                <div className="mb-6 flex items-center justify-between">
+                  <div>
+                    <p className="text-[11px] uppercase tracking-[0.32em] text-white/50">Categories</p>
+                    <p className="mt-2 text-sm font-semibold text-white">One preview per lens</p>
+                  </div>
+                  <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[10px] uppercase tracking-[0.28em] text-white/60">
+                    {activeSlide + 1}/{SLIDES.length}
+                  </span>
                 </div>
-              </div>
+                <div className="space-y-3">
+                  {SLIDES.map((item, index) => {
+                    const isActive = index === activeSlide;
+                    return (
+                      <button
+                        key={item.id}
+                        type="button"
+                        className={`category-card group w-full overflow-hidden rounded-xl border px-4 py-3 text-left transition ${isActive ? "border-white/50 bg-white/10" : "border-white/10 bg-black/20 hover:border-white/30 hover:bg-white/5"}`}
+                        onClick={() => changeSlide(index)}
+                      >
+                        <div className="flex items-start justify-between gap-4">
+                          <div className="min-w-0">
+                            <p className="text-xs font-medium uppercase tracking-[0.18em] text-white/85">{item.category}</p>
+                            <p className="mt-1 truncate text-xs text-white/45">{item.title}</p>
+                          </div>
+                          <span className="pt-0.5 text-[10px] tabular-nums text-white/35">{String(index + 1).padStart(2, "0")}</span>
+                        </div>
+                        <div className="mt-4 flex items-center justify-between text-[10px] uppercase tracking-[0.28em] text-white/50">
+                          <span>{isActive ? "Playing" : "Preview"}</span>
+                          <span>{item.badge ?? "Live"}</span>
+                        </div>
+                      </button>
+                    );
+                  })}
+                </div>
+              </aside>
             </div>
           </div>
         </div>

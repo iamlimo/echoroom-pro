@@ -2,220 +2,270 @@
 exports.__esModule = true;
 var react_1 = require("react");
 var lucide_react_1 = require("lucide-react");
-// Videos
-var VIDEOS = [
+var gsap_1 = require("gsap");
+var THREE = require("three");
+var SLIDES = [
     {
-        id: "v1",
+        id: "slide-1",
+        category: "Live Session",
         title: "Midnight Studio Session",
-        artist: "Adekunle Gold",
-        type: "Live Session",
-        duration: "42:18",
-        year: "2024",
-        thumb: "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=1200&h=675&fit=crop&auto=format",
-        alt: "Adekunle Gold studio session",
-        featured: true,
-        description: "An intimate late-night session recorded live at EchooRoom Studio. Three cameras, one take, zero edits."
+        description: "A live session that moves through shadow, rhythm, and intimate cinematic atmosphere.",
+        thumb: "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=1600&h=900&fit=crop&auto=format",
+        link: "https://www.youtube.com/watch?v=aqz-KE-bpKQ",
+        videoUrl: "https://res.cloudinary.com/day4hpjji/video/upload/v1786149832/LEOSTAYTRILL_FT._SHODAY_TILL_THE_WHEEL_IS_FALLING_LIVE_PERFORMANCE_AT_ECHOOROOM_-_Echoo_Room_1080p_h264_youtube_oggbos.mp4",
+        badge: "Featured"
     },
-];
-// Shows
-var SHOWS = [
     {
-        id: "s1",
-        title: "The Creative Roundtable",
-        category: "Interview",
-        episode: "Ep. 24",
-        guest: "Falz & Simi",
-        host: "Kemi Adeyemi",
-        duration: "1:02:44",
-        date: "Nov 28, 2024",
-        thumb: "https://images.unsplash.com/photo-1478737270239-2f02b77fc618?w=800&h=500&fit=crop&auto=format",
-        alt: "Creative Roundtable episode",
-        excerpt: "Falz and Simi sit down with Kemi Adeyemi to discuss creative independence, the business of music, and why Nigerian artists must own their masters.",
-        featured: true,
-        "new": true
+        id: "slide-2",
+        category: "Performance",
+        title: "Afterglow Performance",
+        description: "A cinematic studio cut that lets motion, light, and sound bleed into the frame.",
+        thumb: "https://images.unsplash.com/photo-1501386761578-eac5c94b800a?w=1600&h=900&fit=crop&auto=format",
+        link: "https://www.youtube.com/watch?v=4XhR5l4U4Kk",
+        videoUrl: "https://www.w3schools.com/html/mov_bbb.mp4"
     },
+    {
+        id: "slide-3",
+        category: "Special",
+        title: "The Neon Special",
+        description: "A bold visual experiment with texture, glow, and a subtle cinematic pulse.",
+        thumb: "https://images.unsplash.com/photo-1516280030429-27679b7f7f66?w=1600&h=900&fit=crop&auto=format",
+        link: "https://www.youtube.com/watch?v=2Vv-BfVoq4g",
+        videoUrl: "https://www.w3schools.com/html/mov_bbb.mp4"
+    },
+    {
+        id: "slide-4",
+        category: "Behind The Scenes",
+        title: "The Cut Room Diaries",
+        description: "A textured preview of the space where every frame is tuned for sound and shadow.",
+        thumb: "https://images.unsplash.com/photo-1516280440614-37939bbacd81?w=1600&h=900&fit=crop&auto=format",
+        link: "https://www.youtube.com/watch?v=VYOjWnS4cMY",
+        videoUrl: "https://www.w3schools.com/html/mov_bbb.mp4"
+    },
+    {
+        id: "slide-5",
+        category: "Interview",
+        title: "The Creative Roundtable",
+        description: "A quiet conversation that opens up the creative process and the energy behind it.",
+        thumb: "https://images.unsplash.com/photo-1478737270239-2f02b77fc618?w=1600&h=900&fit=crop&auto=format",
+        link: "https://www.youtube.com/watch?v=7QU9mvNHnKg",
+        videoUrl: "https://www.w3schools.com/html/mov_bbb.mp4"
+    },
+    {
+        id: "slide-6",
+        category: "Podcast",
+        title: "Synths & Sovereignty",
+        description: "A deep-dive into influence, ritual, and the pressure of staying iconic.",
+        thumb: "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=1600&h=900&fit=crop&auto=format",
+        link: "https://www.youtube.com/watch?v=F7rHps6VWIU",
+        videoUrl: "https://www.w3schools.com/html/mov_bbb.mp4"
+    }
 ];
-var FILTERS_V = ["All", "Live Session", "Performance", "Special", "Behind The Scenes"];
-var FILTERS_S = ["All", "Interview", "Podcast", "Programme", "Panel"];
-var CATEGORY_ICONS = {
-    Interview: lucide_react_1.Mic,
-    Podcast: lucide_react_1.Radio,
-    Programme: lucide_react_1.Tv,
-    Panel: lucide_react_1.Users
-};
-var CATEGORY_COLORS = {
-    Interview: "text-amber-400",
-    Podcast: "text-emerald-400",
-    Programme: "text-sky-400",
-    Panel: "text-violet-400"
-};
-// Simple Featured video player (kept lightweight)
-function FeaturedPlayer(_a) {
-    var video = _a.video;
-    var _b = react_1.useState(false), playing = _b[0], setPlaying = _b[1];
-    var _c = react_1.useState(false), muted = _c[0], setMuted = _c[1];
-    var _d = react_1.useState(0), progress = _d[0], setProgress = _d[1];
-    return (React.createElement("div", { className: "relative w-full aspect-video bg-black overflow-hidden group cursor-pointer" },
-        React.createElement("img", { src: video.thumb, alt: video.alt, className: "w-full h-full object-cover transition-all duration-700 " + (playing ? "scale-105" : "scale-100"), style: { filter: playing ? "brightness(0.55)" : "brightness(0.75)" } }),
-        React.createElement("div", { className: "absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent" }),
-        React.createElement("button", { onClick: function () { return setPlaying(!playing); }, className: "absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 transition-all duration-300 " + (playing ? "opacity-0 scale-75" : "opacity-100 scale-100"), "aria-label": playing ? "Pause" : "Play" },
-            React.createElement("div", { className: "w-16 h-16 md:w-20 md:h-20 rounded-full bg-primary flex items-center justify-center shadow-2xl hover:scale-110 transition-transform duration-200" }, playing ? React.createElement(lucide_react_1.Pause, { size: 24, className: "text-primary-foreground" }) : React.createElement(lucide_react_1.Play, { size: 24, className: "text-primary-foreground ml-1 fill-current" }))),
-        React.createElement("div", { className: "absolute bottom-0 left-0 right-0 px-6 md:px-10 pb-6 md:pb-8" },
-            React.createElement("div", { className: "w-full h-0.5 bg-white/20 mb-5 cursor-pointer relative" },
-                React.createElement("div", { className: "h-full bg-primary", style: { width: progress + "%" } })),
-            React.createElement("div", { className: "flex items-end justify-between" },
-                React.createElement("div", null,
-                    React.createElement("p", { className: "font-mono text-[10px] text-primary tracking-widest uppercase mb-1.5" }, video.type),
-                    React.createElement("h2", { className: "font-display text-xl md:text-3xl font-black text-white leading-tight" }, video.title),
-                    React.createElement("p", { className: "text-white/60 text-sm mt-1" }, video.artist)),
-                React.createElement("div", { className: "flex items-center gap-4" },
-                    React.createElement("span", { className: "font-mono text-xs text-white/60" }, video.duration),
-                    React.createElement("button", { onClick: function () { return setMuted(!muted); }, className: "text-white/60 hover:text-white transition-colors", "aria-label": "Toggle mute" }, muted ? React.createElement(lucide_react_1.VolumeX, { size: 16 }) : React.createElement(lucide_react_1.Volume2, { size: 16 })),
-                    React.createElement("button", { className: "text-white/60 hover:text-white transition-colors", "aria-label": "Fullscreen" },
-                        React.createElement(lucide_react_1.Maximize2, { size: 16 })))))));
-}
-function VideoCard(_a) {
-    var video = _a.video, onSelect = _a.onSelect, active = _a.active;
-    var _b = react_1.useState(false), hovered = _b[0], setHovered = _b[1];
-    return (React.createElement("button", { className: "group text-left w-full transition-all duration-200 " + (active ? "opacity-100" : "opacity-80 hover:opacity-100"), onClick: onSelect, onMouseEnter: function () { return setHovered(true); }, onMouseLeave: function () { return setHovered(false); } },
-        React.createElement("div", { className: "relative aspect-video overflow-hidden bg-muted mb-4" },
-            React.createElement("img", { src: video.thumb, alt: video.alt, className: "w-full h-full object-cover transition-all duration-500 " + (hovered ? "scale-105 brightness-75" : "scale-100 brightness-60") }),
-            React.createElement("div", { className: "absolute inset-0 flex items-center justify-center transition-opacity duration-200 " + (hovered ? "opacity-100" : "opacity-0") },
-                React.createElement("div", { className: "w-11 h-11 rounded-full bg-primary flex items-center justify-center" },
-                    React.createElement(lucide_react_1.Play, { size: 14, className: "text-primary-foreground fill-current ml-0.5" }))),
-            React.createElement("div", { className: "absolute bottom-2 right-2 bg-black/80 px-2 py-0.5" },
-                React.createElement("span", { className: "font-mono text-[10px] text-white tracking-wide" }, video.duration)),
-            active && React.createElement("div", { className: "absolute inset-0 border-2 border-primary pointer-events-none" })),
-        React.createElement("div", { className: "flex items-start justify-between gap-2" },
-            React.createElement("div", { className: "min-w-0" },
-                React.createElement("p", { className: "font-mono text-[9px] text-primary tracking-widest uppercase mb-1" }, video.type),
-                React.createElement("h3", { className: "font-display font-black text-sm leading-tight truncate transition-colors " + (hovered ? "text-primary" : "text-foreground") }, video.title),
-                React.createElement("p", { className: "text-muted-foreground text-xs mt-0.5" },
-                    video.artist,
-                    " \u00B7 ",
-                    video.year)),
-            React.createElement(lucide_react_1.ArrowUpRight, { size: 14, className: "shrink-0 mt-0.5 transition-all duration-200 " + (hovered ? "text-primary" : "text-muted-foreground opacity-0 group-hover:opacity-100") }))));
-}
-function FeaturedShow(_a) {
-    var show = _a.show;
-    var Icon = CATEGORY_ICONS[show.category];
-    return (React.createElement("div", null,
-        React.createElement("div", { className: "relative aspect-[16/7] overflow-hidden bg-muted mb-6" },
-            React.createElement("img", { src: show.thumb, alt: show.alt, className: "w-full h-full object-cover brightness-40" }),
-            React.createElement("div", { className: "absolute inset-0 bg-gradient-to-r from-black/80 via-black/30 to-transparent" }),
-            React.createElement("div", { className: "absolute bottom-0 left-0 p-8 md:p-10 max-w-2xl" },
-                React.createElement("div", { className: "flex items-center gap-3 mb-4" },
-                    show["new"] && (React.createElement("span", { className: "bg-primary text-primary-foreground font-mono text-[9px] tracking-widest uppercase px-2.5 py-1" }, "New")),
-                    React.createElement("span", { className: "flex items-center gap-1.5 font-mono text-[10px] tracking-widest uppercase " + CATEGORY_COLORS[show.category] },
-                        React.createElement(Icon, { size: 11 }),
-                        " ",
-                        show.category),
-                    React.createElement("span", { className: "font-mono text-[10px] text-white/40 tracking-wide" }, show.episode)),
-                React.createElement("h2", { className: "font-display text-2xl md:text-4xl font-black text-white leading-tight mb-2" }, show.title),
-                React.createElement("p", { className: "text-white/60 text-sm" },
-                    "with ",
-                    show.guest,
-                    " \u00B7 hosted by ",
-                    show.host)),
-            React.createElement("div", { className: "absolute top-6 right-6 flex items-center gap-1.5 bg-black/60 px-3 py-1.5" },
-                React.createElement(lucide_react_1.Clock, { size: 11, className: "text-white/60" }),
-                React.createElement("span", { className: "font-mono text-[10px] text-white/60 tracking-wide" }, show.duration))),
-        React.createElement("p", { className: "text-muted-foreground leading-relaxed max-w-3xl" }, show.excerpt)));
-}
-function ShowCard(_a) {
-    var show = _a.show;
-    return (React.createElement("article", { className: "group cursor-pointer" },
-        React.createElement("div", { className: "relative aspect-video overflow-hidden bg-muted mb-4" },
-            React.createElement("img", { src: show.thumb, alt: show.alt, className: "w-full h-full object-cover brightness-60" }),
-            React.createElement("div", { className: "absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" }),
-            React.createElement("div", { className: "absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity" },
-                React.createElement("div", { className: "w-12 h-12 rounded-full bg-primary flex items-center justify-center shadow-xl" },
-                    React.createElement(lucide_react_1.Play, { size: 14, className: "text-primary-foreground fill-current ml-0.5" }))),
-            React.createElement("div", { className: "absolute bottom-3 left-3 right-3 flex items-end justify-between" },
-                React.createElement("span", { className: "flex items-center gap-1.5 font-mono text-[9px] tracking-widest uppercase bg-black/70 px-2 py-1 text-amber-400" },
-                    React.createElement(lucide_react_1.Mic, { size: 9 }),
-                    " Interview"),
-                React.createElement("span", { className: "font-mono text-[10px] text-white/70 bg-black/70 px-2 py-1" }, show.duration))),
-        React.createElement("div", null,
-            React.createElement("div", { className: "flex items-center justify-between mb-2" },
-                React.createElement("span", { className: "font-mono text-[9px] text-muted-foreground tracking-widest" },
-                    show.episode,
-                    " \u00B7 ",
-                    show.date),
-                React.createElement(lucide_react_1.ArrowUpRight, { size: 13, className: "transition-all duration-200 text-muted-foreground opacity-0 group-hover:opacity-100" })),
-            React.createElement("h3", { className: "font-display font-black text-base leading-tight mb-1 text-foreground" }, show.title),
-            React.createElement("p", { className: "text-muted-foreground text-xs mb-2" },
-                "with ",
-                React.createElement("span", { className: "text-foreground" }, show.guest)),
-            React.createElement("p", { className: "text-muted-foreground text-xs leading-relaxed line-clamp-2" }, show.excerpt))));
-}
 function Studio() {
-    var _a;
-    var _b = react_1.useState("All"), filterV = _b[0], setFilterV = _b[1];
-    var _c = react_1.useState(VIDEOS[0]), featured = _c[0], setFeatured = _c[1];
-    var _d = react_1.useState("All"), filterS = _d[0], setFilterS = _d[1];
-    var featuredShow = (_a = SHOWS.find(function (s) { return s.featured; })) !== null && _a !== void 0 ? _a : SHOWS[0];
-    var filteredVideos = filterV === "All" ? VIDEOS : VIDEOS.filter(function (v) { return v.type === filterV; });
-    var restShows = SHOWS.filter(function (s) { return !s.featured; });
-    var filteredShows = filterS === "All" ? restShows : restShows.filter(function (s) { return s.category === filterS; });
-    return (React.createElement("div", { className: "min-h-screen bg-background" },
-        React.createElement("div", { className: "pt-24 pb-10 px-6 md:px-12 max-w-[1400px] mx-auto" },
-            React.createElement("div", { className: "flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10" },
-                React.createElement("div", null,
-                    React.createElement("p", { className: "font-mono text-xs text-primary tracking-[0.22em] uppercase mb-3" }, "EchooRoom Studio"),
-                    React.createElement("h1", { className: "font-display text-4xl md:text-6xl font-black leading-tight text-foreground" }, "The Studio"),
-                    React.createElement("p", { className: "text-muted-foreground mt-3 max-w-md leading-relaxed" }, "Recorded artist sessions, live performances, specials, and shows \u2014 captured in cinematic quality from our state-of-the-art studios.")),
-                React.createElement("div", { className: "flex flex-wrap gap-2" }, FILTERS_V.map(function (f) { return (React.createElement("button", { key: f, onClick: function () { return setFilterV(f); }, className: "px-4 py-2 font-mono text-[10px] tracking-widest uppercase transition-all duration-200 " + (filterV === f ? "bg-primary text-primary-foreground" : "border border-border text-muted-foreground hover:border-primary/40 hover:text-foreground") }, f)); })))),
-        React.createElement("div", { className: "px-6 md:px-12 max-w-[1400px] mx-auto pb-24" },
-            React.createElement("div", { className: "grid grid-cols-1 xl:grid-cols-[1fr_380px] gap-8 items-start" },
-                React.createElement("div", { className: "sticky top-20" },
-                    React.createElement(FeaturedPlayer, { video: featured }),
-                    React.createElement("div", { className: "mt-5 flex items-start gap-6" },
-                        React.createElement("div", { className: "flex-1" },
-                            React.createElement("div", { className: "flex items-center gap-3 mb-2" },
-                                React.createElement("span", { className: "font-mono text-[9px] text-primary tracking-widest uppercase border border-primary/30 px-2 py-0.5" }, featured.type),
-                                React.createElement("span", { className: "flex items-center gap-1 font-mono text-[10px] text-muted-foreground" },
-                                    React.createElement(lucide_react_1.Clock, { size: 11 }),
-                                    " ",
-                                    featured.duration),
-                                React.createElement("span", { className: "font-mono text-[10px] text-muted-foreground" }, featured.year)),
-                            React.createElement("p", { className: "text-muted-foreground text-sm leading-relaxed" }, featured.description)))),
-                React.createElement("div", { className: "space-y-6" },
-                    React.createElement("div", { className: "flex items-center justify-between pb-3 border-b border-border" },
-                        React.createElement("p", { className: "font-mono text-[10px] text-muted-foreground tracking-widest uppercase" },
-                            filteredVideos.length,
-                            " ",
-                            filterV === "All" ? "videos" : filterV.toLowerCase() + "s"),
-                        React.createElement("p", { className: "font-mono text-[10px] text-muted-foreground tracking-widest uppercase" }, "Latest first")),
-                    filteredVideos.map(function (v) { return (React.createElement(VideoCard, { key: v.id, video: v, active: featured.id === v.id, onSelect: function () { return setFeatured(v); } })); })))),
-        React.createElement("div", { className: "px-6 md:px-12 max-w-[1400px] mx-auto pb-24 border-t border-border pt-16" },
-            React.createElement("div", { className: "flex items-end justify-between mb-10" },
-                React.createElement("h2", { className: "font-display text-3xl md:text-4xl font-black text-foreground" }, "All Sessions & Shows"),
-                React.createElement("p", { className: "font-mono text-[10px] text-muted-foreground tracking-widest uppercase hidden md:block" },
-                    VIDEOS.length + SHOWS.length,
-                    " recordings")),
-            React.createElement("div", { className: "grid grid-cols-1 lg:grid-cols-3 gap-6" },
-                React.createElement("div", { className: "lg:col-span-2" },
-                    React.createElement("div", { className: "mb-6" },
-                        React.createElement("div", { className: "flex items-center justify-between pb-3 border-b border-border mb-6" },
-                            React.createElement("p", { className: "font-mono text-[10px] text-muted-foreground tracking-widest uppercase" },
-                                "Shows \u2014 ",
-                                filteredShows.length,
-                                " results"),
-                            React.createElement("div", { className: "flex flex-wrap gap-2" }, FILTERS_S.map(function (f) { return (React.createElement("button", { key: f, onClick: function () { return setFilterS(f); }, className: "px-4 py-1.5 font-mono text-[10px] tracking-widest uppercase transition-all duration-200 " + (filterS === f ? "bg-primary text-primary-foreground" : "border border-border text-muted-foreground hover:border-primary/40 hover:text-foreground") }, f)); }))),
-                        featuredShow && (React.createElement("div", { className: "mb-8" },
-                            React.createElement("p", { className: "font-mono text-[10px] text-muted-foreground tracking-widest uppercase mb-4" }, "Latest episode"),
-                            React.createElement(FeaturedShow, { show: featuredShow }))),
-                        React.createElement("div", { className: "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6" }, filteredShows.map(function (s) { return (React.createElement(ShowCard, { key: s.id, show: s })); })),
-                        filteredShows.length === 0 && (React.createElement("div", { className: "py-24 text-center" },
-                            React.createElement("p", { className: "font-display text-2xl font-black text-muted-foreground" }, "No episodes yet"),
-                            React.createElement("p", { className: "text-muted-foreground text-sm mt-2" }, "Check back soon."))))),
-                React.createElement("div", { className: "" },
-                    React.createElement("div", { className: "border-t border-border bg-card pt-6" },
-                        React.createElement("div", { className: "px-6 md:px-0" },
-                            React.createElement("p", { className: "font-mono text-xs text-primary tracking-[0.2em] uppercase mb-2" }, "Never miss an episode"),
-                            React.createElement("h3", { className: "font-display text-xl font-black text-foreground mb-2" }, "Subscribe to EchooRoom Shows"),
-                            React.createElement("p", { className: "text-muted-foreground text-sm mb-4" }, "New interviews, podcasts, and programmes every week."),
-                            React.createElement("div", { className: "flex flex-col sm:flex-row gap-3" }, ['Spotify', 'Apple Podcasts', 'YouTube'].map(function (p) { return (React.createElement("button", { key: p, className: "px-5 py-3 border border-border text-sm text-foreground hover:border-primary/50 hover:text-primary transition-colors font-mono tracking-wide text-[11px] uppercase" }, p)); })))))))));
+    var _a = react_1.useState(0), activeSlide = _a[0], setActiveSlide = _a[1];
+    var _b = react_1.useState(true), loading = _b[0], setLoading = _b[1];
+    var _c = react_1.useState(0), progress = _c[0], setProgress = _c[1];
+    var _d = react_1.useState(true), muted = _d[0], setMuted = _d[1];
+    var _e = react_1.useState(false), isThrottled = _e[0], setIsThrottled = _e[1];
+    var canvasRef = react_1.useRef(null);
+    var videoRef = react_1.useRef(null);
+    var touchStartY = react_1.useRef(null);
+    var slide = SLIDES[activeSlide];
+    react_1.useEffect(function () {
+        var timeline = gsap_1["default"].timeline({ defaults: { ease: "power3.inOut" } });
+        var duration = 4800;
+        var current = 0;
+        var interval = window.setInterval(function () {
+            current = Math.min(100, current + Math.floor(Math.random() * 7) + 4);
+            setProgress(current);
+            if (current >= 100) {
+                window.clearInterval(interval);
+                timeline.to(".studio-loader", { yPercent: -110, opacity: 0, duration: 1.4 });
+                timeline.fromTo(".studio-shell", { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: 1.3, clearProps: "all" }, "<0.35");
+                window.setTimeout(function () { return setLoading(false); }, 500);
+            }
+        }, duration / 12);
+        return function () {
+            window.clearInterval(interval);
+        };
+    }, []);
+    react_1.useEffect(function () {
+        var video = videoRef.current;
+        if (!video)
+            return;
+        video.pause();
+        video.load();
+        void video.play()["catch"](function () {
+            // Autoplay fallback handled by muted attribute
+        });
+        gsap_1["default"].fromTo(".slide-meta", { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: 0.9, ease: "power3.out" });
+        gsap_1["default"].fromTo(".category-card", { opacity: 0, x: 18 }, { opacity: 1, x: 0, duration: 0.75, stagger: 0.05, ease: "power3.out" });
+    }, [activeSlide]);
+    react_1.useEffect(function () {
+        var canvas = canvasRef.current;
+        if (!canvas)
+            return;
+        var renderer = new THREE.WebGLRenderer({
+            canvas: canvas,
+            alpha: true,
+            antialias: true
+        });
+        renderer.setPixelRatio(window.devicePixelRatio);
+        renderer.setClearColor(0x000000, 0);
+        var scene = new THREE.Scene();
+        var camera = new THREE.PerspectiveCamera(55, 1, 0.1, 20);
+        camera.position.z = 3;
+        var particleCount = 120;
+        var positions = new Float32Array(particleCount * 3);
+        var sizes = new Float32Array(particleCount);
+        for (var i = 0; i < particleCount; i += 1) {
+            positions[i * 3 + 0] = (Math.random() - 0.5) * 4;
+            positions[i * 3 + 1] = (Math.random() - 0.5) * 2.5;
+            positions[i * 3 + 2] = (Math.random() - 0.5) * 2;
+            sizes[i] = Math.random() * 2 + 1;
+        }
+        var geometry = new THREE.BufferGeometry();
+        geometry.setAttribute("position", new THREE.BufferAttribute(positions, 3));
+        geometry.setAttribute("size", new THREE.BufferAttribute(sizes, 1));
+        var material = new THREE.PointsMaterial({
+            color: 0xffffff,
+            size: 0.03,
+            transparent: true,
+            opacity: 0.4,
+            sizeAttenuation: true
+        });
+        var points = new THREE.Points(geometry, material);
+        scene.add(points);
+        var clock = new THREE.Clock();
+        var frameId;
+        var resize = function () {
+            var width = canvas.clientWidth;
+            var height = canvas.clientHeight;
+            renderer.setSize(width, height, false);
+            camera.aspect = width / height;
+            camera.updateProjectionMatrix();
+        };
+        var animate = function () {
+            var time = clock.getElapsedTime();
+            var positionsArray = geometry.attributes.position.array;
+            for (var i = 0; i < particleCount; i += 1) {
+                var idx = i * 3;
+                positionsArray[idx + 0] += Math.sin(time + i * 0.1) * 0.0008;
+                positionsArray[idx + 1] += Math.cos(time + i * 0.12) * 0.0009;
+                positionsArray[idx + 2] += Math.sin(time + i * 0.15) * 0.0005;
+            }
+            geometry.attributes.position.needsUpdate = true;
+            points.rotation.y = time * 0.015;
+            points.rotation.x = Math.sin(time * 0.2) * 0.02;
+            renderer.render(scene, camera);
+            frameId = window.requestAnimationFrame(animate);
+        };
+        resize();
+        window.addEventListener("resize", resize);
+        animate();
+        return function () {
+            window.cancelAnimationFrame(frameId);
+            window.removeEventListener("resize", resize);
+            renderer.dispose();
+            geometry.dispose();
+            material.dispose();
+        };
+    }, []);
+    var clampIndex = function (next) {
+        if (next < 0)
+            return 0;
+        if (next >= SLIDES.length)
+            return SLIDES.length - 1;
+        return next;
+    };
+    var changeSlide = function (next) {
+        setActiveSlide(clampIndex(next));
+    };
+    var handleWheel = function (event) {
+        event.preventDefault();
+        if (loading || isThrottled)
+            return;
+        var direction = Math.sign(event.deltaY);
+        if (direction === 0)
+            return;
+        setIsThrottled(true);
+        setTimeout(function () { return setIsThrottled(false); }, 600);
+        changeSlide(activeSlide + direction);
+    };
+    var handleTouchStart = function (event) {
+        var _a, _b;
+        touchStartY.current = (_b = (_a = event.touches[0]) === null || _a === void 0 ? void 0 : _a.clientY) !== null && _b !== void 0 ? _b : null;
+    };
+    var handleTouchEnd = function (event) {
+        var _a;
+        if (loading || isThrottled || touchStartY.current === null)
+            return;
+        var delta = touchStartY.current - ((_a = event.changedTouches[0]) === null || _a === void 0 ? void 0 : _a.clientY);
+        if (Math.abs(delta) < 40) {
+            touchStartY.current = null;
+            return;
+        }
+        setIsThrottled(true);
+        setTimeout(function () { return setIsThrottled(false); }, 600);
+        changeSlide(activeSlide + (delta > 0 ? 1 : -1));
+        touchStartY.current = null;
+    };
+    return (React.createElement("div", { className: "min-h-screen overflow-hidden bg-[#050505] text-white" },
+        React.createElement("div", { className: "studio-loader fixed inset-0 z-[90] flex items-center justify-center bg-[#030303] transition-opacity " + (loading ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0") },
+            React.createElement("div", { className: "w-full max-w-md px-6 text-center" },
+                React.createElement("p", { className: "font-mono text-[10px] uppercase tracking-[0.4em] text-white/60" }, "EchooRoom Studio"),
+                React.createElement("p", { className: "mt-4 text-5xl font-black tracking-[0.24em] text-white" },
+                    progress,
+                    "%"),
+                React.createElement("div", { className: "mt-5 h-2 overflow-hidden rounded-full border border-white/20 bg-white/5" },
+                    React.createElement("div", { className: "h-full bg-white transition-all duration-200", style: { width: progress + "%" } })),
+                React.createElement("p", { className: "mt-4 font-mono text-[10px] uppercase tracking-[0.28em] text-white/45" }, "Welcome to the EchooRoom experience"))),
+        React.createElement("div", { className: "studio-shell transition-opacity duration-500 " + (loading ? "opacity-0" : "opacity-100"), onWheel: handleWheel, onTouchStart: handleTouchStart, onTouchEnd: handleTouchEnd },
+            React.createElement("div", { className: "relative min-h-screen" },
+                React.createElement("div", { className: "absolute inset-0 overflow-hidden" },
+                    React.createElement("video", { ref: videoRef, key: slide.id, className: "absolute inset-0 h-full w-full object-cover brightness-110 contrast-105 saturate-110", muted: muted, loop: true, autoPlay: true, playsInline: true, preload: "auto", poster: slide.thumb },
+                        React.createElement("source", { src: slide.videoUrl, type: "video/mp4" })),
+                    React.createElement("div", { className: "absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent" }),
+                    React.createElement("div", { className: "absolute inset-0 bg-black/10" }),
+                    React.createElement("canvas", { ref: canvasRef, className: "pointer-events-none absolute inset-0 h-full w-full" })),
+                React.createElement("div", { className: "relative z-10 mx-auto flex min-h-screen max-w-[1600px] flex-col justify-end px-4 py-10 sm:px-6 lg:px-8" },
+                    React.createElement("div", { className: "grid items-end gap-8 lg:grid-cols-[1.7fr_0.9fr]" },
+                        React.createElement("section", { className: "slide-meta max-w-3xl space-y-6 pb-1 sm:pb-3" },
+                            React.createElement("div", { className: "inline-flex items-center gap-3 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-[10px] uppercase tracking-[0.3em] text-white/70 backdrop-blur" },
+                                React.createElement("span", { className: "h-2.5 w-2.5 rounded-full bg-white/80" }),
+                                React.createElement("span", null, slide.category)),
+                            React.createElement("div", { className: "space-y-5" },
+                                React.createElement("h1", { className: "text-4xl font-black leading-tight tracking-[-0.04em] text-white sm:text-6xl" }, slide.title),
+                                React.createElement("p", { className: "max-w-2xl text-lg leading-8 text-white/70 sm:text-xl" }, slide.description)),
+                            React.createElement("div", { className: "flex flex-wrap items-center gap-4" },
+                                React.createElement("a", { href: slide.link, target: "_blank", rel: "noreferrer", className: "inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-5 py-3 text-sm font-semibold uppercase tracking-[0.24em] text-white transition hover:border-white/40 hover:bg-white/15" },
+                                    "Watch",
+                                    React.createElement(lucide_react_1.ArrowUpRight, { size: 14 })),
+                                React.createElement("button", { type: "button", onClick: function () { return setMuted(function (value) { return !value; }); }, className: "inline-flex items-center gap-2 rounded-full border border-white/10 bg-black/60 px-4 py-3 text-sm text-white/80 transition hover:border-white/30 hover:bg-white/10" },
+                                    muted ? React.createElement(lucide_react_1.Volume2, { size: 16 }) : React.createElement(lucide_react_1.VolumeX, { size: 16 }),
+                                    muted ? "Unmute" : "Mute")),
+                            React.createElement("p", { className: "max-w-xl text-sm uppercase tracking-[0.32em] text-white/45" }, "Scroll to move through the carousel, or tap a category to jump directly.")),
+                        React.createElement("aside", { className: "rounded-[1.5rem] border border-white/15 bg-black/45 p-4 backdrop-blur-xl lg:mb-3" },
+                            React.createElement("div", { className: "mb-6 flex items-center justify-between" },
+                                React.createElement("div", null,
+                                    React.createElement("p", { className: "text-[11px] uppercase tracking-[0.32em] text-white/50" }, "Categories"),
+                                    React.createElement("p", { className: "mt-2 text-sm font-semibold text-white" }, "One preview per lens")),
+                                React.createElement("span", { className: "rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[10px] uppercase tracking-[0.28em] text-white/60" },
+                                    activeSlide + 1,
+                                    "/",
+                                    SLIDES.length)),
+                            React.createElement("div", { className: "space-y-3" }, SLIDES.map(function (item, index) {
+                                var _a;
+                                var isActive = index === activeSlide;
+                                return (React.createElement("button", { key: item.id, type: "button", className: "category-card group w-full overflow-hidden rounded-xl border px-4 py-3 text-left transition " + (isActive ? "border-white/50 bg-white/10" : "border-white/10 bg-black/20 hover:border-white/30 hover:bg-white/5"), onClick: function () { return changeSlide(index); } },
+                                    React.createElement("div", { className: "flex items-start justify-between gap-4" },
+                                        React.createElement("div", { className: "min-w-0" },
+                                            React.createElement("p", { className: "text-xs font-medium uppercase tracking-[0.18em] text-white/85" }, item.category),
+                                            React.createElement("p", { className: "mt-1 truncate text-xs text-white/45" }, item.title)),
+                                        React.createElement("span", { className: "pt-0.5 text-[10px] tabular-nums text-white/35" }, String(index + 1).padStart(2, "0"))),
+                                    React.createElement("div", { className: "mt-4 flex items-center justify-between text-[10px] uppercase tracking-[0.28em] text-white/50" },
+                                        React.createElement("span", null, isActive ? "Playing" : "Preview"),
+                                        React.createElement("span", null, (_a = item.badge) !== null && _a !== void 0 ? _a : "Live"))));
+                            })))))))));
 }
 exports["default"] = Studio;
