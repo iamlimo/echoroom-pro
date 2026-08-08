@@ -343,8 +343,8 @@ export default function Studio() {
               <aside className="rounded-[1.5rem] border border-white/15 bg-black/45 p-4 backdrop-blur-xl lg:mb-3">
                 <div className="mb-6 flex items-center justify-between">
                   <div>
-                    <p className="text-[11px] uppercase tracking-[0.32em] text-white/50">Categories</p>
-                    <p className="mt-2 text-sm font-semibold text-white">One preview per lens</p>
+                    <p className="text-[11px] uppercase tracking-[0.32em] text-white/50">The Echoroom Studio</p>
+                    <p className="mt-2 text-sm font-semibold text-white">Enjoy Quality And Immersive Experience</p>
                   </div>
                   <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[10px] uppercase tracking-[0.28em] text-white/60">
                     {activeSlide + 1}/{SLIDES.length}
