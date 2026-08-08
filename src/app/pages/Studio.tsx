@@ -352,7 +352,7 @@ export default function Studio() {
                 <div className="mb-6 flex items-center justify-between">
                   <div>
                     <p className="text-[11px] uppercase tracking-[0.32em] text-white/50">The Echoroom Studio</p>
-                    <p className="mt-2 text-sm font-semibold text-white">Enjoy Quality And Immersive Experience</p>
+                    <p className="mt-2 text-sm font-semibold text-white"></p>
                   </div>
                   <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[10px] uppercase tracking-[0.28em] text-white/60">
                     {activeSlide + 1}/{SLIDES.length}
