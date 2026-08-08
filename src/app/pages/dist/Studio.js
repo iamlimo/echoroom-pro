@@ -17,24 +17,15 @@ var SLIDES = [
     },
     {
         id: "slide-2",
-        category: "Performance",
-        title: "Afterglow Performance",
-        description: "A cinematic studio cut that lets motion, light, and sound bleed into the frame.",
-        thumb: "https://images.unsplash.com/photo-1501386761578-eac5c94b800a?w=1600&h=900&fit=crop&auto=format",
-        link: "https://www.youtube.com/watch?v=4XhR5l4U4Kk",
-        videoUrl: "https://www.w3schools.com/html/mov_bbb.mp4"
-    },
-    {
-        id: "slide-3",
         category: "Special",
         title: "The Neon Special",
         description: "A bold visual experiment with texture, glow, and a subtle cinematic pulse.",
         thumb: "https://images.unsplash.com/photo-1516280030429-27679b7f7f66?w=1600&h=900&fit=crop&auto=format",
         link: "https://www.youtube.com/watch?v=2Vv-BfVoq4g",
-        videoUrl: "https://www.w3schools.com/html/mov_bbb.mp4"
+        videoUrl: "https://res.cloudinary.com/day4hpjji/video/upload/v1786151748/YCEE_LEMONADE_LIVE_PERFORMANCE_AT_ECHOO_ROOM_-_Echoo_Room_1080p_h264_youtube_rbpqob.mp4"
     },
     {
-        id: "slide-4",
+        id: "slide-3",
         category: "Behind The Scenes",
         title: "The Cut Room Diaries",
         description: "A textured preview of the space where every frame is tuned for sound and shadow.",
@@ -43,7 +34,7 @@ var SLIDES = [
         videoUrl: "https://www.w3schools.com/html/mov_bbb.mp4"
     },
     {
-        id: "slide-5",
+        id: "slide-6",
         category: "Interview",
         title: "The Creative Roundtable",
         description: "A quiet conversation that opens up the creative process and the energy behind it.",
@@ -52,10 +43,19 @@ var SLIDES = [
         videoUrl: "https://www.w3schools.com/html/mov_bbb.mp4"
     },
     {
-        id: "slide-6",
+        id: "slide-5",
         category: "Podcast",
         title: "Synths & Sovereignty",
         description: "A deep-dive into influence, ritual, and the pressure of staying iconic.",
+        thumb: "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=1600&h=900&fit=crop&auto=format",
+        link: "https://www.youtube.com/watch?v=F7rHps6VWIU",
+        videoUrl: "https://www.w3schools.com/html/mov_bbb.mp4"
+    },
+    {
+        id: "slide-6",
+        category: "Performances",
+        title: "Afterglow performance",
+        description: "Professional and creative performances from your favourit artistes",
         thumb: "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=1600&h=900&fit=crop&auto=format",
         link: "https://www.youtube.com/watch?v=F7rHps6VWIU",
         videoUrl: "https://www.w3schools.com/html/mov_bbb.mp4"
@@ -232,7 +232,10 @@ function Studio() {
                     React.createElement("div", { className: "grid items-end gap-8 lg:grid-cols-[1.7fr_0.9fr]" },
                         React.createElement("section", { className: "slide-meta max-w-3xl space-y-6 pb-1 sm:pb-3" },
                             React.createElement("div", { className: "inline-flex items-center gap-3 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-[10px] uppercase tracking-[0.3em] text-white/70 backdrop-blur" },
-                                React.createElement("span", { className: "h-2.5 w-2.5 rounded-full bg-white/80" }),
+                                slide.category === "Live Session" ? (React.createElement("span", { className: "flex h-3 items-end gap-0.5", role: "status", "aria-label": "Live session active" },
+                                    React.createElement("span", { className: "h-1.5 w-0.5 animate-pulse bg-white/80" }),
+                                    React.createElement("span", { className: "h-3 w-0.5 animate-pulse bg-white/80 [animation-delay:160ms]" }),
+                                    React.createElement("span", { className: "h-2 w-0.5 animate-pulse bg-white/80 [animation-delay:320ms]" }))) : (React.createElement("span", { className: "h-2.5 w-2.5 rounded-full bg-white/80" })),
                                 React.createElement("span", null, slide.category)),
                             React.createElement("div", { className: "space-y-5" },
                                 React.createElement("h1", { className: "text-4xl font-black leading-tight tracking-[-0.04em] text-white sm:text-6xl" }, slide.title),
@@ -260,7 +263,12 @@ function Studio() {
                                 return (React.createElement("button", { key: item.id, type: "button", className: "category-card group w-full overflow-hidden rounded-xl border px-4 py-3 text-left transition " + (isActive ? "border-white/50 bg-white/10" : "border-white/10 bg-black/20 hover:border-white/30 hover:bg-white/5"), onClick: function () { return changeSlide(index); } },
                                     React.createElement("div", { className: "flex items-start justify-between gap-4" },
                                         React.createElement("div", { className: "min-w-0" },
-                                            React.createElement("p", { className: "text-xs font-medium uppercase tracking-[0.18em] text-white/85" }, item.category),
+                                            React.createElement("p", { className: "flex items-center gap-2 text-xs font-medium uppercase tracking-[0.18em] text-white/85" },
+                                                item.category === "Live Session" ? (React.createElement("span", { className: "flex h-3 items-end gap-0.5", "aria-label": "Live session active" },
+                                                    React.createElement("span", { className: "h-1.5 w-0.5 animate-pulse bg-white/80" }),
+                                                    React.createElement("span", { className: "h-3 w-0.5 animate-pulse bg-white/80 [animation-delay:160ms]" }),
+                                                    React.createElement("span", { className: "h-2 w-0.5 animate-pulse bg-white/80 [animation-delay:320ms]" }))) : null,
+                                                item.category),
                                             React.createElement("p", { className: "mt-1 truncate text-xs text-white/45" }, item.title)),
                                         React.createElement("span", { className: "pt-0.5 text-[10px] tabular-nums text-white/35" }, String(index + 1).padStart(2, "0"))),
                                     React.createElement("div", { className: "mt-4 flex items-center justify-between text-[10px] uppercase tracking-[0.28em] text-white/50" },
