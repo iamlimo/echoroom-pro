@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, type TouchEvent, type WheelEvent } from "react";
+import { useEffect, useRef, useState, type TouchEvent } from "react";
 import {
   ArrowUpRight,
   Volume2,
@@ -230,18 +230,6 @@ export default function Studio() {
     setActiveSlide(clampIndex(next));
   };
 
-  const handleWheel = (event: WheelEvent<HTMLDivElement>) => {
-    event.preventDefault();
-    if (loading || isThrottled) return;
-
-    const direction = Math.sign(event.deltaY);
-    if (direction === 0) return;
-
-    setIsThrottled(true);
-    setTimeout(() => setIsThrottled(false), 600);
-    changeSlide(activeSlide + direction);
-  };
-
   const handleTouchStart = (event: TouchEvent<HTMLDivElement>) => {
     touchStartY.current = event.touches[0]?.clientY ?? null;
   };
@@ -277,7 +265,6 @@ export default function Studio() {
 
       <div
         className={`studio-shell transition-opacity duration-500 ${loading ? "opacity-0" : "opacity-100"}`}
-        onWheel={handleWheel}
         onTouchStart={handleTouchStart}
         onTouchEnd={handleTouchEnd}
       >
@@ -344,7 +331,7 @@ export default function Studio() {
                   </button>
                 </div>
                 <p className="max-w-xl text-sm uppercase tracking-[0.32em] text-white/45">
-                  Scroll to move through the carousel, or tap a category to jump directly.
+                  Select a category to change the preview, or swipe on touch devices.
                 </p>
               </section>
 

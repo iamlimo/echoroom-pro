@@ -181,17 +181,6 @@ function Studio() {
     var changeSlide = function (next) {
         setActiveSlide(clampIndex(next));
     };
-    var handleWheel = function (event) {
-        event.preventDefault();
-        if (loading || isThrottled)
-            return;
-        var direction = Math.sign(event.deltaY);
-        if (direction === 0)
-            return;
-        setIsThrottled(true);
-        setTimeout(function () { return setIsThrottled(false); }, 600);
-        changeSlide(activeSlide + direction);
-    };
     var handleTouchStart = function (event) {
         var _a, _b;
         touchStartY.current = (_b = (_a = event.touches[0]) === null || _a === void 0 ? void 0 : _a.clientY) !== null && _b !== void 0 ? _b : null;
@@ -220,7 +209,7 @@ function Studio() {
                 React.createElement("div", { className: "mt-5 h-2 overflow-hidden rounded-full border border-white/20 bg-white/5" },
                     React.createElement("div", { className: "h-full bg-white transition-all duration-200", style: { width: progress + "%" } })),
                 React.createElement("p", { className: "mt-4 font-mono text-[10px] uppercase tracking-[0.28em] text-white/45" }, "Welcome to the EchooRoom experience"))),
-        React.createElement("div", { className: "studio-shell transition-opacity duration-500 " + (loading ? "opacity-0" : "opacity-100"), onWheel: handleWheel, onTouchStart: handleTouchStart, onTouchEnd: handleTouchEnd },
+        React.createElement("div", { className: "studio-shell transition-opacity duration-500 " + (loading ? "opacity-0" : "opacity-100"), onTouchStart: handleTouchStart, onTouchEnd: handleTouchEnd },
             React.createElement("div", { className: "relative min-h-screen" },
                 React.createElement("div", { className: "absolute inset-0 overflow-hidden" },
                     React.createElement("video", { ref: videoRef, key: slide.id, className: "absolute inset-0 h-full w-full object-cover brightness-110 contrast-105 saturate-110", muted: muted, loop: true, autoPlay: true, playsInline: true, preload: "auto", poster: slide.thumb },
@@ -247,12 +236,12 @@ function Studio() {
                                 React.createElement("button", { type: "button", onClick: function () { return setMuted(function (value) { return !value; }); }, className: "inline-flex items-center gap-2 rounded-full border border-white/10 bg-black/60 px-4 py-3 text-sm text-white/80 transition hover:border-white/30 hover:bg-white/10" },
                                     muted ? React.createElement(lucide_react_1.Volume2, { size: 16 }) : React.createElement(lucide_react_1.VolumeX, { size: 16 }),
                                     muted ? "Unmute" : "Mute")),
-                            React.createElement("p", { className: "max-w-xl text-sm uppercase tracking-[0.32em] text-white/45" }, "Scroll to move through the carousel, or tap a category to jump directly.")),
+                            React.createElement("p", { className: "max-w-xl text-sm uppercase tracking-[0.32em] text-white/45" }, "Select a category to change the preview, or swipe on touch devices.")),
                         React.createElement("aside", { className: "rounded-[1.5rem] border border-white/15 bg-black/45 p-4 backdrop-blur-xl lg:mb-3" },
                             React.createElement("div", { className: "mb-6 flex items-center justify-between" },
                                 React.createElement("div", null,
                                     React.createElement("p", { className: "text-[11px] uppercase tracking-[0.32em] text-white/50" }, "The Echoroom Studio"),
-                                    React.createElement("p", { className: "mt-2 text-sm font-semibold text-white" }, "Enjoy Quality And Immersive Experience")),
+                                    React.createElement("p", { className: "mt-2 text-sm font-semibold text-white" })),
                                 React.createElement("span", { className: "rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[10px] uppercase tracking-[0.28em] text-white/60" },
                                     activeSlide + 1,
                                     "/",
