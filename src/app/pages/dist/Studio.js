@@ -9,20 +9,20 @@ var SLIDES = [
     {
         id: "slide-1",
         category: "Live Session",
-        title: "Midnight Studio Session",
+        title: "LEOSTAYTRILL FT. SHODAY",
         description: "A live session that moves through shadow, rhythm, and intimate cinematic atmosphere.",
         thumb: DEFAULT_SLIDE_THUMB,
-        link: "https://www.youtube.com/watch?v=aqz-KE-bpKQ",
+        link: "https://www.youtube.com/watch?v=lxo0l5Mow_4&list=RDlxo0l5Mow_4&start_radio=1",
         videoUrl: "https://res.cloudinary.com/day4hpjji/video/upload/v1786149832/LEOSTAYTRILL_FT._SHODAY_TILL_THE_WHEEL_IS_FALLING_LIVE_PERFORMANCE_AT_ECHOOROOM_-_Echoo_Room_1080p_h264_youtube_oggbos.mp4",
         badge: "Featured"
     },
     {
         id: "slide-2",
         category: "Special",
-        title: "The Neon Special",
+        title: "YCEE",
         description: "A bold visual experiment with texture, glow, and a subtle cinematic pulse.",
         thumb: DEFAULT_SLIDE_THUMB,
-        link: "https://www.youtube.com/watch?v=2Vv-BfVoq4g",
+        link: "https://www.youtube.com/watch?v=JpJSbZEpWew",
         videoUrl: "https://res.cloudinary.com/day4hpjji/video/upload/v1786151748/YCEE_LEMONADE_LIVE_PERFORMANCE_AT_ECHOO_ROOM_-_Echoo_Room_1080p_h264_youtube_rbpqob.mp4"
     },
     {
