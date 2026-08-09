@@ -18,13 +18,15 @@ type Slide = {
   badge?: string;
 };
 
+const DEFAULT_SLIDE_THUMB = "/assets/echoroom-default-thumb.svg";
+
 const SLIDES: Slide[] = [
   {
     id: "slide-1",
     category: "Live Session",
     title: "Midnight Studio Session",
     description: "A live session that moves through shadow, rhythm, and intimate cinematic atmosphere.",
-    thumb: "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=1600&h=900&fit=crop&auto=format",
+    thumb: DEFAULT_SLIDE_THUMB,
     link: "https://www.youtube.com/watch?v=aqz-KE-bpKQ",
     videoUrl: "https://res.cloudinary.com/day4hpjji/video/upload/v1786149832/LEOSTAYTRILL_FT._SHODAY_TILL_THE_WHEEL_IS_FALLING_LIVE_PERFORMANCE_AT_ECHOOROOM_-_Echoo_Room_1080p_h264_youtube_oggbos.mp4",
     badge: "Featured",
@@ -34,7 +36,7 @@ const SLIDES: Slide[] = [
     category: "Special",
     title: "The Neon Special",
     description: "A bold visual experiment with texture, glow, and a subtle cinematic pulse.",
-    thumb: "https://images.unsplash.com/photo-1516280030429-27679b7f7f66?w=1600&h=900&fit=crop&auto=format",
+    thumb: DEFAULT_SLIDE_THUMB,
     link: "https://www.youtube.com/watch?v=2Vv-BfVoq4g",
     videoUrl: "https://res.cloudinary.com/day4hpjji/video/upload/v1786151748/YCEE_LEMONADE_LIVE_PERFORMANCE_AT_ECHOO_ROOM_-_Echoo_Room_1080p_h264_youtube_rbpqob.mp4",
   },
@@ -43,7 +45,7 @@ const SLIDES: Slide[] = [
     category: "Behind The Scenes",
     title: "The Cut Room Diaries",
     description: "A textured preview of the space where every frame is tuned for sound and shadow.",
-    thumb: "https://images.unsplash.com/photo-1516280440614-37939bbacd81?w=1600&h=900&fit=crop&auto=format",
+    thumb: DEFAULT_SLIDE_THUMB,
     link: "https://www.youtube.com/watch?v=VYOjWnS4cMY",
     videoUrl: "https://www.w3schools.com/html/mov_bbb.mp4",
   },
@@ -52,7 +54,7 @@ const SLIDES: Slide[] = [
     category: "Interview",
     title: "The Creative Roundtable",
     description: "A quiet conversation that opens up the creative process and the energy behind it.",
-    thumb: "https://images.unsplash.com/photo-1478737270239-2f02b77fc618?w=1600&h=900&fit=crop&auto=format",
+    thumb: DEFAULT_SLIDE_THUMB,
     link: "https://www.youtube.com/watch?v=7QU9mvNHnKg",
     videoUrl: "https://www.w3schools.com/html/mov_bbb.mp4",
   },
@@ -61,7 +63,7 @@ const SLIDES: Slide[] = [
     category: "Podcast",
     title: "Synths & Sovereignty",
     description: "A deep-dive into influence, ritual, and the pressure of staying iconic.",
-    thumb: "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=1600&h=900&fit=crop&auto=format",
+    thumb: DEFAULT_SLIDE_THUMB,
     link: "https://www.youtube.com/watch?v=F7rHps6VWIU",
     videoUrl: "https://www.w3schools.com/html/mov_bbb.mp4",
   },
@@ -70,7 +72,7 @@ const SLIDES: Slide[] = [
     category: "Performances",
     title: "Afterglow performance",
     description: "Professional and creative performances from your favourit artistes",
-    thumb: "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=1600&h=900&fit=crop&auto=format",
+    thumb: DEFAULT_SLIDE_THUMB,
     link: "https://www.youtube.com/watch?v=F7rHps6VWIU",
     videoUrl: "https://www.w3schools.com/html/mov_bbb.mp4",
   }

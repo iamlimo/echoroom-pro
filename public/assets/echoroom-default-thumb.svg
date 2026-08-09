@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+  <title id="title">EchooRoom Studio</title>
+  <desc id="desc">A centered white EchooRoom logo on a dark studio background.</desc>
+  <defs>
+    <radialGradient id="glow" cx="50%" cy="50%" r="70%">
+      <stop offset="0" stop-color="#1d1d1d" />
+      <stop offset="0.68" stop-color="#0b0b0b" />
+      <stop offset="1" stop-color="#030303" />
+    </radialGradient>
+    <linearGradient id="edge" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.16" />
+      <stop offset="0.5" stop-color="#ffffff" stop-opacity="0.02" />
+      <stop offset="1" stop-color="#ffffff" stop-opacity="0.1" />
+    </linearGradient>
+    <filter id="soft-shadow" x="-20%" y="-30%" width="140%" height="160%">
+      <feDropShadow dx="0" dy="12" stdDeviation="18" flood-color="#000000" flood-opacity="0.7" />
+    </filter>
+  </defs>
+  <rect width="1600" height="900" fill="url(#glow)" />
+  <rect x="40" y="40" width="1520" height="820" rx="12" fill="none" stroke="url(#edge)" />
+  <image
+    x="270"
+    y="237"
+    width="1060"
+    height="426"
+    preserveAspectRatio="xMidYMid meet"
+    href="echoroom-logo.png"
+    xlink:href="echoroom-logo.png"
+    opacity="0.96"
+    filter="url(#soft-shadow)"
+  />
+</svg>
