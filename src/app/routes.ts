@@ -5,6 +5,7 @@ import Studio from "./pages/Studio";
 import Services from "./pages/Services";
 import About from "./pages/About";
 import Team from "./pages/Team";
+import Shows from "./pages/Shows";
 
 export const router = createBrowserRouter([
   {
@@ -16,7 +17,7 @@ export const router = createBrowserRouter([
       { path: "about", Component: About },
       { path: "team", Component: Team },
       { path: "studio", Component: Studio },
-      { path: "shows", Component: Studio },
+      { path: "shows", Component: Shows },
     ],
   },
 ]);

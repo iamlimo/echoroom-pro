@@ -1,375 +1,57 @@
 import { useState } from "react";
-import { Play, Clock, ArrowUpRight, Mic, Radio, Tv, Users } from "lucide-react";
+import { ArrowUpRight, BookOpen, Clock3, Headphones, Mic2, Play, Radio, Sparkles, Video, type LucideIcon } from "lucide-react";
 
-// ─── Data ─────────────────────────────────────────────────────────────────────
-
-type ShowCategory = "Interview" | "Podcast" | "Programme" | "Panel";
-
-type Show = {
-  id: string;
-  title: string;
-  category: ShowCategory;
-  episode: string;
-  guest: string;
-  host: string;
-  duration: string;
-  date: string;
-  thumb: string;
-  alt: string;
-  excerpt: string;
-  featured?: boolean;
-  new?: boolean;
-};
+type ContentKind = "Live sessions" | "Specials" | "Behind the scenes" | "Podcast" | "Stories" | "Interviews";
+type Show = { id: string; title: string; kind: ContentKind; label: string; guest?: string; date: string; duration?: string; excerpt: string; image: string; href: string; featured?: boolean; new?: boolean };
 
 const SHOWS: Show[] = [
-  {
-    id: "s1",
-    title: "The Creative Roundtable",
-    category: "Interview",
-    episode: "Ep. 24",
-    guest: "Falz & Simi",
-    host: "Kemi Adeyemi",
-    duration: "1:02:44",
-    date: "Nov 28, 2024",
-    thumb: "https://images.unsplash.com/photo-1478737270239-2f02b77fc618?w=800&h=500&fit=crop&auto=format",
-    alt: "Creative Roundtable episode",
-    excerpt: "Falz and Simi sit down with Kemi Adeyemi to discuss creative independence, the business of music, and why Nigerian artists must own their masters.",
-    featured: true,
-    new: true,
-  },
-  {
-    id: "s2",
-    title: "EchoFreq Podcast",
-    category: "Podcast",
-    episode: "Ep. 89",
-    guest: "Odunsi The Engine",
-    host: "Seun Praise",
-    duration: "58:12",
-    date: "Nov 21, 2024",
-    thumb: "https://images.unsplash.com/photo-1590602847861-f357a9332bbc?w=800&h=500&fit=crop&auto=format",
-    alt: "EchoFreq Podcast recording",
-    excerpt: "Odunsi opens up about his production process, dealing with creative block, and what the next chapter of Afro-fusion sounds like.",
-    new: true,
-  },
-  {
-    id: "s3",
-    title: "Media & The Machine",
-    category: "Programme",
-    episode: "S2 Ep. 06",
-    guest: "Akin Fadeyi",
-    host: "Tobi Okafor",
-    duration: "44:30",
-    date: "Nov 14, 2024",
-    thumb: "https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=800&h=500&fit=crop&auto=format",
-    alt: "Media and the machine programme",
-    excerpt: "A deep dive into how Nigerian media companies can monetise digital audiences and build sustainable content businesses.",
-    new: true,
-  },
-  {
-    id: "s4",
-    title: "Board Room Talk",
-    category: "Panel",
-    episode: "Ep. 12",
-    guest: "4 Industry Leaders",
-    host: "Chisom Nweke",
-    duration: "1:28:00",
-    date: "Nov 07, 2024",
-    thumb: "https://images.unsplash.com/photo-1560439514-4e9645039924?w=800&h=500&fit=crop&auto=format",
-    alt: "Board Room Talk panel session",
-    excerpt: "Four of Nigeria's most influential marketing executives debate the future of brand investment in a post-social-algorithm world.",
-  },
-  {
-    id: "s5",
-    title: "The Creative Roundtable",
-    category: "Interview",
-    episode: "Ep. 23",
-    guest: "Tiwa Savage",
-    host: "Kemi Adeyemi",
-    duration: "47:55",
-    date: "Oct 31, 2024",
-    thumb: "https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?w=800&h=500&fit=crop&auto=format",
-    alt: "Interview with Tiwa Savage",
-    excerpt: "Tiwa Savage on launching an independent label, building a global fanbase, and navigating the politics of the Nigerian music industry.",
-  },
-  {
-    id: "s6",
-    title: "EchoFreq Podcast",
-    category: "Podcast",
-    episode: "Ep. 88",
-    guest: "Blaqbonez",
-    host: "Seun Praise",
-    duration: "1:05:20",
-    date: "Oct 24, 2024",
-    thumb: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&h=500&fit=crop&auto=format",
-    alt: "EchoFreq podcast with Blaqbonez",
-    excerpt: "Blaqbonez dissects the rap game, his controversial marketing tactics, and why he believes Nigerian hip-hop will outlast every trend.",
-  },
-  {
-    id: "s7",
-    title: "Media & The Machine",
-    category: "Programme",
-    episode: "S2 Ep. 05",
-    guest: "Chude Jideonwo",
-    host: "Tobi Okafor",
-    duration: "39:45",
-    date: "Oct 17, 2024",
-    thumb: "https://images.unsplash.com/photo-1598387993441-a364f854cfbd?w=800&h=500&fit=crop&auto=format",
-    alt: "Media and the machine programme",
-    excerpt: "Chude Jideonwo on building Africa's most-read newsletter, the future of long-form content, and why attention is the new currency.",
-  },
-  {
-    id: "s8",
-    title: "Board Room Talk",
-    category: "Panel",
-    episode: "Ep. 11",
-    guest: "3 CMOs",
-    host: "Chisom Nweke",
-    duration: "1:12:40",
-    date: "Oct 10, 2024",
-    thumb: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=800&h=500&fit=crop&auto=format",
-    alt: "CMO panel discussion",
-    excerpt: "Three chief marketing officers from fintech, telecom, and FMCG reveal what actually moves the needle in Nigerian consumer marketing.",
-  },
+  { id: "live-leostaytrill", title: "LEOSTAYTRILL ft. Shoday", kind: "Live sessions", label: "Live session 01", date: "Jun 08, 2026", duration: "04:12", excerpt: "A live performance shaped by shadow, rhythm, and intimate cinematic atmosphere.", image: "https://images.unsplash.com/photo-1501386761578-eac5c94b800a?w=1200&h=760&fit=crop&auto=format", href: "https://www.youtube.com/watch?v=lxo0l5Mow_4&list=RDlxo0l5Mow_4&start_radio=1", featured: true, new: true },
+  { id: "special-ycee", title: "YCEE — Lemonade", kind: "Specials", label: "Studio special", date: "May 24, 2026", duration: "03:48", excerpt: "A bold, stripped-back performance captured in the EchooRoom light.", image: "https://images.unsplash.com/photo-1524368535928-5b5e00ddc76b?w=900&h=600&fit=crop&auto=format", href: "https://www.youtube.com/watch?v=JpJSbZEpWew", new: true },
+  { id: "bts-cut-room", title: "The Cut Room Diaries", kind: "Behind the scenes", label: "Field notes 04", date: "May 12, 2026", excerpt: "A look inside the room where every frame is tuned for sound and shadow.", image: "https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?w=900&h=600&fit=crop&auto=format", href: "https://www.youtube.com/watch?v=VYOjWnS4cMY" },
+  { id: "podcast-synths", title: "Synths & Sovereignty", kind: "Podcast", label: "EchoFreq · Ep. 89", guest: "with Odunsi The Engine", date: "May 02, 2026", duration: "58:12", excerpt: "On influence, ritual, creative blocks, and the pressure of staying iconic.", image: "https://images.unsplash.com/photo-1590602847861-f357a9332bbc?w=900&h=600&fit=crop&auto=format", href: "https://www.youtube.com/watch?v=F7rHps6VWIU", new: true },
+  { id: "story-attention", title: "Attention is the new currency", kind: "Stories", label: "The EchooRoom journal", date: "Apr 18, 2026", excerpt: "Why the most valuable media brands are building trust before they build reach.", image: "https://images.unsplash.com/photo-1455390582262-044cdead277a?w=900&h=600&fit=crop&auto=format", href: "/stories/attention-is-the-new-currency" },
+  { id: "interview-roundtable", title: "The Creative Roundtable", kind: "Interviews", label: "Conversation 24", guest: "with Falz & Simi", date: "Apr 06, 2026", duration: "1:02:44", excerpt: "A conversation on creative independence, the business of music, and owning your masters.", image: "https://images.unsplash.com/photo-1478737270239-2f02b77fc618?w=900&h=600&fit=crop&auto=format", href: "https://www.youtube.com/watch?v=7QU9mvNHnKg" },
 ];
 
-const FILTERS = ["All", "Interview", "Podcast", "Programme", "Panel"] as const;
-type Filter = (typeof FILTERS)[number];
+const CATEGORIES: { label: ContentKind; icon: LucideIcon; color: string }[] = [
+  { label: "Live sessions", icon: Radio, color: "text-rose-400" }, { label: "Specials", icon: Sparkles, color: "text-amber-400" },
+  { label: "Behind the scenes", icon: Video, color: "text-sky-400" }, { label: "Podcast", icon: Headphones, color: "text-emerald-400" },
+  { label: "Stories", icon: BookOpen, color: "text-violet-400" }, { label: "Interviews", icon: Mic2, color: "text-orange-400" },
+];
 
-const CATEGORY_ICONS: Record<ShowCategory, typeof Mic> = {
-  Interview: Mic,
-  Podcast: Radio,
-  Programme: Tv,
-  Panel: Users,
-};
-
-const CATEGORY_COLORS: Record<ShowCategory, string> = {
-  Interview: "text-amber-400",
-  Podcast: "text-emerald-400",
-  Programme: "text-sky-400",
-  Panel: "text-violet-400",
-};
-
-// ─── Featured card ────────────────────────────────────────────────────────────
-
-function FeaturedShow({ show }: { show: Show }) {
-  const [hovered, setHovered] = useState(false);
-  const Icon = CATEGORY_ICONS[show.category];
-
-  return (
-    <div
-      className="group cursor-pointer"
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
-    >
-      <div className="relative aspect-[16/7] overflow-hidden bg-muted mb-6">
-        <img
-          src={show.thumb}
-          alt={show.alt}
-          className={`w-full h-full object-cover transition-all duration-700 ${hovered ? "scale-105 brightness-50" : "scale-100 brightness-40"}`}
-        />
-        <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/30 to-transparent" />
-
-        {/* Play button */}
-        <div className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 transition-all duration-300 ${hovered ? "opacity-100 scale-100" : "opacity-0 scale-90"}`}>
-          <div className="w-16 h-16 rounded-full bg-primary flex items-center justify-center shadow-2xl">
-            <Play size={20} className="text-primary-foreground fill-current ml-1" />
-          </div>
-        </div>
-
-        {/* Content overlay */}
-        <div className="absolute bottom-0 left-0 p-8 md:p-10 max-w-2xl">
-          <div className="flex items-center gap-3 mb-4">
-            {show.new && (
-              <span className="bg-primary text-primary-foreground font-mono text-[9px] tracking-widest uppercase px-2.5 py-1">New</span>
-            )}
-            <span className={`flex items-center gap-1.5 font-mono text-[10px] tracking-widest uppercase ${CATEGORY_COLORS[show.category]}`}>
-              <Icon size={11} /> {show.category}
-            </span>
-            <span className="font-mono text-[10px] text-white/40 tracking-wide">{show.episode}</span>
-          </div>
-          <h2 className="font-display text-2xl md:text-4xl font-black text-white leading-tight mb-2">{show.title}</h2>
-          <p className="text-white/60 text-sm">with {show.guest} · hosted by {show.host}</p>
-        </div>
-
-        {/* Duration */}
-        <div className="absolute top-6 right-6 flex items-center gap-1.5 bg-black/60 px-3 py-1.5">
-          <Clock size={11} className="text-white/60" />
-          <span className="font-mono text-[10px] text-white/60 tracking-wide">{show.duration}</span>
-        </div>
-      </div>
-
-      <p className="text-muted-foreground leading-relaxed max-w-3xl">{show.excerpt}</p>
-    </div>
-  );
+function CategoryIcon({ kind, className = "" }: { kind: ContentKind; className?: string }) {
+  const category = CATEGORIES.find(({ label }) => label === kind);
+  const Icon = category?.icon ?? Video;
+  return <Icon className={`${category?.color ?? "text-primary"} ${className}`} />;
 }
-
-// ─── Show Card ────────────────────────────────────────────────────────────────
 
 function ShowCard({ show }: { show: Show }) {
-  const [hovered, setHovered] = useState(false);
-  const Icon = CATEGORY_ICONS[show.category];
-
+  const external = show.href.startsWith("http");
   return (
-    <article
-      className="group cursor-pointer"
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
-    >
-      {/* Thumbnail */}
-      <div className="relative aspect-video overflow-hidden bg-muted mb-4">
-        <img
-          src={show.thumb}
-          alt={show.alt}
-          className={`w-full h-full object-cover transition-all duration-500 ${hovered ? "scale-105 brightness-50" : "scale-100 brightness-60"}`}
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-
-        {/* Play hover */}
-        <div className={`absolute inset-0 flex items-center justify-center transition-opacity duration-200 ${hovered ? "opacity-100" : "opacity-0"}`}>
-          <div className="w-12 h-12 rounded-full bg-primary flex items-center justify-center shadow-xl">
-            <Play size={14} className="text-primary-foreground fill-current ml-0.5" />
-          </div>
-        </div>
-
-        {/* Bottom badges */}
-        <div className="absolute bottom-3 left-3 right-3 flex items-end justify-between">
-          <span className={`flex items-center gap-1.5 font-mono text-[9px] tracking-widest uppercase bg-black/70 px-2 py-1 ${CATEGORY_COLORS[show.category]}`}>
-            <Icon size={9} /> {show.category}
-          </span>
-          <span className="font-mono text-[10px] text-white/70 bg-black/70 px-2 py-1">{show.duration}</span>
-        </div>
-
-        {show.new && (
-          <div className="absolute top-3 left-3">
-            <span className="bg-primary text-primary-foreground font-mono text-[9px] tracking-widest uppercase px-2 py-0.5">New</span>
-          </div>
-        )}
+    <a href={show.href} target={external ? "_blank" : undefined} rel={external ? "noreferrer" : undefined} className="group block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary">
+      <div className="relative aspect-[4/3] overflow-hidden rounded-sm bg-muted">
+        <img src={show.image} alt={`${show.title} — ${show.kind}`} className="h-full w-full object-cover grayscale-[35%] transition duration-700 group-hover:scale-105 group-hover:grayscale-0" loading="lazy" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent" />
+        <div className="absolute left-4 top-4 flex items-center gap-2">{show.new && <span className="bg-primary px-2 py-1 font-mono text-[9px] uppercase tracking-widest text-primary-foreground">New</span>}<span className="flex items-center gap-1.5 bg-black/55 px-2 py-1 font-mono text-[9px] uppercase tracking-widest text-white/80 backdrop-blur-sm"><CategoryIcon kind={show.kind} className="size-3" />{show.kind}</span></div>
+        <div className="absolute bottom-4 left-4 right-4 flex items-end justify-between"><span className="font-mono text-[10px] uppercase tracking-widest text-white/60">{show.label}</span>{show.duration && <span className="flex items-center gap-1 bg-black/55 px-2 py-1 font-mono text-[10px] text-white/75"><Clock3 size={11} />{show.duration}</span>}</div>
+        <span className="absolute inset-0 flex items-center justify-center bg-black/20 opacity-0 transition duration-300 group-hover:opacity-100"><span className="flex size-12 scale-75 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-xl transition duration-300 group-hover:scale-100"><Play size={16} fill="currentColor" /></span></span>
       </div>
-
-      {/* Meta */}
-      <div>
-        <div className="flex items-center justify-between mb-2">
-          <span className="font-mono text-[9px] text-muted-foreground tracking-widest">{show.episode} · {show.date}</span>
-          <ArrowUpRight size={13} className={`transition-all duration-200 ${hovered ? "text-primary" : "text-muted-foreground opacity-0 group-hover:opacity-100"}`} />
-        </div>
-        <h3 className={`font-display font-black text-base leading-tight mb-1 transition-colors ${hovered ? "text-primary" : "text-foreground"}`}>
-          {show.title}
-        </h3>
-        <p className="text-muted-foreground text-xs mb-2">
-          with <span className="text-foreground">{show.guest}</span>
-        </p>
-        <p className="text-muted-foreground text-xs leading-relaxed line-clamp-2">{show.excerpt}</p>
-      </div>
-    </article>
+      <div className="pt-4"><div className="mb-2 flex items-center justify-between font-mono text-[10px] uppercase tracking-widest text-muted-foreground"><span>{show.date}</span><ArrowUpRight size={14} className="opacity-0 transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:opacity-100" /></div><h3 className="font-display text-xl font-black leading-tight transition-colors group-hover:text-primary">{show.title}</h3>{show.guest && <p className="mt-1 text-sm text-muted-foreground">{show.guest}</p>}<p className="mt-3 line-clamp-2 text-sm leading-relaxed text-muted-foreground">{show.excerpt}</p></div>
+    </a>
   );
 }
 
-// ─── Page ─────────────────────────────────────────────────────────────────────
-
 export default function Shows() {
-  const [filter, setFilter] = useState<Filter>("All");
-
-  const featured = SHOWS.find((s) => s.featured) ?? SHOWS[0];
-  const rest = SHOWS.filter((s) => !s.featured);
-  const filtered = filter === "All" ? rest : rest.filter((s) => s.category === filter);
+  const [activeCategory, setActiveCategory] = useState<ContentKind | "All">("All");
+  const featured = SHOWS.find((show) => show.featured) ?? SHOWS[0];
+  const episodes = SHOWS.filter((show) => !show.featured && (activeCategory === "All" || show.kind === activeCategory));
+  const featuredExternal = featured.href.startsWith("http");
 
   return (
-    <div className="min-h-screen bg-background">
-      {/* Header */}
-      <div className="pt-24 pb-10 px-6 md:px-12 max-w-[1400px] mx-auto">
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-2">
-          <div>
-            <p className="font-mono text-xs text-primary tracking-[0.22em] uppercase mb-3">EchooRoom Broadcasting</p>
-            <h1 className="font-display text-4xl md:text-6xl font-black leading-tight text-foreground">Shows</h1>
-            <p className="text-muted-foreground mt-3 max-w-lg leading-relaxed">
-              Recorded interviews, podcasts, and programmes — conversations that move culture, business, and creative ambition forward.
-            </p>
-          </div>
-
-          {/* Category stats */}
-          <div className="flex gap-6 shrink-0">
-            {(["Interview", "Podcast", "Programme", "Panel"] as ShowCategory[]).map((cat) => {
-              const Icon = CATEGORY_ICONS[cat];
-              const count = SHOWS.filter((s) => s.category === cat).length;
-              return (
-                <div key={cat} className="text-center">
-                  <Icon size={16} className={`mx-auto mb-1 ${CATEGORY_COLORS[cat]}`} />
-                  <div className="font-display text-xl font-black text-foreground">{count}</div>
-                  <div className="font-mono text-[9px] text-muted-foreground tracking-wide uppercase">{cat}s</div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      </div>
-
-      {/* Divider */}
-      <div className="border-t border-border" />
-
-      {/* Featured show */}
-      <div className="px-6 md:px-12 max-w-[1400px] mx-auto py-12">
-        <p className="font-mono text-[10px] text-muted-foreground tracking-widest uppercase mb-6">Latest episode</p>
-        <FeaturedShow show={featured} />
-      </div>
-
-      {/* Filter + grid */}
-      <div className="px-6 md:px-12 max-w-[1400px] mx-auto pb-24">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 py-6 border-t border-border mb-10">
-          <p className="font-mono text-[10px] text-muted-foreground tracking-widest uppercase">
-            All episodes — {filtered.length} results
-          </p>
-          <div className="flex flex-wrap gap-2">
-            {FILTERS.map((f) => (
-              <button
-                key={f}
-                onClick={() => setFilter(f)}
-                className={`px-4 py-1.5 font-mono text-[10px] tracking-widest uppercase transition-all duration-200 ${
-                  filter === f
-                    ? "bg-primary text-primary-foreground"
-                    : "border border-border text-muted-foreground hover:border-primary/40 hover:text-foreground"
-                }`}
-              >
-                {f}
-              </button>
-            ))}
-          </div>
-        </div>
-
-        {/* Cards grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-6 gap-y-12">
-          {filtered.map((show) => (
-            <ShowCard key={show.id} show={show} />
-          ))}
-        </div>
-
-        {filtered.length === 0 && (
-          <div className="py-24 text-center">
-            <p className="font-display text-2xl font-black text-muted-foreground">No episodes yet</p>
-            <p className="text-muted-foreground text-sm mt-2">Check back soon.</p>
-          </div>
-        )}
-      </div>
-
-      {/* Subscribe CTA */}
-      <div className="border-t border-border bg-card">
-        <div className="px-6 md:px-12 max-w-[1400px] mx-auto py-16 flex flex-col md:flex-row items-center justify-between gap-8">
-          <div>
-            <p className="font-mono text-xs text-primary tracking-[0.2em] uppercase mb-2">Never miss an episode</p>
-            <h2 className="font-display text-2xl md:text-4xl font-black text-foreground">Subscribe to EchooRoom Shows</h2>
-            <p className="text-muted-foreground mt-2 text-sm">New interviews, podcasts, and programmes every week.</p>
-          </div>
-          <div className="flex flex-col sm:flex-row gap-3 shrink-0">
-            {["Spotify", "Apple Podcasts", "YouTube"].map((platform) => (
-              <button
-                key={platform}
-                className="px-5 py-3 border border-border text-sm text-foreground hover:border-primary/50 hover:text-primary transition-colors font-mono tracking-wide text-[11px] uppercase"
-              >
-                {platform}
-              </button>
-            ))}
-          </div>
-        </div>
-      </div>
-    </div>
+    <main className="min-h-screen bg-background">
+      <header className="mx-auto max-w-[1400px] px-6 pb-12 pt-28 md:px-12 md:pt-36"><div className="max-w-3xl"><p className="mb-4 font-mono text-[10px] uppercase tracking-[0.3em] text-primary">EchooRoom / Media library</p><h1 className="font-display text-5xl font-black leading-[0.95] tracking-tight md:text-8xl">Experience worth<br /><span className="text-muted-foreground/45">staying for.</span></h1><p className="mt-7 max-w-xl text-base leading-relaxed text-muted-foreground md:text-lg">Live sessions, honest conversations, and the stories behind the work. Explore everything we make, all in one room.</p></div><div className="mt-14 grid grid-cols-2 gap-px overflow-hidden border border-border bg-border sm:grid-cols-3 lg:grid-cols-6">{CATEGORIES.map(({ label, icon: Icon, color }) => <button key={label} onClick={() => setActiveCategory(label)} className={`flex items-center gap-3 bg-background px-4 py-4 text-left transition hover:bg-card ${activeCategory === label ? "ring-1 ring-inset ring-primary" : ""}`}><Icon size={16} className={color} /><span className="font-mono text-[10px] uppercase tracking-wider text-muted-foreground">{label}</span></button>)}</div></header>
+      <section className="border-y border-border bg-card/40"><div className="mx-auto max-w-[1400px] px-6 py-10 md:px-12 md:py-14"><div className="mb-6 flex items-center justify-between"><p className="font-mono text-[10px] uppercase tracking-[0.25em] text-muted-foreground">Now playing- This Week</p><span className="flex items-center gap-2 font-mono text-[10px] uppercase tracking-widest text-primary"><span className="size-1.5 animate-pulse rounded-full bg-primary" />Featured</span></div><a href={featured.href} target={featuredExternal ? "_blank" : undefined} rel={featuredExternal ? "noreferrer" : undefined} className="group grid overflow-hidden bg-[#0d1117] text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"><div className="relative min-h-[300px] overflow-hidden"><img src={featured.image} alt={featured.title} className="h-full w-full object-cover opacity-80 transition duration-700 group-hover:scale-105 group-hover:opacity-100" /><div className="absolute inset-0 bg-gradient-to-r from-black/60 to-transparent" /><div className="absolute bottom-6 left-6 md:bottom-10 md:left-10"><span className="font-mono text-[10px] uppercase tracking-widest text-primary">{featured.label}</span><h2 className="mt-3 max-w-lg font-display text-3xl font-black md:text-5xl">{featured.title}</h2></div><span className="absolute right-6 top-6 flex size-12 items-center justify-center rounded-full bg-primary text-primary-foreground transition group-hover:scale-110"><Play size={16} fill="currentColor" /></span></div><div className="flex flex-col justify-between p-6 md:p-10"><div><p className="text-sm leading-relaxed text-white/60 md:text-base">{featured.excerpt}</p><p className="mt-6 font-mono text-[10px] uppercase tracking-widest text-white/40">{featured.date} · {featured.duration}</p></div><span className="mt-10 flex items-center gap-2 font-mono text-[10px] uppercase tracking-widest text-primary">Watch full session <ArrowUpRight size={14} /></span></div></a></div></section>
+      <section className="mx-auto max-w-[1400px] px-6 py-16 md:px-12 md:py-24"><div className="mb-10 flex flex-col justify-between gap-5 border-b border-border pb-6 sm:flex-row sm:items-end"><div><p className="font-mono text-[10px] uppercase tracking-[0.25em] text-primary">The archive</p><h2 className="mt-2 font-display text-3xl font-black md:text-4xl">Browse the room</h2></div><div className="flex flex-wrap gap-2"><button onClick={() => setActiveCategory("All")} className={`px-3 py-2 font-mono text-[10px] uppercase tracking-widest transition ${activeCategory === "All" ? "bg-primary text-primary-foreground" : "border border-border text-muted-foreground hover:text-foreground"}`}>All</button>{CATEGORIES.map(({ label }) => <button key={label} onClick={() => setActiveCategory(label)} className={`hidden px-3 py-2 font-mono text-[10px] uppercase tracking-widest transition sm:block ${activeCategory === label ? "bg-primary text-primary-foreground" : "border border-border text-muted-foreground hover:text-foreground"}`}>{label}</button>)}</div></div><p className="mb-8 font-mono text-[10px] uppercase tracking-widest text-muted-foreground">{episodes.length} {episodes.length === 1 ? "story" : "stories"} in {activeCategory === "All" ? "the archive" : activeCategory}</p>{episodes.length ? <div className="grid grid-cols-1 gap-x-6 gap-y-14 sm:grid-cols-2 lg:grid-cols-3">{episodes.map((show) => <ShowCard key={show.id} show={show} />)}</div> : <div className="border border-dashed border-border py-24 text-center"><p className="font-display text-2xl font-black">Nothing here yet.</p><p className="mt-2 text-sm text-muted-foreground">Check back soon for new {activeCategory.toLowerCase()}.</p></div>}</section>
+    </main>
   );
 }

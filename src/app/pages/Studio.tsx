@@ -27,7 +27,7 @@ const SLIDES: Slide[] = [
     title: "LEOSTAYTRILL FT. SHODAY",
     description: "A live session that moves through shadow, rhythm, and intimate cinematic atmosphere.",
     thumb: DEFAULT_SLIDE_THUMB,
-    link: "https://www.youtube.com/watch?v=lxo0l5Mow_4&list=RDlxo0l5Mow_4&start_radio=1",
+    link: "/shows",
     videoUrl: "https://res.cloudinary.com/day4hpjji/video/upload/v1786149832/LEOSTAYTRILL_FT._SHODAY_TILL_THE_WHEEL_IS_FALLING_LIVE_PERFORMANCE_AT_ECHOOROOM_-_Echoo_Room_1080p_h264_youtube_oggbos.mp4",
     badge: "Featured",
   },
