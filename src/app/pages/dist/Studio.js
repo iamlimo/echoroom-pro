@@ -22,7 +22,7 @@ var SLIDES = [
         title: "YCEE",
         description: "A bold visual experiment with texture, glow, and a subtle cinematic pulse.",
         thumb: DEFAULT_SLIDE_THUMB,
-        link: "https://www.youtube.com/watch?v=JpJSbZEpWew",
+        link: "/shows",
         videoUrl: "https://res.cloudinary.com/day4hpjji/video/upload/v1786151748/YCEE_LEMONADE_LIVE_PERFORMANCE_AT_ECHOO_ROOM_-_Echoo_Room_1080p_h264_youtube_rbpqob.mp4"
     },
     {
