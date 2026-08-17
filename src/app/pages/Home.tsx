@@ -400,6 +400,35 @@ function Onboarding() {
 function Contact() {
   const [form, setForm] = useState({ name: "", email: "", company: "", size: "", message: "" });
   const [sent, setSent] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  async function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    setError(null);
+    setLoading(true);
+
+    try {
+      const resp = await fetch('/.netlify/functions/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(form),
+      });
+
+      if (!resp.ok) {
+        const text = await resp.text();
+        throw new Error(text || 'Failed to send message');
+      }
+
+      setSent(true);
+      setForm({ name: "", email: "", company: "", size: "", message: "" });
+    } catch (err: any) {
+      console.error(err);
+      setError(err.message || 'An error occurred');
+    } finally {
+      setLoading(false);
+    }
+  }
 
   return (
     <section id="contact" className="py-24 bg-card">
@@ -416,11 +445,6 @@ function Contact() {
               </div>
               <div>
                 <p className="font-mono text-[10px] text-muted-foreground tracking-widest uppercase mb-2">Services offered</p>
-                {/* <div className="flex flex-wrap gap-2">
-                  {["Video Production", "Motion Design", "Audio & Podcast", "PR & Influencer", "White-Label", "BTL / Events"].map((tag) => (
-                    <span key={tag} className="font-mono text-[9px] tracking-widest uppercase text-primary border border-primary/25 px-2.5 py-1">{tag}</span>
-                  ))}
-                </div> */}
               </div>
             </div>
           </div>
@@ -432,7 +456,7 @@ function Contact() {
                 <p className="text-muted-foreground text-sm">Our team will be in touch within 24 hours to schedule your alignment call.</p>
               </div>
             ) : (
-              <form onSubmit={(e) => { e.preventDefault(); setSent(true); }} className="space-y-5">
+              <form onSubmit={handleSubmit} className="space-y-5">
                 {[
                   { name: "name", label: "Your name", type: "text", required: true },
                   { name: "email", label: "Work email address", type: "email", required: true },
@@ -461,8 +485,9 @@ function Contact() {
                     placeholder="What are you working on? What is the scale of your content needs?"
                   />
                 </div>
-                <button type="submit" className="w-full bg-primary text-primary-foreground py-4 font-bold text-sm tracking-wide hover:bg-primary/85 transition-colors flex items-center justify-center gap-2">
-                  Book the alignment brief <ArrowRight size={15} />
+                {error && <div className="text-sm text-destructive">{error}</div>}
+                <button type="submit" disabled={loading} className="w-full bg-primary text-primary-foreground py-4 font-bold text-sm tracking-wide hover:bg-primary/85 transition-colors flex items-center justify-center gap-2">
+                  {loading ? 'Sending…' : 'Book the alignment brief'} <ArrowRight size={15} />
                 </button>
                 <p className="text-[11px] text-muted-foreground text-center font-mono tracking-wide">We respond within 24 hours — NDA available on request</p>
               </form>

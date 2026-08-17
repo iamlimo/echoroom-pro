@@ -1,57 +1,391 @@
-import { useState } from "react";
-import { ArrowUpRight, BookOpen, Clock3, Headphones, Mic2, Play, Radio, Sparkles, Video, type LucideIcon } from "lucide-react";
+import { useEffect, useRef, useState, type TouchEvent } from "react";
+import {
+  ArrowUpRight,
+  Volume2,
+  VolumeX,
+} from "lucide-react";
+import gsap from "gsap";
+import * as THREE from "three";
 
-type ContentKind = "Live sessions" | "Specials" | "Behind the scenes" | "Podcast" | "Stories" | "Interviews";
-type Show = { id: string; title: string; kind: ContentKind; label: string; guest?: string; date: string; duration?: string; excerpt: string; image: string; href: string; featured?: boolean; new?: boolean };
+type Slide = {
+  id: string;
+  category: string;
+  title: string;
+  description: string;
+  thumb: string;
+  link: string;
+  videoUrl: string;
+  badge?: string;
+};
 
-const SHOWS: Show[] = [
-  { id: "live-leostaytrill", title: "LEOSTAYTRILL ft. Shoday", kind: "Live sessions", label: "Live session 01", date: "Jun 08, 2026", duration: "04:12", excerpt: "A live performance shaped by shadow, rhythm, and intimate cinematic atmosphere.", image: "https://images.unsplash.com/photo-1501386761578-eac5c94b800a?w=1200&h=760&fit=crop&auto=format", href: "https://www.youtube.com/watch?v=lxo0l5Mow_4&list=RDlxo0l5Mow_4&start_radio=1", featured: true, new: true },
-  { id: "special-ycee", title: "YCEE — Lemonade", kind: "Specials", label: "Studio special", date: "May 24, 2026", duration: "03:48", excerpt: "A bold, stripped-back performance captured in the EchooRoom light.", image: "https://images.unsplash.com/photo-1524368535928-5b5e00ddc76b?w=900&h=600&fit=crop&auto=format", href: "https://www.youtube.com/watch?v=JpJSbZEpWew", new: true },
-  { id: "bts-cut-room", title: "The Cut Room Diaries", kind: "Behind the scenes", label: "Field notes 04", date: "May 12, 2026", excerpt: "A look inside the room where every frame is tuned for sound and shadow.", image: "https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?w=900&h=600&fit=crop&auto=format", href: "https://www.youtube.com/watch?v=VYOjWnS4cMY" },
-  { id: "podcast-synths", title: "Synths & Sovereignty", kind: "Podcast", label: "EchoFreq · Ep. 89", guest: "with Odunsi The Engine", date: "May 02, 2026", duration: "58:12", excerpt: "On influence, ritual, creative blocks, and the pressure of staying iconic.", image: "https://images.unsplash.com/photo-1590602847861-f357a9332bbc?w=900&h=600&fit=crop&auto=format", href: "https://www.youtube.com/watch?v=F7rHps6VWIU", new: true },
-  { id: "story-attention", title: "Attention is the new currency", kind: "Stories", label: "The EchooRoom journal", date: "Apr 18, 2026", excerpt: "Why the most valuable media brands are building trust before they build reach.", image: "https://images.unsplash.com/photo-1455390582262-044cdead277a?w=900&h=600&fit=crop&auto=format", href: "/stories/attention-is-the-new-currency" },
-  { id: "interview-roundtable", title: "The Creative Roundtable", kind: "Interviews", label: "Conversation 24", guest: "with Falz & Simi", date: "Apr 06, 2026", duration: "1:02:44", excerpt: "A conversation on creative independence, the business of music, and owning your masters.", image: "https://images.unsplash.com/photo-1478737270239-2f02b77fc618?w=900&h=600&fit=crop&auto=format", href: "https://www.youtube.com/watch?v=7QU9mvNHnKg" },
+const DEFAULT_SLIDE_THUMB = "/assets/echoroom-default-thumb.svg";
+
+const SLIDES: Slide[] = [
+  {
+    id: "slide-1",
+    category: "Live Session",
+    title: "LEOSTAYTRILL FT. SHODAY",
+    description: "A live session that moves through shadow, rhythm, and intimate cinematic atmosphere.",
+    thumb: DEFAULT_SLIDE_THUMB,
+    link: "/shows",
+    videoUrl: "https://res.cloudinary.com/day4hpjji/video/upload/v1786149832/LEOSTAYTRILL_FT._SHODAY_TILL_THE_WHEEL_IS_FALLING_LIVE_PERFORMANCE_AT_ECHOOROOM_-_Echoo_Room_1080p_h264_youtube_oggbos.mp4",
+    badge: "Featured",
+  },
+  {
+    id: "slide-2",
+    category: "Special",
+    title: "YCEE",
+    description: "A bold visual experiment with texture, glow, and a subtle cinematic pulse.",
+    thumb: DEFAULT_SLIDE_THUMB,
+    link: "/shows",
+    videoUrl: "https://res.cloudinary.com/day4hpjji/video/upload/v1786151748/YCEE_LEMONADE_LIVE_PERFORMANCE_AT_ECHOO_ROOM_-_Echoo_Room_1080p_h264_youtube_rbpqob.mp4",
+  },
+  {
+    id: "slide-3",
+    category: "Behind The Scenes",
+    title: "The Cut Room Diaries",
+    description: "A textured preview of the space where every frame is tuned for sound and shadow.",
+    thumb: DEFAULT_SLIDE_THUMB,
+    link: "https://www.youtube.com/watch?v=VYOjWnS4cMY",
+    videoUrl: "https://www.w3schools.com/html/mov_bbb.mp4",
+  },
+  {
+    id: "slide-6",
+    category: "Interview",
+    title: "The Creative Roundtable",
+    description: "A quiet conversation that opens up the creative process and the energy behind it.",
+    thumb: DEFAULT_SLIDE_THUMB,
+    link: "https://www.youtube.com/watch?v=7QU9mvNHnKg",
+    videoUrl: "https://www.w3schools.com/html/mov_bbb.mp4",
+  },
+  {
+    id: "slide-5",
+    category: "Podcast",
+    title: "Synths & Sovereignty",
+    description: "A deep-dive into influence, ritual, and the pressure of staying iconic.",
+    thumb: DEFAULT_SLIDE_THUMB,
+    link: "https://www.youtube.com/watch?v=F7rHps6VWIU",
+    videoUrl: "https://www.w3schools.com/html/mov_bbb.mp4",
+  },
+  {
+    id: "slide-6",
+    category: "Performances",
+    title: "Afterglow performance",
+    description: "Professional and creative performances from your favourit artistes",
+    thumb: DEFAULT_SLIDE_THUMB,
+    link: "https://www.youtube.com/watch?v=F7rHps6VWIU",
+    videoUrl: "https://www.w3schools.com/html/mov_bbb.mp4",
+  }
 ];
 
-const CATEGORIES: { label: ContentKind; icon: LucideIcon; color: string }[] = [
-  { label: "Live sessions", icon: Radio, color: "text-rose-400" }, { label: "Specials", icon: Sparkles, color: "text-amber-400" },
-  { label: "Behind the scenes", icon: Video, color: "text-sky-400" }, { label: "Podcast", icon: Headphones, color: "text-emerald-400" },
-  { label: "Stories", icon: BookOpen, color: "text-violet-400" }, { label: "Interviews", icon: Mic2, color: "text-orange-400" },
-];
+export default function Studio() {
+  const [activeSlide, setActiveSlide] = useState(0);
+  const [loading, setLoading] = useState(true);
+  const [progress, setProgress] = useState(0);
+  const [muted, setMuted] = useState(true);
+  const [isThrottled, setIsThrottled] = useState(false);
+  const canvasRef = useRef<HTMLCanvasElement | null>(null);
+  const videoRef = useRef<HTMLVideoElement | null>(null);
+  const touchStartY = useRef<number | null>(null);
 
-function CategoryIcon({ kind, className = "" }: { kind: ContentKind; className?: string }) {
-  const category = CATEGORIES.find(({ label }) => label === kind);
-  const Icon = category?.icon ?? Video;
-  return <Icon className={`${category?.color ?? "text-primary"} ${className}`} />;
-}
+  const slide = SLIDES[activeSlide];
 
-function ShowCard({ show }: { show: Show }) {
-  const external = show.href.startsWith("http");
+  useEffect(() => {
+    const timeline = gsap.timeline({ defaults: { ease: "power3.inOut" } });
+    const duration = 4800;
+    let current = 0;
+    const interval = window.setInterval(() => {
+      current = Math.min(100, current + Math.floor(Math.random() * 7) + 4);
+      setProgress(current);
+
+      if (current >= 100) {
+        window.clearInterval(interval);
+        timeline.to(".studio-loader", { yPercent: -110, opacity: 0, duration: 1.4 });
+        timeline.fromTo(
+          ".studio-shell",
+          { opacity: 0, y: 18 },
+          { opacity: 1, y: 0, duration: 1.3, clearProps: "all" },
+          "<0.35"
+        );
+        window.setTimeout(() => setLoading(false), 500);
+      }
+    }, duration / 12);
+
+    return () => {
+      window.clearInterval(interval);
+    };
+  }, []);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+    video.pause();
+    video.load();
+    void video.play().catch(() => {
+      // Autoplay fallback handled by muted attribute
+    });
+
+    gsap.fromTo(
+      ".slide-meta",
+      { opacity: 0, y: 18 },
+      { opacity: 1, y: 0, duration: 0.9, ease: "power3.out" }
+    );
+    gsap.fromTo(
+      ".category-card",
+      { opacity: 0, x: 18 },
+      { opacity: 1, x: 0, duration: 0.75, stagger: 0.05, ease: "power3.out" }
+    );
+  }, [activeSlide]);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+
+    const renderer = new THREE.WebGLRenderer({
+      canvas,
+      alpha: true,
+      antialias: true,
+    });
+    renderer.setPixelRatio(window.devicePixelRatio);
+    renderer.setClearColor(0x000000, 0);
+
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(55, 1, 0.1, 20);
+    camera.position.z = 3;
+
+    const particleCount = 120;
+    const positions = new Float32Array(particleCount * 3);
+    const sizes = new Float32Array(particleCount);
+
+    for (let i = 0; i < particleCount; i += 1) {
+      positions[i * 3 + 0] = (Math.random() - 0.5) * 4;
+      positions[i * 3 + 1] = (Math.random() - 0.5) * 2.5;
+      positions[i * 3 + 2] = (Math.random() - 0.5) * 2;
+      sizes[i] = Math.random() * 2 + 1;
+    }
+
+    const geometry = new THREE.BufferGeometry();
+    geometry.setAttribute("position", new THREE.BufferAttribute(positions, 3));
+    geometry.setAttribute("size", new THREE.BufferAttribute(sizes, 1));
+
+    const material = new THREE.PointsMaterial({
+      color: 0xffffff,
+      size: 0.03,
+      transparent: true,
+      opacity: 0.4,
+      sizeAttenuation: true,
+    });
+
+    const points = new THREE.Points(geometry, material);
+    scene.add(points);
+
+    const clock = new THREE.Clock();
+    let frameId: number;
+
+    const resize = () => {
+      const width = canvas.clientWidth;
+      const height = canvas.clientHeight;
+      renderer.setSize(width, height, false);
+      camera.aspect = width / height;
+      camera.updateProjectionMatrix();
+    };
+
+    const animate = () => {
+      const time = clock.getElapsedTime();
+      const positionsArray = geometry.attributes.position.array as Float32Array;
+
+      for (let i = 0; i < particleCount; i += 1) {
+        const idx = i * 3;
+        positionsArray[idx + 0] += Math.sin(time + i * 0.1) * 0.0008;
+        positionsArray[idx + 1] += Math.cos(time + i * 0.12) * 0.0009;
+        positionsArray[idx + 2] += Math.sin(time + i * 0.15) * 0.0005;
+      }
+
+      geometry.attributes.position.needsUpdate = true;
+      points.rotation.y = time * 0.015;
+      points.rotation.x = Math.sin(time * 0.2) * 0.02;
+
+      renderer.render(scene, camera);
+      frameId = window.requestAnimationFrame(animate);
+    };
+
+    resize();
+    window.addEventListener("resize", resize);
+    animate();
+
+    return () => {
+      window.cancelAnimationFrame(frameId);
+      window.removeEventListener("resize", resize);
+      renderer.dispose();
+      geometry.dispose();
+      material.dispose();
+    };
+  }, []);
+
+  const clampIndex = (next: number) => {
+    if (next < 0) return 0;
+    if (next >= SLIDES.length) return SLIDES.length - 1;
+    return next;
+  };
+
+  const changeSlide = (next: number) => {
+    setActiveSlide(clampIndex(next));
+  };
+
+  const handleTouchStart = (event: TouchEvent<HTMLDivElement>) => {
+    touchStartY.current = event.touches[0]?.clientY ?? null;
+  };
+
+  const handleTouchEnd = (event: TouchEvent<HTMLDivElement>) => {
+    if (loading || isThrottled || touchStartY.current === null) return;
+    const delta = touchStartY.current - event.changedTouches[0]?.clientY;
+    if (Math.abs(delta) < 40) {
+      touchStartY.current = null;
+      return;
+    }
+
+    setIsThrottled(true);
+    setTimeout(() => setIsThrottled(false), 600);
+    changeSlide(activeSlide + (delta > 0 ? 1 : -1));
+    touchStartY.current = null;
+  };
+
   return (
-    <a href={show.href} target={external ? "_blank" : undefined} rel={external ? "noreferrer" : undefined} className="group block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary">
-      <div className="relative aspect-[4/3] overflow-hidden rounded-sm bg-muted">
-        <img src={show.image} alt={`${show.title} — ${show.kind}`} className="h-full w-full object-cover grayscale-[35%] transition duration-700 group-hover:scale-105 group-hover:grayscale-0" loading="lazy" />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent" />
-        <div className="absolute left-4 top-4 flex items-center gap-2">{show.new && <span className="bg-primary px-2 py-1 font-mono text-[9px] uppercase tracking-widest text-primary-foreground">New</span>}<span className="flex items-center gap-1.5 bg-black/55 px-2 py-1 font-mono text-[9px] uppercase tracking-widest text-white/80 backdrop-blur-sm"><CategoryIcon kind={show.kind} className="size-3" />{show.kind}</span></div>
-        <div className="absolute bottom-4 left-4 right-4 flex items-end justify-between"><span className="font-mono text-[10px] uppercase tracking-widest text-white/60">{show.label}</span>{show.duration && <span className="flex items-center gap-1 bg-black/55 px-2 py-1 font-mono text-[10px] text-white/75"><Clock3 size={11} />{show.duration}</span>}</div>
-        <span className="absolute inset-0 flex items-center justify-center bg-black/20 opacity-0 transition duration-300 group-hover:opacity-100"><span className="flex size-12 scale-75 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-xl transition duration-300 group-hover:scale-100"><Play size={16} fill="currentColor" /></span></span>
+    <div className="min-h-screen overflow-hidden bg-[#050505] text-white">
+      <div
+        className={`studio-loader fixed inset-0 z-[90] flex items-center justify-center bg-[#030303] transition-opacity ${loading ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0"}`}
+      >
+        <div className="w-full max-w-md px-6 text-center">
+          <p className="font-mono text-[10px] uppercase tracking-[0.4em] text-white/60">EchooRoom Studio</p>
+          <p className="mt-4 text-5xl font-black tracking-[0.24em] text-white">{progress}%</p>
+          <div className="mt-5 h-2 overflow-hidden rounded-full border border-white/20 bg-white/5">
+            <div className="h-full bg-white transition-all duration-200" style={{ width: `${progress}%` }} />
+          </div>
+          <p className="mt-4 font-mono text-[10px] uppercase tracking-[0.28em] text-white/45">Welcome to the EchooRoom experience</p>
+        </div>
       </div>
-      <div className="pt-4"><div className="mb-2 flex items-center justify-between font-mono text-[10px] uppercase tracking-widest text-muted-foreground"><span>{show.date}</span><ArrowUpRight size={14} className="opacity-0 transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:opacity-100" /></div><h3 className="font-display text-xl font-black leading-tight transition-colors group-hover:text-primary">{show.title}</h3>{show.guest && <p className="mt-1 text-sm text-muted-foreground">{show.guest}</p>}<p className="mt-3 line-clamp-2 text-sm leading-relaxed text-muted-foreground">{show.excerpt}</p></div>
-    </a>
-  );
-}
 
-export default function Shows() {
-  const [activeCategory, setActiveCategory] = useState<ContentKind | "All">("All");
-  const featured = SHOWS.find((show) => show.featured) ?? SHOWS[0];
-  const episodes = SHOWS.filter((show) => !show.featured && (activeCategory === "All" || show.kind === activeCategory));
-  const featuredExternal = featured.href.startsWith("http");
+      <div
+        className={`studio-shell transition-opacity duration-500 ${loading ? "opacity-0" : "opacity-100"}`}
+        onTouchStart={handleTouchStart}
+        onTouchEnd={handleTouchEnd}
+      >
+        <div className="relative min-h-screen">
+          <div className="absolute inset-0 overflow-hidden">
+            <video
+              ref={videoRef}
+              key={slide.id}
+              className="absolute inset-0 h-full w-full object-cover brightness-110 contrast-105 saturate-110"
+              muted={muted}
+              loop
+              autoPlay
+              playsInline
+              preload="auto"
+              poster={slide.thumb}
+            >
+              <source src={slide.videoUrl} type="video/mp4" />
+            </video>
+            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent" />
+            <div className="absolute inset-0 bg-black/10" />
+            <canvas ref={canvasRef} className="pointer-events-none absolute inset-0 h-full w-full" />
+          </div>
 
-  return (
-    <main className="min-h-screen bg-background">
-      <header className="mx-auto max-w-[1400px] px-6 pb-12 pt-28 md:px-12 md:pt-36"><div className="max-w-3xl"><p className="mb-4 font-mono text-[10px] uppercase tracking-[0.3em] text-primary">EchooRoom / Media library</p><h1 className="font-display text-5xl font-black leading-[0.95] tracking-tight md:text-8xl">Experience worth<span className="text-muted-foreground/45"> staying for.</span></h1><p className="mt-7 max-w-xl text-base leading-relaxed text-muted-foreground md:text-lg">Live sessions, honest conversations, and the stories behind the work. Explore everything we make, all in one room.</p></div><div className="mt-14 grid grid-cols-2 gap-px overflow-hidden border border-border bg-border sm:grid-cols-3 lg:grid-cols-6">{CATEGORIES.map(({ label, icon: Icon, color }) => <button key={label} onClick={() => setActiveCategory(label)} className={`flex items-center gap-3 bg-background px-4 py-4 text-left transition hover:bg-card ${activeCategory === label ? "ring-1 ring-inset ring-primary" : ""}`}><Icon size={16} className={color} /><span className="font-mono text-[10px] uppercase tracking-wider text-muted-foreground">{label}</span></button>)}</div></header>
-      {/* <section className="border-y border-border bg-card/40"><div className="mx-auto max-w-[1400px] px-6 py-10 md:px-12 md:py-14"><div className="mb-6 flex items-center justify-between"><p className="font-mono text-[10px] uppercase tracking-[0.25em] text-muted-foreground">Now playing- This Week</p><span className="flex items-center gap-2 font-mono text-[10px] uppercase tracking-widest text-primary"><span className="size-1.5 animate-pulse rounded-full bg-primary" />Featured</span></div><a href={featured.href} target={featuredExternal ? "_blank" : undefined} rel={featuredExternal ? "noreferrer" : undefined} className="group grid overflow-hidden bg-[#0d1117] text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"><div className="relative min-h-[300px] overflow-hidden"><img src={featured.image} alt={featured.title} className="h-full w-full object-cover opacity-80 transition duration-700 group-hover:scale-105 group-hover:opacity-100" /><div className="absolute inset-0 bg-gradient-to-r from-black/60 to-transparent" /><div className="absolute bottom-6 left-6 md:bottom-10 md:left-10"><span className="font-mono text-[10px] uppercase tracking-widest text-primary">{featured.label}</span><h2 className="mt-3 max-w-lg font-display text-3xl font-black md:text-5xl">{featured.title}</h2></div><span className="absolute right-6 top-6 flex size-12 items-center justify-center rounded-full bg-primary text-primary-foreground transition group-hover:scale-110"><Play size={16} fill="currentColor" /></span></div><div className="flex flex-col justify-between p-6 md:p-10"><div><p className="text-sm leading-relaxed text-white/60 md:text-base">{featured.excerpt}</p><p className="mt-6 font-mono text-[10px] uppercase tracking-widest text-white/40">{featured.date} · {featured.duration}</p></div><span className="mt-10 flex items-center gap-2 font-mono text-[10px] uppercase tracking-widest text-primary">Watch full session <ArrowUpRight size={14} /></span></div></a></div></section> */}
-      <section className="mx-auto max-w-[1400px] px-6 py-16 md:px-12 md:py-24"><div className="mb-10 flex flex-col justify-between gap-5 border-b border-border pb-6 sm:flex-row sm:items-end"><div><p className="font-mono text-[10px] uppercase tracking-[0.25em] text-primary">The archive</p><h2 className="mt-2 font-display text-3xl font-black md:text-4xl">Browse the room</h2></div><div className="flex flex-wrap gap-2"><button onClick={() => setActiveCategory("All")} className={`px-3 py-2 font-mono text-[10px] uppercase tracking-widest transition ${activeCategory === "All" ? "bg-primary text-primary-foreground" : "border border-border text-muted-foreground hover:text-foreground"}`}>All</button>{CATEGORIES.map(({ label }) => <button key={label} onClick={() => setActiveCategory(label)} className={`hidden px-3 py-2 font-mono text-[10px] uppercase tracking-widest transition sm:block ${activeCategory === label ? "bg-primary text-primary-foreground" : "border border-border text-muted-foreground hover:text-foreground"}`}>{label}</button>)}</div></div><p className="mb-8 font-mono text-[10px] uppercase tracking-widest text-muted-foreground">{episodes.length} {episodes.length === 1 ? "story" : "stories"} in {activeCategory === "All" ? "the archive" : activeCategory}</p>{episodes.length ? <div className="grid grid-cols-1 gap-x-6 gap-y-14 sm:grid-cols-2 lg:grid-cols-3">{episodes.map((show) => <ShowCard key={show.id} show={show} />)}</div> : <div className="border border-dashed border-border py-24 text-center"><p className="font-display text-2xl font-black">Nothing here yet.</p><p className="mt-2 text-sm text-muted-foreground">Check back soon for new {activeCategory.toLowerCase()}.</p></div>}</section>
-    </main>
+          <div className="relative z-10 mx-auto flex min-h-screen max-w-[1600px] flex-col justify-end px-4 py-10 sm:px-6 lg:px-8">
+            <div className="grid items-end gap-8 lg:grid-cols-[1.7fr_0.9fr]">
+              <section className="slide-meta max-w-3xl space-y-6 pb-1 sm:pb-3">
+                <div className="inline-flex items-center gap-3 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-[10px] uppercase tracking-[0.3em] text-white/70 backdrop-blur">
+                  {slide.category === "Live Session" ? (
+                    <span className="flex h-3 items-end gap-0.5" role="status" aria-label="Live session active">
+                      <span className="h-1.5 w-0.5 animate-pulse bg-white/80" />
+                      <span className="h-3 w-0.5 animate-pulse bg-white/80 [animation-delay:160ms]" />
+                      <span className="h-2 w-0.5 animate-pulse bg-white/80 [animation-delay:320ms]" />
+                    </span>
+                  ) : (
+                    <span className="h-2.5 w-2.5 rounded-full bg-white/80" />
+                  )}
+                  <span>{slide.category}</span>
+                </div>
+                <div className="space-y-5">
+                  <h1 className="text-4xl font-black leading-tight tracking-[-0.04em] text-white sm:text-6xl">
+                    {slide.title}
+                  </h1>
+                  <p className="max-w-2xl text-lg leading-8 text-white/70 sm:text-xl">
+                    {slide.description}
+                  </p>
+                </div>
+                <div className="flex flex-wrap items-center gap-4">
+                  <a
+                    href={slide.link}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-5 py-3 text-sm font-semibold uppercase tracking-[0.24em] text-white transition hover:border-white/40 hover:bg-white/15"
+                  >
+                    Watch
+                    <ArrowUpRight size={14} />
+                  </a>
+                  <button
+                    type="button"
+                    onClick={() => setMuted((value) => !value)}
+                    className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-black/60 px-4 py-3 text-sm text-white/80 transition hover:border-white/30 hover:bg-white/10"
+                  >
+                    {muted ? <Volume2 size={16} /> : <VolumeX size={16} />}
+                    {muted ? "Unmute" : "Mute"}
+                  </button>
+                </div>
+                <p className="max-w-xl text-sm uppercase tracking-[0.32em] text-white/45">
+                  Select a category to change the preview, or swipe on touch devices.
+                </p>
+              </section>
+
+              <aside className="rounded-[1.5rem] border border-white/15 bg-black/45 p-4 backdrop-blur-xl lg:mb-3">
+                <div className="mb-6 flex items-center justify-between">
+                  <div>
+                    <p className="text-[11px] uppercase tracking-[0.32em] text-white/50">The Echoroom Studio</p>
+                    <p className="mt-2 text-sm font-semibold text-white"></p>
+                  </div>
+                  <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[10px] uppercase tracking-[0.28em] text-white/60">
+                    {activeSlide + 1}/{SLIDES.length}
+                  </span>
+                </div>
+                <div className="space-y-3">
+                  {SLIDES.map((item, index) => {
+                    const isActive = index === activeSlide;
+                    return (
+                      <button
+                        key={item.id}
+                        type="button"
+                        className={`category-card group w-full overflow-hidden rounded-xl border px-4 py-3 text-left transition ${isActive ? "border-white/50 bg-white/10" : "border-white/10 bg-black/20 hover:border-white/30 hover:bg-white/5"}`}
+                        onClick={() => changeSlide(index)}
+                      >
+                        <div className="flex items-start justify-between gap-4">
+                          <div className="min-w-0">
+                            <p className="flex items-center gap-2 text-xs font-medium uppercase tracking-[0.18em] text-white/85">
+                              {item.category === "Live Session" ? (
+                                <span className="flex h-3 items-end gap-0.5" aria-label="Live session active">
+                                  <span className="h-1.5 w-0.5 animate-pulse bg-white/80" />
+                                  <span className="h-3 w-0.5 animate-pulse bg-white/80 [animation-delay:160ms]" />
+                                  <span className="h-2 w-0.5 animate-pulse bg-white/80 [animation-delay:320ms]" />
+                                </span>
+                              ) : null}
+                              {item.category}
+                            </p>
+                            <p className="mt-1 truncate text-xs text-white/45">{item.title}</p>
+                          </div>
+                          <span className="pt-0.5 text-[10px] tabular-nums text-white/35">{String(index + 1).padStart(2, "0")}</span>
+                        </div>
+                        <div className="mt-4 flex items-center justify-between text-[10px] uppercase tracking-[0.28em] text-white/50">
+                          <span>{isActive ? "Playing" : "Preview"}</span>
+                          <span>{item.badge ?? "Live"}</span>
+                        </div>
+                      </button>
+                    );
+                  })}
+                </div>
+              </aside>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 }
