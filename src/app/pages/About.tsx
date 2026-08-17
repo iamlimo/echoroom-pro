@@ -278,6 +278,7 @@ export default function About() {
           </div>
         </div>
       </section>
+      {/* check this section for update */}
 
       <section id="services" className="py-20 px-6 md:px-12 max-w-[1400px] mx-auto hide-out">
         <div className="grid gap-12 lg:grid-cols-[0.95fr_1.05fr] lg:items-end">
