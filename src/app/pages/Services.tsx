@@ -374,7 +374,7 @@ export default function Services() {
             <div>
               <p className="font-mono text-xs text-primary tracking-[0.22em] uppercase mb-5">Section 3 — Service Catalogue</p>
               <h1 className="font-display text-5xl md:text-7xl font-black leading-[0.95] text-foreground mb-6">
-                The 12 Core<br />
+                The 6 Core<br />
                 <span className="text-primary">Service</span><br />
                 Pillars
               </h1>
@@ -384,7 +384,7 @@ export default function Services() {
             </div>
             <div className="grid grid-cols-2 gap-4">
               {[
-                { val: "12", label: "Fully staffed service pillars" },
+                { val: "6", label: "Fully staffed service pillars" },
                 { val: "1", label: "Partner. One invoice. Zero friction." },
                 { val: "∞", label: "Scalable across all industries" },
                 { val: "NDA", label: "Available on every engagement" },
@@ -470,7 +470,7 @@ export default function Services() {
                 Stop managing<br />multiple vendors.
               </h2>
               <p className="text-primary-foreground/70 text-lg leading-relaxed">
-                All 12 service pillars under one roof. One account manager, one invoice, zero micro-management. Your marketing team gets back to strategy — we handle everything else.
+                All 6 service pillars under one roof. One account manager, one invoice, zero micro-management. Your marketing team gets back to strategy — we handle everything else.
               </p>
             </div>
             <div className="space-y-4">
