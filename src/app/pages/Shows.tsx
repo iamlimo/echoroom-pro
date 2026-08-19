@@ -33,7 +33,7 @@ const SLIDES: Slide[] = [
   },
   {
     id: "slide-2",
-    category: "Special",
+    category: "Live Session",
     title: "YCEE",
     description: "A bold visual experiment with texture, glow, and a subtle cinematic pulse.",
     thumb: DEFAULT_SLIDE_THUMB,
