@@ -178,49 +178,50 @@ export default function Team() {
   const location = useLocation();
   const contactHash = useMemo(() => "#contact", []);
 
+  const teamAsset = (fileName: string) => `/assets/Teams/${encodeURIComponent(fileName)}`;
+
   const MEMBERS: TeamMember[] = useMemo(
     () => [
       {
-        name: "Amina Okafor",
-        role: "Head of Creative Systems",
-        bio: "Builds repeatable production workflows that protect brand precision under tight deadlines.",
-        tags: ["Workflow Design", "Brand Safety", "Creative Ops"],
-        imageSrc: "/assets/team/amina.png",
+        name: "David George",
+        role: "Growth and Sales Manager",
+        bio: "Builds strategic sales opportunities and partner relationships that keep the pipeline steady and high-value.",
+        tags: ["Sales Strategy", "Partnerships", "Revenue Growth"],
+        imageSrc: teamAsset("David George \nGrowth and Sales Manager.jpeg"),
       },
       {
-        name: "Daniel Mensah",
-        role: "Production Director",
-        bio: "Leads filming + post pipelines with disciplined crew coordination and cinematic consistency.",
-        tags: ["Video Production", "Scheduling", "Post-Production"],
-        imageSrc: "/assets/team/daniel.png",
+        name: "Doris Kenneth",
+        role: "Editor",
+        bio: "Shapes the rhythm, clarity, and emotional pacing of every final story, frame, and cut.",
+        tags: ["Editing", "Story Flow", "Post Production"],
+        imageSrc: teamAsset("Doris Kenneth \n\nEditor.jpeg"),
       },
       {
-        name: "Selina Nwosu",
-        role: "Design & Motion Lead",
-        bio: "Turns complex product stories into immersive, conversion-focused motion and digital design.",
-        tags: ["Motion Graphics", "UI/UX", "2D/3D Animation"],
-        imageSrc: "/assets/team/selina.png",
+        name: "Elizabeth Akhere",
+        role: "Head of Operations",
+        bio: "Keeps delivery teams organized, efficient, and resilient across every project milestone.",
+        tags: ["Operations", "Project Delivery", "Team Systems"],
+        imageSrc: teamAsset("Elizabeth Akhere\n\nHead of Operations.jpeg"),
       },
       {
-        name: "Kofi Adetayo",
-        role: "Audio & Narrative Engineer",
-        bio: "Delivers studio-grade voice, sound design, and editorial rhythm for enterprise voice assets.",
-        tags: ["Audio Mastering", "Voiceover", "Narrative Flow"],
-        imageSrc: "/assets/team/kofi.png",
+        name: "Olamide Amubieya",
+        role: "HR Lead",
+        bio: "Builds a strong team culture through onboarding, retention, and clear people-first systems.",
+        tags: ["People Ops", "Talent", "Culture"],
+        imageSrc: teamAsset("Olamide Amubieya HR Lead.jpeg"),
       },
       {
-        name: "Grace Ofori",
-        role: "PR & Reputation Strategist",
-        bio: "Architects media relations and crisis-safe communications with measured, rapid response.",
-        tags: ["PR Orchestration", "Crisis Response", "Media Relations"],
-        imageSrc: "/assets/team/grace.png",
+        name: "Rosemary Adeoti",
+        role: "Growth and Business Development Manager",
+        bio: "Turns market insight and strategic outreach into sustainable opportunities and long-term partnerships.",
+        tags: ["Business Development", "Growth", "Strategy"],
+        imageSrc: teamAsset("Rosemary Adeoti\nGrowth and Business Development Manager.jpeg"),
       },
-      {
-        name: "Ifeanyi Eze",
-        role: "Partnerships & Growth Ops",
-        bio: "Structures influencer + event partnerships that align incentives, protect brand, and scale output.",
-        tags: ["Partnerships", "Influencer Mgmt", "Event IP"],
-        imageSrc: "/assets/team/ifeanyi.png",
+       {
+        name: "Olusegun M Adeniran",
+        role: "Founder",
+        tags: ["Business Development", "Growth", "Strategy"],
+        imageSrc: teamAsset("Olusegun_adeniran.jpeg"),
       },
     ],
     []
