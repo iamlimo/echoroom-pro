@@ -185,7 +185,8 @@ export default function Team() {
        {
         name: "Olusegun M Adeniran",
         role: "Founder",
-        tags: ["Business Development", "Growth", "Strategy"],
+        bio: "Leads the company with a strategic, people-first vision focused on sustainable growth, operational clarity, and premium execution.",
+        tags: ["Vision Leadership", "Growth Strategy", "Partnerships"],
         imageSrc: teamAsset("Olusegun_adeniran.jpeg"),
       },
       {
@@ -226,7 +227,8 @@ export default function Team() {
       {
         name: "Kehinde Adeolu",
         role: "Production Manager",
-        tags: ["Business Development", "Growth", "Strategy"],
+        bio: "Coordinates people, timelines, and logistics to keep production moving smoothly from concept through delivery without friction.",
+        tags: ["Production Planning", "Crew Coordination", "Delivery Ops"],
         imageSrc: teamAsset("Kehinde_adeolu.jpeg"),
       },
     ],

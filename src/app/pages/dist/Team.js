@@ -87,6 +87,13 @@ function Team() {
     var teamAsset = function (fileName) { return "/assets/Teams/" + encodeURIComponent(fileName); };
     var MEMBERS = react_1.useMemo(function () { return [
         {
+            name: "Olusegun M Adeniran",
+            role: "Founder",
+            bio: "Leads the company with a strategic, people-first vision focused on sustainable growth, operational clarity, and premium execution.",
+            tags: ["Vision Leadership", "Growth Strategy", "Partnerships"],
+            imageSrc: teamAsset("Olusegun_adeniran.jpeg")
+        },
+        {
             name: "David George",
             role: "Growth and Sales Manager",
             bio: "Builds strategic sales opportunities and partner relationships that keep the pipeline steady and high-value.",
@@ -124,7 +131,8 @@ function Team() {
         {
             name: "Kehinde Adeolu",
             role: "Production Manager",
-            tags: ["Business Development", "Growth", "Strategy"],
+            bio: "Coordinates people, timelines, and logistics to keep production moving smoothly from concept through delivery without friction.",
+            tags: ["Production Planning", "Crew Coordination", "Delivery Ops"],
             imageSrc: teamAsset("Kehinde_adeolu.jpeg")
         },
     ]; }, []);
