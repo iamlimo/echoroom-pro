@@ -122,10 +122,10 @@ function Team() {
             imageSrc: teamAsset("Rosemary Adeoti\nGrowth and Business Development Manager.jpeg")
         },
         {
-            name: "Olusegun M Adeniran",
-            role: "Founder",
+            name: "Kehinde Adeolu",
+            role: "Production Manager",
             tags: ["Business Development", "Growth", "Strategy"],
-            imageSrc: teamAsset("Olusegun_adeniran.jpeg.jpeg")
+            imageSrc: teamAsset("Kehinde_adeolu.jpeg")
         },
     ]; }, []);
     var goToContact = function () {

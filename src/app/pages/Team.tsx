@@ -182,6 +182,12 @@ export default function Team() {
 
   const MEMBERS: TeamMember[] = useMemo(
     () => [
+       {
+        name: "Olusegun M Adeniran",
+        role: "Founder",
+        tags: ["Business Development", "Growth", "Strategy"],
+        imageSrc: teamAsset("Olusegun_adeniran.jpeg"),
+      },
       {
         name: "David George",
         role: "Growth and Sales Manager",
@@ -217,11 +223,11 @@ export default function Team() {
         tags: ["Business Development", "Growth", "Strategy"],
         imageSrc: teamAsset("Rosemary Adeoti\nGrowth and Business Development Manager.jpeg"),
       },
-       {
-        name: "Olusegun M Adeniran",
-        role: "Founder",
+      {
+        name: "Kehinde Adeolu",
+        role: "Production Manager",
         tags: ["Business Development", "Growth", "Strategy"],
-        imageSrc: teamAsset("Olusegun_adeniran.jpeg"),
+        imageSrc: teamAsset("Kehinde_adeolu.jpeg"),
       },
     ],
     []
