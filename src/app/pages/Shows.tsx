@@ -1,4 +1,5 @@
-import { useEffect, useRef, useState, type TouchEvent } from "react";
+import { useEffect, useMemo, useRef, useState, type TouchEvent } from "react";
+import { useLocation } from "react-router";
 import {
   ArrowUpRight,
   Volume2,
@@ -6,79 +7,50 @@ import {
 } from "lucide-react";
 import gsap from "gsap";
 import * as THREE from "three";
+import { ALL_SHOWS, CONTENT_KINDS, SHOW_CATEGORY_DATA, type ContentKind } from "../data/showCategories";
 
-type Slide = {
-  id: string;
-  category: string;
-  title: string;
-  description: string;
-  thumb: string;
-  link: string;
-  videoUrl: string;
-  badge?: string;
+const normalizeCategory = (value: string) =>
+  value
+    .trim()
+    .toLowerCase()
+    .replace(/[^a-z]+/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+
+const toCanonicalCategory = (value: string): ContentKind | null => {
+  const normalized = normalizeCategory(value);
+  if (!normalized) return null;
+
+  const directMatch = CONTENT_KINDS.find((category) => normalizeCategory(category) === normalized);
+  if (directMatch) return directMatch;
+
+  const aliases: Record<string, ContentKind> = {
+    "live session": "Live sessions",
+    special: "Specials",
+    "behind the scene": "Behind the scenes",
+    story: "Stories",
+    interview: "Interviews",
+  };
+
+  return aliases[normalized] ?? null;
 };
 
-const DEFAULT_SLIDE_THUMB = "/assets/echoroom-default-thumb.svg";
+export default function ShowsPage() {
+  const location = useLocation();
+  const selectedCategory = useMemo(() => {
+    const rawValue = new URLSearchParams(location.search).get("category");
+    if (!rawValue) return null;
+    return toCanonicalCategory(rawValue);
+  }, [location.search]);
 
-const SLIDES: Slide[] = [
-  {
-    id: "slide-1",
-    category: "Live Session",
-    title: "LEOSTAYTRILL FT. SHODAY",
-    description: "A live session that moves through shadow, rhythm, and intimate cinematic atmosphere.",
-    thumb: DEFAULT_SLIDE_THUMB,
-    link: "/shows",
-    videoUrl: "https://res.cloudinary.com/day4hpjji/video/upload/v1786149832/LEOSTAYTRILL_FT._SHODAY_TILL_THE_WHEEL_IS_FALLING_LIVE_PERFORMANCE_AT_ECHOOROOM_-_Echoo_Room_1080p_h264_youtube_oggbos.mp4",
-    badge: "Featured",
-  },
-  {
-    id: "slide-2",
-    category: "Live Session",
-    title: "YCEE",
-    description: "A bold visual experiment with texture, glow, and a subtle cinematic pulse.",
-    thumb: DEFAULT_SLIDE_THUMB,
-    link: "/shows",
-    videoUrl: "https://res.cloudinary.com/day4hpjji/video/upload/v1786151748/YCEE_LEMONADE_LIVE_PERFORMANCE_AT_ECHOO_ROOM_-_Echoo_Room_1080p_h264_youtube_rbpqob.mp4",
-  },
-  {
-    id: "slide-3",
-    category: "Behind The Scenes",
-    title: "The Cut Room Diaries",
-    description: "A textured preview of the space where every frame is tuned for sound and shadow.",
-    thumb: DEFAULT_SLIDE_THUMB,
-    link: "https://www.youtube.com/watch?v=VYOjWnS4cMY",
-    videoUrl: "https://www.w3schools.com/html/mov_bbb.mp4",
-  },
-  {
-    id: "slide-6",
-    category: "Interview",
-    title: "The Creative Roundtable",
-    description: "A quiet conversation that opens up the creative process and the energy behind it.",
-    thumb: DEFAULT_SLIDE_THUMB,
-    link: "https://www.youtube.com/watch?v=7QU9mvNHnKg",
-    videoUrl: "https://www.w3schools.com/html/mov_bbb.mp4",
-  },
-  {
-    id: "slide-5",
-    category: "Podcast",
-    title: "Synths & Sovereignty",
-    description: "A deep-dive into influence, ritual, and the pressure of staying iconic.",
-    thumb: DEFAULT_SLIDE_THUMB,
-    link: "https://www.youtube.com/watch?v=F7rHps6VWIU",
-    videoUrl: "https://www.w3schools.com/html/mov_bbb.mp4",
-  },
-  {
-    id: "slide-6",
-    category: "Performances",
-    title: "Afterglow performance",
-    description: "Professional and creative performances from your favourit artistes",
-    thumb: DEFAULT_SLIDE_THUMB,
-    link: "https://www.youtube.com/watch?v=F7rHps6VWIU",
-    videoUrl: "https://www.w3schools.com/html/mov_bbb.mp4",
-  }
-];
+  const slidesForDisplay = useMemo(() => {
+    if (selectedCategory) {
+      return SHOW_CATEGORY_DATA[selectedCategory];
+    }
 
-export default function Studio() {
+    return ALL_SHOWS;
+  }, [selectedCategory]);
+
   const [activeSlide, setActiveSlide] = useState(0);
   const [loading, setLoading] = useState(true);
   const [progress, setProgress] = useState(0);
@@ -88,7 +60,9 @@ export default function Studio() {
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const touchStartY = useRef<number | null>(null);
 
-  const slide = SLIDES[activeSlide];
+  useEffect(() => {
+    setActiveSlide(0);
+  }, [selectedCategory]);
 
   useEffect(() => {
     const timeline = gsap.timeline({ defaults: { ease: "power3.inOut" } });
@@ -135,7 +109,7 @@ export default function Studio() {
       { opacity: 0, x: 18 },
       { opacity: 1, x: 0, duration: 0.75, stagger: 0.05, ease: "power3.out" }
     );
-  }, [activeSlide]);
+  }, [activeSlide, selectedCategory]);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -180,7 +154,7 @@ export default function Studio() {
     scene.add(points);
 
     const clock = new THREE.Clock();
-    let frameId: number;
+    let frameId = 0;
 
     const resize = () => {
       const width = canvas.clientWidth;
@@ -224,7 +198,7 @@ export default function Studio() {
 
   const clampIndex = (next: number) => {
     if (next < 0) return 0;
-    if (next >= SLIDES.length) return SLIDES.length - 1;
+    if (next >= slidesForDisplay.length) return Math.max(slidesForDisplay.length - 1, 0);
     return next;
   };
 
@@ -250,6 +224,12 @@ export default function Studio() {
     touchStartY.current = null;
   };
 
+  const slide = slidesForDisplay[activeSlide] ?? slidesForDisplay[0];
+
+  if (!slide) {
+    return null;
+  }
+
   return (
     <div className="min-h-screen overflow-hidden bg-[#050505] text-white">
       <div
@@ -261,7 +241,9 @@ export default function Studio() {
           <div className="mt-5 h-2 overflow-hidden rounded-full border border-white/20 bg-white/5">
             <div className="h-full bg-white transition-all duration-200" style={{ width: `${progress}%` }} />
           </div>
-          <p className="mt-4 font-mono text-[10px] uppercase tracking-[0.28em] text-white/45">Welcome to the EchooRoom experience</p>
+          <p className="mt-4 font-mono text-[10px] uppercase tracking-[0.28em] text-white/45">
+            {selectedCategory ? `${selectedCategory} showcase` : "Welcome to the EchooRoom experience"}
+          </p>
         </div>
       </div>
 
@@ -281,9 +263,9 @@ export default function Studio() {
               autoPlay
               playsInline
               preload="auto"
-              poster={slide.thumb}
+              poster={slide.thumbLink}
             >
-              <source src={slide.videoUrl} type="video/mp4" />
+              <source src={slide.backgroundVideoUrl} type="video/mp4" />
             </video>
             <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent" />
             <div className="absolute inset-0 bg-black/10" />
@@ -294,7 +276,7 @@ export default function Studio() {
             <div className="grid items-end gap-8 lg:grid-cols-[1.7fr_0.9fr]">
               <section className="slide-meta max-w-3xl space-y-6 pb-1 sm:pb-3">
                 <div className="inline-flex items-center gap-3 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-[10px] uppercase tracking-[0.3em] text-white/70 backdrop-blur">
-                  {slide.category === "Live Session" ? (
+                  {slide.category === "Live sessions" ? (
                     <span className="flex h-3 items-end gap-0.5" role="status" aria-label="Live session active">
                       <span className="h-1.5 w-0.5 animate-pulse bg-white/80" />
                       <span className="h-3 w-0.5 animate-pulse bg-white/80 [animation-delay:160ms]" />
@@ -315,9 +297,9 @@ export default function Studio() {
                 </div>
                 <div className="flex flex-wrap items-center gap-4">
                   <a
-                    href={slide.link}
-                    target="_blank"
-                    rel="noreferrer"
+                    href={slide.watchLink ?? "/shows"}
+                    target={slide.watchLink?.startsWith("http") ? "_blank" : undefined}
+                    rel={slide.watchLink?.startsWith("http") ? "noreferrer" : undefined}
                     className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-5 py-3 text-sm font-semibold uppercase tracking-[0.24em] text-white transition hover:border-white/40 hover:bg-white/15"
                   >
                     Watch
@@ -333,7 +315,9 @@ export default function Studio() {
                   </button>
                 </div>
                 <p className="max-w-xl text-sm uppercase tracking-[0.32em] text-white/45">
-                  Select a category to change the preview, or swipe on touch devices.
+                  {selectedCategory
+                    ? `Showing ${selectedCategory} previews.`
+                    : "Select a category to change the preview, or swipe on touch devices."}
                 </p>
               </section>
 
@@ -341,14 +325,14 @@ export default function Studio() {
                 <div className="mb-6 flex items-center justify-between">
                   <div>
                     <p className="text-[11px] uppercase tracking-[0.32em] text-white/50">The Echoroom Studio</p>
-                    <p className="mt-2 text-sm font-semibold text-white"></p>
+                    <p className="mt-2 text-sm font-semibold text-white">{selectedCategory ?? "All shows"}</p>
                   </div>
                   <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[10px] uppercase tracking-[0.28em] text-white/60">
-                    {activeSlide + 1}/{SLIDES.length}
+                    {activeSlide + 1}/{slidesForDisplay.length}
                   </span>
                 </div>
                 <div className="space-y-3">
-                  {SLIDES.map((item, index) => {
+                  {slidesForDisplay.map((item, index) => {
                     const isActive = index === activeSlide;
                     return (
                       <button
@@ -360,7 +344,7 @@ export default function Studio() {
                         <div className="flex items-start justify-between gap-4">
                           <div className="min-w-0">
                             <p className="flex items-center gap-2 text-xs font-medium uppercase tracking-[0.18em] text-white/85">
-                              {item.category === "Live Session" ? (
+                              {item.category === "Live sessions" ? (
                                 <span className="flex h-3 items-end gap-0.5" aria-label="Live session active">
                                   <span className="h-1.5 w-0.5 animate-pulse bg-white/80" />
                                   <span className="h-3 w-0.5 animate-pulse bg-white/80 [animation-delay:160ms]" />
