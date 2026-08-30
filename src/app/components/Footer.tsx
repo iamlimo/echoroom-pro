@@ -13,7 +13,7 @@ export default function Footer() {
               style={{ filter: "brightness(0) invert(1)" }}
             />
           </div>
-          <p className="text-xs text-muted-foreground mt-2 font-mono tracking-wide">EchooRoom Studio Ltd</p>
+          <p className="text-xs text-muted-foreground mt-2 font-mono tracking-wide">EchooRoom Ltd</p>
         </div>
 
         <div className="flex flex-wrap gap-8">
@@ -24,7 +24,7 @@ export default function Footer() {
             Services
           </a>
           <a href="/studio" className="text-sm text-muted-foreground hover:text-foreground transition-colors tracking-wide">
-            Studio
+            Entertainment
           </a>
           <a href="/shows" className="text-sm text-muted-foreground hover:text-foreground transition-colors tracking-wide">
             Shows
@@ -39,7 +39,7 @@ export default function Footer() {
         </a>
       </div>
       <div className="mt-10 pt-6 border-t border-border flex flex-col sm:flex-row justify-between gap-2">
-        <p className="font-mono text-[10px] text-muted-foreground tracking-wide">© 2026 EchooRoom Studio Ltd. All rights reserved.</p>
+        <p className="font-mono text-[10px] text-muted-foreground tracking-wide">© 2026 EchooRoom Ltd. All rights reserved.</p>
         <p className="font-mono text-[10px] text-muted-foreground tracking-wide">Strategic Capability Document · Enterprise Profile & Service Catalogue</p>
       </div>
     </footer>
