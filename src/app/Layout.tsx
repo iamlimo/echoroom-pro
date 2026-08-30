@@ -15,8 +15,8 @@ const NAV_LINKS = [
       { label: "Our Team", to: "/team" },
     ],
   },
-  { label: "What We Do", to: "/services" },
-  { label: "Studio", to: "/studio" },
+  { label: "Services", to: "/services" },
+  { label: "Entertainment", to: "/studio" },
   // { label: "Shows", to: "/shows" },
   { label: "Contact", to: "/", hash: "#contact" },
 ];
@@ -42,10 +42,14 @@ function Nav() {
       if (location.pathname !== "/") {
         navigate("/");
         setTimeout(() => {
-          document.querySelector(link.hash!)?.scrollIntoView({ behavior: "smooth" });
+          document
+            .querySelector(link.hash!)
+            ?.scrollIntoView({ behavior: "smooth" });
         }, 80);
       } else {
-        document.querySelector(link.hash)?.scrollIntoView({ behavior: "smooth" });
+        document
+          .querySelector(link.hash)
+          ?.scrollIntoView({ behavior: "smooth" });
       }
     } else {
       navigate(link.to);
@@ -95,7 +99,10 @@ function Nav() {
                     }`}
                   >
                     {link.label}
-                    <ChevronDown size={14} className="text-muted-foreground transition-transform duration-200 group-hover:-rotate-180 group-hover:text-foreground" />
+                    <ChevronDown
+                      size={14}
+                      className="text-muted-foreground transition-transform duration-200 group-hover:-rotate-180 group-hover:text-foreground"
+                    />
                   </button>
 
                   {/* Dropdown */}
@@ -134,7 +141,9 @@ function Nav() {
           <div className="flex items-center gap-6">
             <ThemeToggle />
             <button
-              onClick={() => handleNavClick({ label: "Contact", to: "/", hash: "#contact" })}
+              onClick={() =>
+                handleNavClick({ label: "Contact", to: "/", hash: "#contact" })
+              }
               className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-5 py-2.5 text-sm font-bold tracking-wide hover:bg-primary/85 transition-colors"
             >
               Start a project <ArrowRight size={14} />
@@ -179,7 +188,9 @@ function Nav() {
             </div>
           ))}
           <button
-            onClick={() => handleNavClick({ label: "Contact", to: "/", hash: "#contact" })}
+            onClick={() =>
+              handleNavClick({ label: "Contact", to: "/", hash: "#contact" })
+            }
             className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-5 py-3 text-sm font-bold tracking-wide w-fit mt-2"
           >
             Start a project <ArrowRight size={14} />
@@ -206,4 +217,3 @@ export default function Layout() {
     </div>
   );
 }
-

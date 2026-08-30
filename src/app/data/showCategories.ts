@@ -26,7 +26,8 @@ export const CONTENT_KINDS: ContentKind[] = [
   "Interviews",
 ];
 
-const b2 = (path: string) => `https://f005.backblazeb2.com/file/echoroom/${path}`;
+const b2 = (path: string) =>
+  `https://f005.backblazeb2.com/file/echoroom/${path}`;
 
 export const SHOW_CATEGORY_DATA: Record<ContentKind, ShowItem[]> = {
   "Live sessions": [
@@ -34,7 +35,8 @@ export const SHOW_CATEGORY_DATA: Record<ContentKind, ShowItem[]> = {
       id: "live-leostaytrill",
       category: "Live sessions",
       title: "LEOSTAYTRILL FT. SHODAY",
-      description: "A live session moving through shadow, rhythm, and intimate cinematic atmosphere.",
+      description:
+        "A live session moving through shadow, rhythm, and intimate cinematic atmosphere.",
       thumbLink: "/assets/echoroom-default-thumb.svg",
       backgroundVideoUrl: b2("live-sessions/leo-staytrill-ft-shoday.mp4"),
       badge: "Featured",
@@ -44,7 +46,8 @@ export const SHOW_CATEGORY_DATA: Record<ContentKind, ShowItem[]> = {
       id: "live-ycee",
       category: "Live sessions",
       title: "YCEE — Lemonade",
-      description: "A visually rich performance built around texture, glow, and a subtle cinematic pulse.",
+      description:
+        "A visually rich performance built around texture, glow, and a subtle cinematic pulse.",
       thumbLink: "/assets/echoroom-default-thumb.svg",
       backgroundVideoUrl: b2("live-sessions/ycee-lemonade.mp4"),
       watchLink: "/shows?category=Live%20sessions",
@@ -55,7 +58,8 @@ export const SHOW_CATEGORY_DATA: Record<ContentKind, ShowItem[]> = {
       id: "special-ycee",
       category: "Specials",
       title: "YCEE — Lemonade",
-      description: "A curated spotlight built around atmosphere, performance, and mood.",
+      description:
+        "A curated spotlight built around atmosphere, performance, and mood.",
       thumbLink: "/assets/echoroom-default-thumb.svg",
       backgroundVideoUrl: b2("specials/ycee-lemonade-special.mp4"),
       badge: "Special",
@@ -65,7 +69,8 @@ export const SHOW_CATEGORY_DATA: Record<ContentKind, ShowItem[]> = {
       id: "special-afterglow",
       category: "Specials",
       title: "Afterglow Session",
-      description: "A cinematic feature set exploring rhythm, ceremony, and visual tension.",
+      description:
+        "A cinematic feature set exploring rhythm, ceremony, and visual tension.",
       thumbLink: "/assets/echoroom-default-thumb.svg",
       backgroundVideoUrl: b2("specials/afterglow-session.mp4"),
       watchLink: "/shows?category=Specials",
@@ -76,7 +81,8 @@ export const SHOW_CATEGORY_DATA: Record<ContentKind, ShowItem[]> = {
       id: "bts-cut-room",
       category: "Behind the scenes",
       title: "The Cut Room Diaries",
-      description: "A textured preview of the room where every frame is tuned for sound and shadow.",
+      description:
+        "A textured preview of the room where every frame is tuned for sound and shadow.",
       thumbLink: "/assets/echoroom-default-thumb.svg",
       backgroundVideoUrl: b2("behind-the-scenes/cut-room-diaries.mp4"),
       badge: "BTS",
@@ -86,7 +92,8 @@ export const SHOW_CATEGORY_DATA: Record<ContentKind, ShowItem[]> = {
       id: "bts-engine-room",
       category: "Behind the scenes",
       title: "Engine Room Notes",
-      description: "A look into the movement, textures, and setup shaping the EchooRoom experience.",
+      description:
+        "A look into the movement, textures, and setup shaping the EchooRoom experience.",
       thumbLink: "/assets/echoroom-default-thumb.svg",
       backgroundVideoUrl: b2("behind-the-scenes/engine-room-notes.mp4"),
       watchLink: "/shows?category=Behind%20the%20scenes",
@@ -96,21 +103,26 @@ export const SHOW_CATEGORY_DATA: Record<ContentKind, ShowItem[]> = {
     {
       id: "podcast-synths",
       category: "Podcast",
-      title: "Synths & Sovereignty",
-      description: "A deep-dive into influence, ritual, and the pressure of staying iconic.",
+      title:
+        "CHAOS IN THE FAMILY FT TIKTOKER - RHENIE SISTER || TEDDY A || FOLASADE",
+      description: "A deep-dive into influence, and iconic lifestyle.",
       thumbLink: "/assets/echoroom-default-thumb.svg",
-      backgroundVideoUrl: b2("podcast/synths-sovereignty.mp4"),
+      backgroundVideoUrl:
+        "https://f005.backblazeb2.com/file/Echooroom11/Podcasts/Rhennie+sister.mp4",
       badge: "New",
-      watchLink: "/shows?category=Podcast",
+      watchLink: "https://www.youtube.com/watch?v=s97ccnnXwIo",
     },
     {
       id: "podcast-goods",
       category: "Podcast",
-      title: "Sound & Signal",
-      description: "A conversation on taste, discipline, and the creative systems behind lasting work.",
+      title:
+        "MAINTENANCE WOMEN VS MALE EGO. FT ASHMUSY | THESLUMFLOWER | TEDDY A | MOET | FOLASADE |SEASON 3 EP1",
+      description:
+        "A conversation on taste, discipline, and the creative systems behind lasting work.",
       thumbLink: "/assets/echoroom-default-thumb.svg",
-      backgroundVideoUrl: b2("podcast/sound-signal.mp4"),
-      watchLink: "/shows?category=Podcast",
+      backgroundVideoUrl:
+        "https://f005.backblazeb2.com/file/Echooroom11/Podcasts/slumflower.mp4",
+      watchLink: "https://www.youtube.com/watch?v=rew0JjLR-kk&t=9s",
     },
   ],
   Stories: [
@@ -118,7 +130,8 @@ export const SHOW_CATEGORY_DATA: Record<ContentKind, ShowItem[]> = {
       id: "story-attention",
       category: "Stories",
       title: "Attention is the new currency",
-      description: "A reflective narrative on energy, attention, and creative intention.",
+      description:
+        "A reflective narrative on energy, attention, and creative intention.",
       thumbLink: "/assets/echoroom-default-thumb.svg",
       backgroundVideoUrl: b2("stories/attention-new-currency.mp4"),
       badge: "Story",
@@ -128,7 +141,8 @@ export const SHOW_CATEGORY_DATA: Record<ContentKind, ShowItem[]> = {
       id: "story-ritual",
       category: "Stories",
       title: "Rituals of Focus",
-      description: "An intimate story about the routines that sharpen creative consistency.",
+      description:
+        "An intimate story about the routines that sharpen creative consistency.",
       thumbLink: "/assets/echoroom-default-thumb.svg",
       backgroundVideoUrl: b2("stories/rituals-of-focus.mp4"),
       watchLink: "/shows?category=Stories",
@@ -139,7 +153,8 @@ export const SHOW_CATEGORY_DATA: Record<ContentKind, ShowItem[]> = {
       id: "interview-roundtable",
       category: "Interviews",
       title: "The Creative Roundtable",
-      description: "A quiet conversation that opens up the creative process and the energy behind it.",
+      description:
+        "A quiet conversation that opens up the creative process and the energy behind it.",
       thumbLink: "/assets/echoroom-default-thumb.svg",
       backgroundVideoUrl: b2("interviews/creative-roundtable.mp4"),
       badge: "Interview",
@@ -149,7 +164,8 @@ export const SHOW_CATEGORY_DATA: Record<ContentKind, ShowItem[]> = {
       id: "interview-makers",
       category: "Interviews",
       title: "Makers in Motion",
-      description: "A direct conversation on craft, pressure, and how creative systems evolve.",
+      description:
+        "A direct conversation on craft, pressure, and how creative systems evolve.",
       thumbLink: "/assets/echoroom-default-thumb.svg",
       backgroundVideoUrl: b2("interviews/makers-in-motion.mp4"),
       watchLink: "/shows?category=Interviews",
@@ -157,4 +173,6 @@ export const SHOW_CATEGORY_DATA: Record<ContentKind, ShowItem[]> = {
   ],
 };
 
-export const ALL_SHOWS = CONTENT_KINDS.flatMap((category) => SHOW_CATEGORY_DATA[category]);
+export const ALL_SHOWS = CONTENT_KINDS.flatMap(
+  (category) => SHOW_CATEGORY_DATA[category],
+);

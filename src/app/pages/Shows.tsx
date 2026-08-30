@@ -1,13 +1,14 @@
 import { useEffect, useMemo, useRef, useState, type TouchEvent } from "react";
 import { useLocation } from "react-router";
-import {
-  ArrowUpRight,
-  Volume2,
-  VolumeX,
-} from "lucide-react";
+import { ArrowUpRight, Volume2, VolumeX } from "lucide-react";
 import gsap from "gsap";
 import * as THREE from "three";
-import { ALL_SHOWS, CONTENT_KINDS, SHOW_CATEGORY_DATA, type ContentKind } from "../data/showCategories";
+import {
+  ALL_SHOWS,
+  CONTENT_KINDS,
+  SHOW_CATEGORY_DATA,
+  type ContentKind,
+} from "../data/showCategories";
 
 const normalizeCategory = (value: string) =>
   value
@@ -21,7 +22,9 @@ const toCanonicalCategory = (value: string): ContentKind | null => {
   const normalized = normalizeCategory(value);
   if (!normalized) return null;
 
-  const directMatch = CONTENT_KINDS.find((category) => normalizeCategory(category) === normalized);
+  const directMatch = CONTENT_KINDS.find(
+    (category) => normalizeCategory(category) === normalized,
+  );
   if (directMatch) return directMatch;
 
   const aliases: Record<string, ContentKind> = {
@@ -74,12 +77,16 @@ export default function ShowsPage() {
 
       if (current >= 100) {
         window.clearInterval(interval);
-        timeline.to(".studio-loader", { yPercent: -110, opacity: 0, duration: 1.4 });
+        timeline.to(".studio-loader", {
+          yPercent: -110,
+          opacity: 0,
+          duration: 1.4,
+        });
         timeline.fromTo(
           ".studio-shell",
           { opacity: 0, y: 18 },
           { opacity: 1, y: 0, duration: 1.3, clearProps: "all" },
-          "<0.35"
+          "<0.35",
         );
         window.setTimeout(() => setLoading(false), 500);
       }
@@ -102,12 +109,12 @@ export default function ShowsPage() {
     gsap.fromTo(
       ".slide-meta",
       { opacity: 0, y: 18 },
-      { opacity: 1, y: 0, duration: 0.9, ease: "power3.out" }
+      { opacity: 1, y: 0, duration: 0.9, ease: "power3.out" },
     );
     gsap.fromTo(
       ".category-card",
       { opacity: 0, x: 18 },
-      { opacity: 1, x: 0, duration: 0.75, stagger: 0.05, ease: "power3.out" }
+      { opacity: 1, x: 0, duration: 0.75, stagger: 0.05, ease: "power3.out" },
     );
   }, [activeSlide, selectedCategory]);
 
@@ -198,7 +205,8 @@ export default function ShowsPage() {
 
   const clampIndex = (next: number) => {
     if (next < 0) return 0;
-    if (next >= slidesForDisplay.length) return Math.max(slidesForDisplay.length - 1, 0);
+    if (next >= slidesForDisplay.length)
+      return Math.max(slidesForDisplay.length - 1, 0);
     return next;
   };
 
@@ -236,13 +244,22 @@ export default function ShowsPage() {
         className={`studio-loader fixed inset-0 z-[90] flex items-center justify-center bg-[#030303] transition-opacity ${loading ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0"}`}
       >
         <div className="w-full max-w-md px-6 text-center">
-          <p className="font-mono text-[10px] uppercase tracking-[0.4em] text-white/60">EchooRoom Studio</p>
-          <p className="mt-4 text-5xl font-black tracking-[0.24em] text-white">{progress}%</p>
+          <p className="font-mono text-[10px] uppercase tracking-[0.4em] text-white/60">
+            EchooRoom Studio
+          </p>
+          <p className="mt-4 text-5xl font-black tracking-[0.24em] text-white">
+            {progress}%
+          </p>
           <div className="mt-5 h-2 overflow-hidden rounded-full border border-white/20 bg-white/5">
-            <div className="h-full bg-white transition-all duration-200" style={{ width: `${progress}%` }} />
+            <div
+              className="h-full bg-white transition-all duration-200"
+              style={{ width: `${progress}%` }}
+            />
           </div>
           <p className="mt-4 font-mono text-[10px] uppercase tracking-[0.28em] text-white/45">
-            {selectedCategory ? `${selectedCategory} showcase` : "Welcome to the EchooRoom experience"}
+            {selectedCategory
+              ? `${selectedCategory} showcase`
+              : "Welcome to the EchooRoom experience"}
           </p>
         </div>
       </div>
@@ -269,7 +286,10 @@ export default function ShowsPage() {
             </video>
             <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent" />
             <div className="absolute inset-0 bg-black/10" />
-            <canvas ref={canvasRef} className="pointer-events-none absolute inset-0 h-full w-full" />
+            <canvas
+              ref={canvasRef}
+              className="pointer-events-none absolute inset-0 h-full w-full"
+            />
           </div>
 
           <div className="relative z-10 mx-auto flex min-h-screen max-w-[1600px] flex-col justify-end px-4 py-10 sm:px-6 lg:px-8">
@@ -277,7 +297,11 @@ export default function ShowsPage() {
               <section className="slide-meta max-w-3xl space-y-6 pb-1 sm:pb-3">
                 <div className="inline-flex items-center gap-3 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-[10px] uppercase tracking-[0.3em] text-white/70 backdrop-blur">
                   {slide.category === "Live sessions" ? (
-                    <span className="flex h-3 items-end gap-0.5" role="status" aria-label="Live session active">
+                    <span
+                      className="flex h-3 items-end gap-0.5"
+                      role="status"
+                      aria-label="Live session active"
+                    >
                       <span className="h-1.5 w-0.5 animate-pulse bg-white/80" />
                       <span className="h-3 w-0.5 animate-pulse bg-white/80 [animation-delay:160ms]" />
                       <span className="h-2 w-0.5 animate-pulse bg-white/80 [animation-delay:320ms]" />
@@ -298,11 +322,17 @@ export default function ShowsPage() {
                 <div className="flex flex-wrap items-center gap-4">
                   <a
                     href={slide.watchLink ?? "/shows"}
-                    target={slide.watchLink?.startsWith("http") ? "_blank" : undefined}
-                    rel={slide.watchLink?.startsWith("http") ? "noreferrer" : undefined}
+                    target={
+                      slide.watchLink?.startsWith("http") ? "_blank" : undefined
+                    }
+                    rel={
+                      slide.watchLink?.startsWith("http")
+                        ? "noreferrer"
+                        : undefined
+                    }
                     className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-5 py-3 text-sm font-semibold uppercase tracking-[0.24em] text-white transition hover:border-white/40 hover:bg-white/15"
                   >
-                    Watch
+                    Watch on Youtube
                     <ArrowUpRight size={14} />
                   </a>
                   <button
@@ -324,8 +354,12 @@ export default function ShowsPage() {
               <aside className="rounded-[1.5rem] border border-white/15 bg-black/45 p-4 backdrop-blur-xl lg:mb-3">
                 <div className="mb-6 flex items-center justify-between">
                   <div>
-                    <p className="text-[11px] uppercase tracking-[0.32em] text-white/50">The Echoroom Studio</p>
-                    <p className="mt-2 text-sm font-semibold text-white">{selectedCategory ?? "All shows"}</p>
+                    <p className="text-[11px] uppercase tracking-[0.32em] text-white/50">
+                      The Echoroom Studio
+                    </p>
+                    <p className="mt-2 text-sm font-semibold text-white">
+                      {selectedCategory ?? "All shows"}
+                    </p>
                   </div>
                   <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[10px] uppercase tracking-[0.28em] text-white/60">
                     {activeSlide + 1}/{slidesForDisplay.length}
@@ -345,7 +379,10 @@ export default function ShowsPage() {
                           <div className="min-w-0">
                             <p className="flex items-center gap-2 text-xs font-medium uppercase tracking-[0.18em] text-white/85">
                               {item.category === "Live sessions" ? (
-                                <span className="flex h-3 items-end gap-0.5" aria-label="Live session active">
+                                <span
+                                  className="flex h-3 items-end gap-0.5"
+                                  aria-label="Live session active"
+                                >
                                   <span className="h-1.5 w-0.5 animate-pulse bg-white/80" />
                                   <span className="h-3 w-0.5 animate-pulse bg-white/80 [animation-delay:160ms]" />
                                   <span className="h-2 w-0.5 animate-pulse bg-white/80 [animation-delay:320ms]" />
@@ -353,9 +390,13 @@ export default function ShowsPage() {
                               ) : null}
                               {item.category}
                             </p>
-                            <p className="mt-1 truncate text-xs text-white/45">{item.title}</p>
+                            <p className="mt-1 truncate text-xs text-white/45">
+                              {item.title}
+                            </p>
                           </div>
-                          <span className="pt-0.5 text-[10px] tabular-nums text-white/35">{String(index + 1).padStart(2, "0")}</span>
+                          <span className="pt-0.5 text-[10px] tabular-nums text-white/35">
+                            {String(index + 1).padStart(2, "0")}
+                          </span>
                         </div>
                         <div className="mt-4 flex items-center justify-between text-[10px] uppercase tracking-[0.28em] text-white/50">
                           <span>{isActive ? "Playing" : "Preview"}</span>

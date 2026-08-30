@@ -94,20 +94,6 @@ function Team() {
             imageSrc: teamAsset("Olusegun_adeniran.jpeg")
         },
         {
-            name: "David George",
-            role: "Growth and Sales Manager",
-            bio: "Builds strategic sales opportunities and partner relationships that keep the pipeline steady and high-value.",
-            tags: ["Sales Strategy", "Partnerships", "Revenue Growth"],
-            imageSrc: teamAsset("David George \nGrowth and Sales Manager.jpeg")
-        },
-        {
-            name: "Doris Kenneth",
-            role: "Editor",
-            bio: "Shapes the rhythm, clarity, and emotional pacing of every final story, frame, and cut.",
-            tags: ["Editing", "Story Flow", "Post Production"],
-            imageSrc: teamAsset("Doris Kenneth \n\nEditor.jpeg")
-        },
-        {
             name: "Elizabeth Akhere",
             role: "Head of Operations",
             bio: "Keeps delivery teams organized, efficient, and resilient across every project milestone.",
@@ -115,11 +101,11 @@ function Team() {
             imageSrc: teamAsset("Elizabeth Akhere\n\nHead of Operations.jpeg")
         },
         {
-            name: "Olamide Amubieya",
-            role: "HR Lead",
-            bio: "Builds a strong team culture through onboarding, retention, and clear people-first systems.",
-            tags: ["People Ops", "Talent", "Culture"],
-            imageSrc: teamAsset("Olamide Amubieya HR Lead.jpeg")
+            name: "David George",
+            role: "Growth and Sales Manager",
+            bio: "Builds strategic sales opportunities and partner relationships that keep the pipeline steady and high-value.",
+            tags: ["Sales Strategy", "Partnerships", "Revenue Growth"],
+            imageSrc: teamAsset("David George \nGrowth and Sales Manager.jpeg")
         },
         {
             name: "Rosemary Adeoti",
@@ -127,6 +113,13 @@ function Team() {
             bio: "Turns market insight and strategic outreach into sustainable opportunities and long-term partnerships.",
             tags: ["Business Development", "Growth", "Strategy"],
             imageSrc: teamAsset("Rosemary Adeoti\nGrowth and Business Development Manager.jpeg")
+        },
+        {
+            name: "Doris Kenneth",
+            role: "Editor",
+            bio: "Shapes the rhythm, clarity, and emotional pacing of every final story, frame, and cut.",
+            tags: ["Editing", "Story Flow", "Post Production"],
+            imageSrc: teamAsset("Doris Kenneth \n\nEditor.jpeg")
         },
         {
             name: "Kehinde Adeolu",

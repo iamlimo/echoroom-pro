@@ -66,7 +66,11 @@ function ShowsPage() {
             setProgress(current);
             if (current >= 100) {
                 window.clearInterval(interval);
-                timeline.to(".studio-loader", { yPercent: -110, opacity: 0, duration: 1.4 });
+                timeline.to(".studio-loader", {
+                    yPercent: -110,
+                    opacity: 0,
+                    duration: 1.4
+                });
                 timeline.fromTo(".studio-shell", { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: 1.3, clearProps: "all" }, "<0.35");
                 window.setTimeout(function () { return setLoading(false); }, 500);
             }
@@ -198,7 +202,9 @@ function ShowsPage() {
                     "%"),
                 React.createElement("div", { className: "mt-5 h-2 overflow-hidden rounded-full border border-white/20 bg-white/5" },
                     React.createElement("div", { className: "h-full bg-white transition-all duration-200", style: { width: progress + "%" } })),
-                React.createElement("p", { className: "mt-4 font-mono text-[10px] uppercase tracking-[0.28em] text-white/45" }, selectedCategory ? selectedCategory + " showcase" : "Welcome to the EchooRoom experience"))),
+                React.createElement("p", { className: "mt-4 font-mono text-[10px] uppercase tracking-[0.28em] text-white/45" }, selectedCategory
+                    ? selectedCategory + " showcase"
+                    : "Welcome to the EchooRoom experience"))),
         React.createElement("div", { className: "studio-shell transition-opacity duration-500 " + (loading ? "opacity-0" : "opacity-100"), onTouchStart: handleTouchStart, onTouchEnd: handleTouchEnd },
             React.createElement("div", { className: "relative min-h-screen" },
                 React.createElement("div", { className: "absolute inset-0 overflow-hidden" },
@@ -220,8 +226,9 @@ function ShowsPage() {
                                 React.createElement("h1", { className: "text-4xl font-black leading-tight tracking-[-0.04em] text-white sm:text-6xl" }, slide.title),
                                 React.createElement("p", { className: "max-w-2xl text-lg leading-8 text-white/70 sm:text-xl" }, slide.description)),
                             React.createElement("div", { className: "flex flex-wrap items-center gap-4" },
-                                React.createElement("a", { href: (_b = slide.watchLink) !== null && _b !== void 0 ? _b : "/shows", target: ((_c = slide.watchLink) === null || _c === void 0 ? void 0 : _c.startsWith("http")) ? "_blank" : undefined, rel: ((_d = slide.watchLink) === null || _d === void 0 ? void 0 : _d.startsWith("http")) ? "noreferrer" : undefined, className: "inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-5 py-3 text-sm font-semibold uppercase tracking-[0.24em] text-white transition hover:border-white/40 hover:bg-white/15" },
-                                    "Watch",
+                                React.createElement("a", { href: (_b = slide.watchLink) !== null && _b !== void 0 ? _b : "/shows", target: ((_c = slide.watchLink) === null || _c === void 0 ? void 0 : _c.startsWith("http")) ? "_blank" : undefined, rel: ((_d = slide.watchLink) === null || _d === void 0 ? void 0 : _d.startsWith("http")) ? "noreferrer"
+                                        : undefined, className: "inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-5 py-3 text-sm font-semibold uppercase tracking-[0.24em] text-white transition hover:border-white/40 hover:bg-white/15" },
+                                    "Watch on Youtube",
                                     React.createElement(lucide_react_1.ArrowUpRight, { size: 14 })),
                                 React.createElement("button", { type: "button", onClick: function () { return setMuted(function (value) { return !value; }); }, className: "inline-flex items-center gap-2 rounded-full border border-white/10 bg-black/60 px-4 py-3 text-sm text-white/80 transition hover:border-white/30 hover:bg-white/10" },
                                     muted ? React.createElement(lucide_react_1.Volume2, { size: 16 }) : React.createElement(lucide_react_1.VolumeX, { size: 16 }),

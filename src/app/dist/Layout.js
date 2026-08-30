@@ -15,8 +15,8 @@ var NAV_LINKS = [
             { label: "Our Team", to: "/team" },
         ]
     },
-    { label: "What We Do", to: "/services" },
-    { label: "Studio", to: "/studio" },
+    { label: "Services", to: "/services" },
+    { label: "Entertainment", to: "/studio" },
     // { label: "Shows", to: "/shows" },
     { label: "Contact", to: "/", hash: "#contact" },
 ];
@@ -40,11 +40,13 @@ function Nav() {
                 navigate("/");
                 setTimeout(function () {
                     var _a;
-                    (_a = document.querySelector(link.hash)) === null || _a === void 0 ? void 0 : _a.scrollIntoView({ behavior: "smooth" });
+                    (_a = document
+                        .querySelector(link.hash)) === null || _a === void 0 ? void 0 : _a.scrollIntoView({ behavior: "smooth" });
                 }, 80);
             }
             else {
-                (_a = document.querySelector(link.hash)) === null || _a === void 0 ? void 0 : _a.scrollIntoView({ behavior: "smooth" });
+                (_a = document
+                    .querySelector(link.hash)) === null || _a === void 0 ? void 0 : _a.scrollIntoView({ behavior: "smooth" });
             }
         }
         else {
@@ -81,7 +83,9 @@ function Nav() {
             React.createElement("div", { className: "hidden md:block" },
                 React.createElement("div", { className: "flex items-center gap-6" },
                     React.createElement(ThemeToggle_1["default"], null),
-                    React.createElement("button", { onClick: function () { return handleNavClick({ label: "Contact", to: "/", hash: "#contact" }); }, className: "inline-flex items-center gap-2 bg-primary text-primary-foreground px-5 py-2.5 text-sm font-bold tracking-wide hover:bg-primary/85 transition-colors" },
+                    React.createElement("button", { onClick: function () {
+                            return handleNavClick({ label: "Contact", to: "/", hash: "#contact" });
+                        }, className: "inline-flex items-center gap-2 bg-primary text-primary-foreground px-5 py-2.5 text-sm font-bold tracking-wide hover:bg-primary/85 transition-colors" },
                         "Start a project ",
                         React.createElement(lucide_react_1.ArrowRight, { size: 14 })))),
             React.createElement("button", { className: "md:hidden text-foreground p-1", onClick: function () { return setMenuOpen(!menuOpen); }, "aria-label": "Toggle menu" }, menuOpen ? React.createElement(lucide_react_1.X, { size: 22 }) : React.createElement(lucide_react_1.Menu, { size: 22 }))),
@@ -90,7 +94,9 @@ function Nav() {
             NAV_LINKS.map(function (link) { return (React.createElement("div", { key: link.label },
                 React.createElement("button", { onClick: function () { return handleNavClick(link); }, className: "text-left text-2xl font-display font-black text-foreground hover:text-primary transition-colors w-full" }, link.label),
                 link.children && (React.createElement("div", { className: "pl-4 mt-2 flex flex-col gap-2" }, link.children.map(function (child) { return (React.createElement("button", { key: child.label, onClick: function () { return handleNavClick(child); }, className: "text-left text-lg font-display font-bold text-foreground/80 hover:text-primary transition-colors" }, child.label)); }))))); }),
-            React.createElement("button", { onClick: function () { return handleNavClick({ label: "Contact", to: "/", hash: "#contact" }); }, className: "inline-flex items-center gap-2 bg-primary text-primary-foreground px-5 py-3 text-sm font-bold tracking-wide w-fit mt-2" },
+            React.createElement("button", { onClick: function () {
+                    return handleNavClick({ label: "Contact", to: "/", hash: "#contact" });
+                }, className: "inline-flex items-center gap-2 bg-primary text-primary-foreground px-5 py-3 text-sm font-bold tracking-wide w-fit mt-2" },
                 "Start a project ",
                 React.createElement(lucide_react_1.ArrowRight, { size: 14 }))))));
 }

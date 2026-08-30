@@ -66,10 +66,10 @@ exports.SHOW_CATEGORY_DATA = {
   Podcast: [{
     id: "podcast-synths",
     category: "Podcast",
-    title: "Synths & Sovereignty",
-    description: "A deep-dive into influence, ritual, and the pressure of staying iconic.",
+    title: "The Link up Podcast- Rhennie Sister",
+    description: "A deep-dive into influence, and iconic lifestyle.",
     thumbLink: "/assets/echoroom-default-thumb.svg",
-    backgroundVideoUrl: "https://f005.backblazeb2.com/file/Echooroom11/Podcasts/ice+prince.mp4",
+    backgroundVideoUrl: "https://f005.backblazeb2.com/file/Echooroom11/Podcasts/Rhennie+sister.mp4",
     badge: "New",
     watchLink: "/shows?category=Podcast"
   }, {

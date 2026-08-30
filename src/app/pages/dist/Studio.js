@@ -12,13 +12,15 @@ var CATEGORIES = [
     { label: "Interviews", icon: lucide_react_1.Mic2 },
 ];
 function CategoryCard(_a) {
+    var _b;
     var label = _a.label;
     var items = showCategories_1.SHOW_CATEGORY_DATA[label];
     var representative = items[0];
     var count = items.length;
-    return (React.createElement("a", { href: "/shows?category=" + encodeURIComponent(label), className: "group relative h-40 overflow-hidden rounded-xl shadow-md ring-1 ring-inset ring-border" },
-        React.createElement("img", { src: representative.thumbLink, alt: label, className: "absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" }),
-        React.createElement("div", { className: "absolute inset-0 bg-black/30 transition-opacity group-hover:bg-black/40" }),
+    var backgroundImage = (_b = representative === null || representative === void 0 ? void 0 : representative.thumbLink) !== null && _b !== void 0 ? _b : "/assets/echoroom-default-thumb.svg";
+    return (React.createElement("a", { href: "/shows?category=" + encodeURIComponent(label), className: "group relative h-40 overflow-hidden rounded-xl shadow-md ring-1 ring-inset ring-border", "aria-label": "Browse " + label + " content" },
+        React.createElement("div", { className: "absolute inset-0 scale-105 bg-cover bg-center bg-no-repeat transition-transform duration-500 group-hover:scale-110", style: { backgroundImage: "url(" + backgroundImage + ")" } }),
+        React.createElement("div", { className: "absolute inset-0 bg-black/35 transition-opacity group-hover:bg-black/45" }),
         React.createElement("div", { className: "relative z-10 flex h-full items-end p-4" },
             React.createElement("div", null,
                 React.createElement("span", { className: "font-mono text-[10px] uppercase tracking-widest text-white/90" }, label),

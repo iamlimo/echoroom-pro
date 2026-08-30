@@ -182,26 +182,12 @@ export default function Team() {
 
   const MEMBERS: TeamMember[] = useMemo(
     () => [
-       {
+      {
         name: "Olusegun M Adeniran",
         role: "Founder",
         bio: "Leads the company with a strategic, people-first vision focused on sustainable growth, operational clarity, and premium execution.",
         tags: ["Vision Leadership", "Growth Strategy", "Partnerships"],
         imageSrc: teamAsset("Olusegun_adeniran.jpeg"),
-      },
-      {
-        name: "David George",
-        role: "Growth and Sales Manager",
-        bio: "Builds strategic sales opportunities and partner relationships that keep the pipeline steady and high-value.",
-        tags: ["Sales Strategy", "Partnerships", "Revenue Growth"],
-        imageSrc: teamAsset("David George \nGrowth and Sales Manager.jpeg"),
-      },
-      {
-        name: "Doris Kenneth",
-        role: "Editor",
-        bio: "Shapes the rhythm, clarity, and emotional pacing of every final story, frame, and cut.",
-        tags: ["Editing", "Story Flow", "Post Production"],
-        imageSrc: teamAsset("Doris Kenneth \n\nEditor.jpeg"),
       },
       {
         name: "Elizabeth Akhere",
@@ -211,19 +197,29 @@ export default function Team() {
         imageSrc: teamAsset("Elizabeth Akhere\n\nHead of Operations.jpeg"),
       },
       {
-        name: "Olamide Amubieya",
-        role: "HR Lead",
-        bio: "Builds a strong team culture through onboarding, retention, and clear people-first systems.",
-        tags: ["People Ops", "Talent", "Culture"],
-        imageSrc: teamAsset("Olamide Amubieya HR Lead.jpeg"),
+        name: "David George",
+        role: "Growth and Sales Manager",
+        bio: "Builds strategic sales opportunities and partner relationships that keep the pipeline steady and high-value.",
+        tags: ["Sales Strategy", "Partnerships", "Revenue Growth"],
+        imageSrc: teamAsset("David George \nGrowth and Sales Manager.jpeg"),
       },
       {
         name: "Rosemary Adeoti",
         role: "Growth and Business Development Manager",
         bio: "Turns market insight and strategic outreach into sustainable opportunities and long-term partnerships.",
         tags: ["Business Development", "Growth", "Strategy"],
-        imageSrc: teamAsset("Rosemary Adeoti\nGrowth and Business Development Manager.jpeg"),
+        imageSrc: teamAsset(
+          "Rosemary Adeoti\nGrowth and Business Development Manager.jpeg",
+        ),
       },
+      {
+        name: "Doris Kenneth",
+        role: "Editor",
+        bio: "Shapes the rhythm, clarity, and emotional pacing of every final story, frame, and cut.",
+        tags: ["Editing", "Story Flow", "Post Production"],
+        imageSrc: teamAsset("Doris Kenneth \n\nEditor.jpeg"),
+      },
+
       {
         name: "Kehinde Adeolu",
         role: "Production Manager",
@@ -232,7 +228,7 @@ export default function Team() {
         imageSrc: teamAsset("Kehinde_adeolu.jpeg"),
       },
     ],
-    []
+    [],
   );
 
   const goToContact = () => {

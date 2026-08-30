@@ -15,15 +15,25 @@ function CategoryCard({ label }: { label: ContentKind }) {
   const items = SHOW_CATEGORY_DATA[label];
   const representative = items[0];
   const count = items.length;
+  const backgroundImage = representative?.thumbLink ?? "/assets/echoroom-default-thumb.svg";
 
   return (
-    <a href={`/shows?category=${encodeURIComponent(label)}`} className="group relative h-40 overflow-hidden rounded-xl shadow-md ring-1 ring-inset ring-border">
-      <img src={representative.thumbLink} alt={label} className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
-      <div className="absolute inset-0 bg-black/30 transition-opacity group-hover:bg-black/40" />
+    <a
+      href={`/shows?category=${encodeURIComponent(label)}`}
+      className="group relative h-40 overflow-hidden rounded-xl shadow-md ring-1 ring-inset ring-border"
+      aria-label={`Browse ${label} content`}
+    >
+      <div
+        className="absolute inset-0 scale-105 bg-cover bg-center bg-no-repeat transition-transform duration-500 group-hover:scale-110"
+        style={{ backgroundImage: `url(${backgroundImage})` }}
+      />
+      <div className="absolute inset-0 bg-black/35 transition-opacity group-hover:bg-black/45" />
       <div className="relative z-10 flex h-full items-end p-4">
         <div>
           <span className="font-mono text-[10px] uppercase tracking-widest text-white/90">{label}</span>
-          <p className="mt-1 text-sm text-white/70">{count} {count === 1 ? "item" : "items"}</p>
+          <p className="mt-1 text-sm text-white/70">
+            {count} {count === 1 ? "item" : "items"}
+          </p>
         </div>
       </div>
     </a>
