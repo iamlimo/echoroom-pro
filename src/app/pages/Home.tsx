@@ -699,7 +699,7 @@ function Contact() {
               significant.
             </h2>
             <p className="text-muted-foreground text-lg leading-relaxed mb-12">
-              Tell us about your organisation and production goals. We respond
+              How can we help you? We respond
               within 24 hours — no pitch decks, no lengthy intake forms.
             </p>
             <div className="space-y-6">
@@ -779,7 +779,7 @@ function Contact() {
                 ))}
                 <div>
                   <label className="block font-mono text-[10px] tracking-widest uppercase text-muted-foreground mb-2">
-                    Tell us about your production goals
+                    How can we help you?
                   </label>
                   <textarea
                     required
