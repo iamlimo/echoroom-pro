@@ -276,13 +276,22 @@ export default function ShowsPage() {
               key={slide.id}
               className="absolute inset-0 h-full w-full object-cover brightness-110 contrast-105 saturate-110"
               muted={muted}
+              crossOrigin="anonymous"
+              onError={() => console.error("Video element error:", videoRef.current?.error)}
               loop
               autoPlay
               playsInline
               preload="auto"
               poster={slide.thumbLink}
             >
-              <source src={slide.backgroundVideoUrl} type="video/mp4" />
+                      <source
+                        src={
+                          (typeof window !== 'undefined' && window.location.hostname === 'localhost')
+                            ? `/.netlify/functions/proxy-video?url=${encodeURIComponent(slide.backgroundVideoUrl)}`
+                            : slide.backgroundVideoUrl
+                        }
+                        type="video/mp4"
+                      />
             </video>
             <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent" />
             <div className="absolute inset-0 bg-black/10" />

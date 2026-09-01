@@ -121,7 +121,7 @@ export const SHOW_CATEGORY_DATA: Record<ContentKind, ShowItem[]> = {
         "A conversation on taste, discipline, and the creative systems behind lasting work.",
       thumbLink: "/assets/echoroom-default-thumb.svg",
       backgroundVideoUrl:
-        "https://f005.backblazeb2.com/file/Echooroom11/Podcasts/slumflower.mp4",
+        "https://youtu.be/rew0JjLR-kk",
       watchLink: "https://www.youtube.com/watch?v=rew0JjLR-kk&t=9s",
     },
   ],

@@ -93,7 +93,7 @@ exports.SHOW_CATEGORY_DATA = {
             title: "MAINTENANCE WOMEN VS MALE EGO. FT ASHMUSY | THESLUMFLOWER | TEDDY A | MOET | FOLASADE |SEASON 3 EP1",
             description: "A conversation on taste, discipline, and the creative systems behind lasting work.",
             thumbLink: "/assets/echoroom-default-thumb.svg",
-            backgroundVideoUrl: "https://f005.backblazeb2.com/file/Echooroom11/Podcasts/SLUMFLOWER.mp4",
+            backgroundVideoUrl: "https://youtu.be/rew0JjLR-kk",
             watchLink: "https://www.youtube.com/watch?v=rew0JjLR-kk&t=9s"
         },
     ],
