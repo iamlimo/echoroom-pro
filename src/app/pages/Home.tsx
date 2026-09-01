@@ -441,7 +441,7 @@ function StudioProfile() {
           <div className="aspect-[4/5] bg-muted overflow-hidden">
             <img
               src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=700&h=900&fit=crop&auto=format"
-              alt="EchooRoom Studio production environment"
+              alt="EchooRoom production environment"
               className="w-full h-full object-cover"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-background/60 to-transparent" />
