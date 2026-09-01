@@ -38,6 +38,40 @@ const toCanonicalCategory = (value: string): ContentKind | null => {
   return aliases[normalized] ?? null;
 };
 
+const isYouTubeUrl = (value: string | undefined | null) => {
+  if (!value) return false;
+  try {
+    const u = new URL(value);
+    const host = u.hostname.toLowerCase();
+    return host.includes('youtube.com') || host.includes('youtu.be');
+  } catch {
+    return false;
+  }
+};
+
+const getYouTubeEmbedUrl = (value: string) => {
+  try {
+    const u = new URL(value);
+    const host = u.hostname.toLowerCase();
+    let id = '';
+    if (host.includes('youtu.be')) {
+      id = u.pathname.slice(1);
+    } else {
+      // youtube.com
+      if (u.searchParams.has('v')) id = u.searchParams.get('v') || '';
+      else if (u.pathname.startsWith('/shorts/')) id = u.pathname.split('/')[2] || '';
+      else {
+        const parts = u.pathname.split('/');
+        id = parts[parts.length - 1] || '';
+      }
+    }
+    if (!id) return '';
+    return `https://www.youtube.com/embed/${id}?autoplay=1&mute=1&playsinline=1&rel=0`;
+  } catch {
+    return '';
+  }
+};
+
 export default function ShowsPage() {
   const location = useLocation();
   const selectedCategory = useMemo(() => {
@@ -271,28 +305,40 @@ export default function ShowsPage() {
       >
         <div className="relative min-h-screen">
           <div className="absolute inset-0 overflow-hidden">
-            <video
-              ref={videoRef}
-              key={slide.id}
-              className="absolute inset-0 h-full w-full object-cover brightness-110 contrast-105 saturate-110"
-              muted={muted}
-              crossOrigin="anonymous"
-              onError={() => console.error("Video element error:", videoRef.current?.error)}
-              loop
-              autoPlay
-              playsInline
-              preload="auto"
-              poster={slide.thumbLink}
-            >
-                      <source
-                        src={
-                          (typeof window !== 'undefined' && window.location.hostname === 'localhost')
-                            ? `/.netlify/functions/proxy-video?url=${encodeURIComponent(slide.backgroundVideoUrl)}`
-                            : slide.backgroundVideoUrl
-                        }
-                        type="video/mp4"
-                      />
-            </video>
+            {isYouTubeUrl(slide.backgroundVideoUrl) ? (
+              <div className="absolute inset-0">
+                <iframe
+                  title={slide.title}
+                  src={getYouTubeEmbedUrl(slide.backgroundVideoUrl)}
+                  className="absolute inset-0 h-full w-full object-cover"
+                  allow="autoplay; encrypted-media; picture-in-picture"
+                  allowFullScreen
+                />
+              </div>
+            ) : (
+              <video
+                ref={videoRef}
+                key={slide.id}
+                className="absolute inset-0 h-full w-full object-cover brightness-110 contrast-105 saturate-110"
+                muted={muted}
+                crossOrigin="anonymous"
+                onError={() => console.error("Video element error:", videoRef.current?.error)}
+                loop
+                autoPlay
+                playsInline
+                preload="auto"
+                poster={slide.thumbLink}
+              >
+                <source
+                  src={
+                    (typeof window !== 'undefined' && window.location.hostname === 'localhost')
+                      ? `/.netlify/functions/proxy-video?url=${encodeURIComponent(slide.backgroundVideoUrl)}`
+                      : slide.backgroundVideoUrl
+                  }
+                  type="video/mp4"
+                />
+              </video>
+            )}
             <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent" />
             <div className="absolute inset-0 bg-black/10" />
             <canvas
