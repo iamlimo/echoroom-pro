@@ -52,6 +52,16 @@ export const SHOW_CATEGORY_DATA: Record<ContentKind, ShowItem[]> = {
       backgroundVideoUrl: "https://f005.backblazeb2.com/file/Echooroom11/Podcasts/ice+prince.mp4",
       watchLink: "https://www.youtube.com/watch?v=P2jmthJqzBQ&list=RDP2jmthJqzBQ&start_radio=1",
     },
+      {
+      id: "live-ycee",
+      category: "Live sessions",
+      title: "Seun Kuti & Vector – Higher Consciousness & The Matter (Live Performance)",
+      description:
+        "A visually rich performance built around texture, glow, and a subtle cinematic pulse.",
+      thumbLink: "/assets/echoroom-default-thumb.svg",
+      backgroundVideoUrl: "https://f005.backblazeb2.com/file/Echooroom11/Podcasts/seun+vect.mp4",
+      watchLink: "https://f005.backblazeb2.com/file/Echooroom11/Podcasts/seun+vect.mp4",
+    },
     {
       id: "live-ycee",
       category: "Live sessions",
