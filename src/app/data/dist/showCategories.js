@@ -87,6 +87,16 @@ exports.SHOW_CATEGORY_DATA = {
             badge: "New",
             watchLink: "https://www.youtube.com/watch?v=s97ccnnXwIo"
         },
+         {
+            id: "podcast-synths",
+            category: "Podcast",
+            title: "POLYGAMY UNDER FIRE (A Heated Confrontation) Featuring PASTOR JOHN",
+            description: "A deep-dive into influence, and iconic lifestyle.",
+            thumbLink: "/assets/echoroom-default-thumb.svg",
+            backgroundVideoUrl: "https://f005.backblazeb2.com/file/Echooroom11/Podcasts/Pastor+John.MP4",
+            badge: "New",
+            watchLink: "https://www.youtube.com/watch?v=Ji_cNvUtqPE"
+        },
         {
             id: "podcast-goods",
             category: "Podcast",

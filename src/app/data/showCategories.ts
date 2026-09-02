@@ -42,6 +42,16 @@ export const SHOW_CATEGORY_DATA: Record<ContentKind, ShowItem[]> = {
       badge: "Featured",
       watchLink: "/shows?category=Live%20sessions",
     },
+       {
+      id: "live-ycee",
+      category: "Live sessions",
+      title: "ICE PRINCE - JEKINLA, ONLY SON & SLAP THE RING (Live Performance)",
+      description:
+        "A visually rich performance built around texture, glow, and a subtle cinematic pulse.",
+      thumbLink: "/assets/echoroom-default-thumb.svg",
+      backgroundVideoUrl: "https://f005.backblazeb2.com/file/Echooroom11/Podcasts/ice+prince.mp4",
+      watchLink: "https://www.youtube.com/watch?v=P2jmthJqzBQ&list=RDP2jmthJqzBQ&start_radio=1",
+    },
     {
       id: "live-ycee",
       category: "Live sessions",
@@ -49,8 +59,18 @@ export const SHOW_CATEGORY_DATA: Record<ContentKind, ShowItem[]> = {
       description:
         "A visually rich performance built around texture, glow, and a subtle cinematic pulse.",
       thumbLink: "/assets/echoroom-default-thumb.svg",
-      backgroundVideoUrl: b2("live-sessions/ycee-lemonade.mp4"),
-      watchLink: "/shows?category=Live%20sessions",
+      backgroundVideoUrl: "https://youtu.be/JpJSbZEpWew?list=RDJpJSbZEpWew",
+      watchLink: "https://www.youtube.com/watch?v=JpJSbZEpWew&list=RDJpJSbZEpWew&start_radio=1",
+    },
+      {
+      id: "live-ycee",
+      category: "Live sessions",
+      title: "Nasboi Live Rooftop Performance",
+      description:
+        "A visually rich performance built around texture, glow, and a subtle cinematic pulse.",
+      thumbLink: "/assets/echoroom-default-thumb.svg",
+      backgroundVideoUrl: "https://f005.backblazeb2.com/file/Echooroom11/Podcasts/NASBOI_COMPLETE_FINAL.+CUTmp4.mp4",
+      watchLink: "https://www.youtube.com/watch?v=BmpcMuM4xhU&list=RDBmpcMuM4xhU&start_radio=1",
     },
   ],
   Specials: [
@@ -112,6 +132,16 @@ export const SHOW_CATEGORY_DATA: Record<ContentKind, ShowItem[]> = {
       badge: "New",
       watchLink: "https://www.youtube.com/watch?v=s97ccnnXwIo",
     },
+    {
+            id: "podcast-synths",
+            category: "Podcast",
+            title: "POLYGAMY UNDER FIRE (A Heated Confrontation) Featuring PASTOR JOHN",
+            description: "A deep-dive into influence, and iconic lifestyle.",
+            thumbLink: "/assets/echoroom-default-thumb.svg",
+            backgroundVideoUrl: "https://f005.backblazeb2.com/file/Echooroom11/Podcasts/Pastor+John.MP4",
+            badge: "New",
+            watchLink: "https://www.youtube.com/watch?v=Ji_cNvUtqPE"
+        },
     {
       id: "podcast-goods",
       category: "Podcast",
