@@ -38,9 +38,9 @@ export const SHOW_CATEGORY_DATA: Record<ContentKind, ShowItem[]> = {
       description:
         "A live session moving through shadow, rhythm, and intimate cinematic atmosphere.",
       thumbLink: "/assets/echoroom-default-thumb.svg",
-      backgroundVideoUrl: b2("live-sessions/leo-staytrill-ft-shoday.mp4"),
+      backgroundVideoUrl: "https://youtu.be/lxo0l5Mow_4?list=RDlxo0l5Mow_4",
       badge: "Featured",
-      watchLink: "/shows?category=Live%20sessions",
+      watchLink: "https://www.youtube.com/watch?v=lxo0l5Mow_4&list=RDlxo0l5Mow_4&start_radio=1",
     },
        {
       id: "live-ycee",
@@ -78,12 +78,11 @@ export const SHOW_CATEGORY_DATA: Record<ContentKind, ShowItem[]> = {
       id: "special-ycee",
       category: "Specials",
       title: "YCEE — Lemonade",
-      description:
-        "A curated spotlight built around atmosphere, performance, and mood.",
+     description:
+        "A visually rich performance built around texture, glow, and a subtle cinematic pulse.",
       thumbLink: "/assets/echoroom-default-thumb.svg",
-      backgroundVideoUrl: b2("specials/ycee-lemonade-special.mp4"),
-      badge: "Special",
-      watchLink: "/shows?category=Specials",
+      backgroundVideoUrl: "https://youtu.be/JpJSbZEpWew?list=RDJpJSbZEpWew",
+      watchLink: "https://www.youtube.com/watch?v=JpJSbZEpWew&list=RDJpJSbZEpWew&start_radio=1",
     },
     {
       id: "special-afterglow",
