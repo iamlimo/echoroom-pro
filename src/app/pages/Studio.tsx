@@ -11,11 +11,26 @@ const CATEGORIES: { label: ContentKind; icon: LucideIcon }[] = [
   { label: "Interviews", icon: Mic2 },
 ];
 
+const CATEGORY_BACKGROUNDS: Record<ContentKind, string> = {
+  "Live sessions":
+    "https://images.unsplash.com/photo-1501386761578-eac5c94b800a?auto=format&fit=crop&w=1200&q=80",
+  Specials:
+    "https://images.unsplash.com/photo-1516280440614-37939bbacd81?auto=format&fit=crop&w=1200&q=80",
+  "Behind the scenes":
+    "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&w=1200&q=80",
+  Podcast:
+    "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1200&q=80",
+  Stories:
+    "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1200&q=80",
+  Interviews:
+    "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1200&q=80",
+};
+
 function CategoryCard({ label }: { label: ContentKind }) {
   const items = SHOW_CATEGORY_DATA[label];
   const representative = items[0];
   const count = items.length;
-  const backgroundImage = representative?.thumbLink ?? "/assets/echoroom-default-thumb.svg";
+  const backgroundImage = CATEGORY_BACKGROUNDS[label] ?? representative?.thumbLink ?? "/assets/echoroom-default-thumb.svg";
 
   return (
     <a
