@@ -62,16 +62,6 @@ export const SHOW_CATEGORY_DATA: Record<ContentKind, ShowItem[]> = {
       backgroundVideoUrl: "https://f005.backblazeb2.com/file/Echooroom11/Podcasts/seun+vect.mp4",
       watchLink: "https://f005.backblazeb2.com/file/Echooroom11/Podcasts/seun+vect.mp4",
     },
-    {
-      id: "live-ycee",
-      category: "Live sessions",
-      title: "YCEE — Lemonade",
-      description:
-        "A visually rich performance built around texture, glow, and a subtle cinematic pulse.",
-      thumbLink: "/assets/echoroom-default-thumb.svg",
-      backgroundVideoUrl: "https://youtu.be/JpJSbZEpWew?list=RDJpJSbZEpWew",
-      watchLink: "https://www.youtube.com/watch?v=JpJSbZEpWew&list=RDJpJSbZEpWew&start_radio=1",
-    },
       {
       id: "live-ycee",
       category: "Live sessions",
@@ -84,16 +74,7 @@ export const SHOW_CATEGORY_DATA: Record<ContentKind, ShowItem[]> = {
     },
   ],
   Specials: [
-    {
-      id: "special-ycee",
-      category: "Specials",
-      title: "YCEE — Lemonade",
-     description:
-        "A visually rich performance built around texture, glow, and a subtle cinematic pulse.",
-      thumbLink: "/assets/echoroom-default-thumb.svg",
-      backgroundVideoUrl: "https://youtu.be/JpJSbZEpWew?list=RDJpJSbZEpWew",
-      watchLink: "https://www.youtube.com/watch?v=JpJSbZEpWew&list=RDJpJSbZEpWew&start_radio=1",
-    },
+
     {
       id: "special-afterglow",
       category: "Specials",
