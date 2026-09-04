@@ -168,6 +168,30 @@ export const SHOW_CATEGORY_DATA: Record<ContentKind, ShowItem[]> = {
         "https://youtu.be/rew0JjLR-kk",
       watchLink: "https://www.youtube.com/watch?v=rew0JjLR-kk&t=9s",
     },
+    {
+      id: "podcast-goods",
+      category: "Podcast",
+      title:
+        "LAGOS DATING SCENE IS SCAM!! | JJ EXCLUSIVE | BUKOLARYY | TEDDY A | MOET | FOLASADE | S3 E7",
+      description:
+        "A conversation on taste, discipline, and the creative systems behind lasting work.",
+      thumbLink: "/assets/echoroom-default-thumb.svg",
+      backgroundVideoUrl:
+        "https://f005.backblazeb2.com/file/Echooroom11/new_cuts/Lagos+dating.mp4",
+      watchLink: "https://www.youtube.com/watch?v=3bqCzMddGeU&t=3336s",
+    },
+    {
+      id: "podcast-goods",
+      category: "Podcast",
+      title:
+        "NEW AGE RUNS GIRLS .MS JORJI & OMOWUMI | TEDDY A | MOET | FOLASADE.",
+      description:
+        "A conversation on taste, discipline, and the creative systems behind lasting work.",
+      thumbLink: "/assets/echoroom-default-thumb.svg",
+      backgroundVideoUrl:
+        "https://f005.backblazeb2.com/file/Echooroom11/new_cuts/new+age+sex+worker.mp4",
+      watchLink: "https://www.youtube.com/watch?v=nZG2gcvj5Zc",
+    },
   ],
   Stories: [
     {
