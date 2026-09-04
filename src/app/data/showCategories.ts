@@ -38,9 +38,20 @@ export const SHOW_CATEGORY_DATA: Record<ContentKind, ShowItem[]> = {
       description:
         "A live session moving through shadow, rhythm, and intimate cinematic atmosphere.",
       thumbLink: "/assets/echoroom-default-thumb.svg",
-      backgroundVideoUrl: "https://youtu.be/lxo0l5Mow_4?list=RDlxo0l5Mow_4",
+      backgroundVideoUrl: "https://f005.backblazeb2.com/file/Echooroom11/new_cuts/shoday+lxt.mp4",
       badge: "Featured",
       watchLink: "https://www.youtube.com/watch?v=lxo0l5Mow_4&list=RDlxo0l5Mow_4&start_radio=1",
+    },
+     {
+      id: "live-leostaytrill",
+      category: "Live sessions",
+      title: "Odumodublvck - Industry Machine, Legolas & Wage War (Live Performance) | Echooroom Top Notch",
+      description:
+        "A live session moving through shadow, rhythm, and intimate cinematic atmosphere.",
+      thumbLink: "/assets/echoroom-default-thumb.svg",
+      backgroundVideoUrl: "https://f005.backblazeb2.com/file/Echooroom11/new_cuts/ODUMODU.mp4",
+      badge: "Featured",
+      watchLink: "https://www.youtube.com/watch?v=eh8sDn8jXT0&list=RDeh8sDn8jXT0&start_radio=1",
     },
        {
       id: "live-ycee",
