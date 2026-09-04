@@ -26,9 +26,9 @@ export default function Footer() {
           <a href="/studio" className="text-sm text-muted-foreground hover:text-foreground transition-colors tracking-wide">
             Entertainment
           </a>
-          {/* <a href="/shows" className="text-sm text-muted-foreground hover:text-foreground transition-colors tracking-wide">
-            Shows
-          </a> */}
+          <a href="/blog" className="text-sm text-muted-foreground hover:text-foreground transition-colors tracking-wide">
+            Blog
+          </a>
           <a href="/#contact" className="text-sm text-muted-foreground hover:text-foreground transition-colors tracking-wide">
             Contact
           </a>
