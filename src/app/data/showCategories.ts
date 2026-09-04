@@ -45,9 +45,9 @@ export const SHOW_CATEGORY_DATA: Record<ContentKind, ShowItem[]> = {
      {
       id: "live-leostaytrill",
       category: "Live sessions",
-      title: "Odumodublvck - Industry Machine, Legolas & Wage War (Live Performance) | Echooroom Top Notch",
+      title: "Odumodublvck - Industry Machine, Legolas & Wage War ",
       description:
-        "A live session moving through shadow, rhythm, and intimate cinematic atmosphere.",
+        "A live session moving through shadow, rhythm, and intimate cinematic atmosphere | Echooroom Top Notch",
       thumbLink: "/assets/echoroom-default-thumb.svg",
       backgroundVideoUrl: "https://f005.backblazeb2.com/file/Echooroom11/new_cuts/ODUMODU.mp4",
       badge: "Featured",
@@ -56,7 +56,7 @@ export const SHOW_CATEGORY_DATA: Record<ContentKind, ShowItem[]> = {
        {
       id: "live-ycee",
       category: "Live sessions",
-      title: "ICE PRINCE - JEKINLA, ONLY SON & SLAP THE RING (Live Performance)",
+      title: "ICE PRINCE - JEKINLA, ONLY SON & SLAP THE RING ",
       description:
         "A visually rich performance built around texture, glow, and a subtle cinematic pulse.",
       thumbLink: "/assets/echoroom-default-thumb.svg",
