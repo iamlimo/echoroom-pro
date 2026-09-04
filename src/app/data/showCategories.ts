@@ -122,6 +122,30 @@ export const SHOW_CATEGORY_DATA: Record<ContentKind, ShowItem[]> = {
       badge: "New",
       watchLink: "https://www.youtube.com/watch?v=s97ccnnXwIo",
     },
+     {
+      id: "podcast-synths",
+      category: "Podcast",
+      title:
+        "APC VS NDC: THE ULTIMATE POLITICAL CLASH | TEDDY A | PRINCEWILL | MOET | FOLASADE",
+      description: "A deep-dive into influence, politics and iconic lifestyle.",
+      thumbLink: "/assets/echoroom-default-thumb.svg",
+      backgroundVideoUrl:
+        "https://f005.backblazeb2.com/file/Echooroom11/new_cuts/APC.mp4",
+      badge: "New",
+      watchLink: "https://www.youtube.com/watch?v=0b-duRNRAGk",
+    },
+     {
+      id: "podcast-synths",
+      category: "Podcast",
+      title:
+        "GEHGEH DIDN'T HOLD BACK: PELLER, JARVIS, MONEY AND MODERN RELATIONSHIP🔥",
+      description: "A deep-dive into influence, politics and iconic lifestyle.",
+      thumbLink: "/assets/echoroom-default-thumb.svg",
+      backgroundVideoUrl:
+        "https://f005.backblazeb2.com/file/Echooroom11/new_cuts/GEHGEH+UNFILTERED!!++_.mp4",
+      badge: "New",
+      watchLink: "https://www.youtube.com/watch?v=ADRKAaVbKCk&t=4s",
+    },
     {
             id: "podcast-synths",
             category: "Podcast",
