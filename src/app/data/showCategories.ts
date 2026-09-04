@@ -53,6 +53,30 @@ export const SHOW_CATEGORY_DATA: Record<ContentKind, ShowItem[]> = {
       badge: "Featured",
       watchLink: "https://www.youtube.com/watch?v=eh8sDn8jXT0&list=RDeh8sDn8jXT0&start_radio=1",
     },
+    {
+      id: "live-leostaytrill",
+      category: "Live sessions",
+      title: "LAYCON X JOEBOY | NIGHT AND DAY",
+      description:
+        "A live session moving through shadow, rhythm, and intimate cinematic atmosphere | Echooroom Top Notch",
+      thumbLink: "/assets/echoroom-default-thumb.svg",
+      backgroundVideoUrl: "https://f005.backblazeb2.com/file/Echooroom11/new_cuts/jeoboy.mp4",
+      badge: "Featured",
+      watchLink: "https://www.youtube.com/watch?v=eiodrPLusB4&list=RDeiodrPLusB4&start_radio=1",
+    },
+
+     {
+      id: "live-leostaytrill",
+      category: "Live sessions",
+      title: "AYOMAFF - PANIC",
+      description:
+        "A live session moving through shadow, rhythm, and intimate cinematic atmosphere | Echooroom Top Notch",
+      thumbLink: "/assets/echoroom-default-thumb.svg",
+      backgroundVideoUrl: "https://f005.backblazeb2.com/file/Echooroom11/new_cuts/AYOMAFF.mp4",
+      badge: "Featured",
+      watchLink: "https://www.youtube.com/watch?v=Uc4pVto7sDA&list=RDUc4pVto7sDA&start_radio=1",
+    },
+       
        {
       id: "live-ycee",
       category: "Live sessions",
@@ -66,7 +90,7 @@ export const SHOW_CATEGORY_DATA: Record<ContentKind, ShowItem[]> = {
       {
       id: "live-ycee",
       category: "Live sessions",
-      title: "Seun Kuti & Vector – Higher Consciousness & The Matter (Live Performance)",
+      title: "Seun Kuti & Vector – Higher Consciousness & The Matter",
       description:
         "A visually rich performance built around texture, glow, and a subtle cinematic pulse.",
       thumbLink: "/assets/echoroom-default-thumb.svg",

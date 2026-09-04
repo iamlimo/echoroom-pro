@@ -17,6 +17,7 @@ const NAV_LINKS = [
   },
   { label: "Services", to: "/services" },
   { label: "Entertainment", to: "/studio" },
+  { label: "Blog", to: "/blog" },
   // { label: "Shows", to: "/shows" },
   { label: "Contact", to: "/", hash: "#contact" },
 ];
