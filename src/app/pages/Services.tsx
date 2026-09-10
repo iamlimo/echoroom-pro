@@ -153,7 +153,7 @@ const SERVICES: Service[] = [
     num: "06",
     id: "marketing-partnership",
     title: "360° Marketing Partnership",
-    tagline: "A premium, end-to-end marketing partnership for brands seeking integrated support.",
+    tagline: "Lead with Partnership for Global Businesses. A premium, end-to-end marketing partnership for brands seeking integrated support.",
     products: [
       "Brand & Marketing Strategy",
       "Creative Development",
@@ -373,10 +373,10 @@ export default function Services() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-end">
             <div>
               <p className="font-mono text-xs text-primary tracking-[0.22em] uppercase mb-5">Section 3 — Service Catalogue</p>
-              <h1 className="font-display text-5xl md:text-7xl font-black leading-[0.95] text-foreground mb-6">
-                The 6 Core<br />
+              <h1 className="font-display text-5xl md:text-7xl font-black leading-[0.95] text-foreground mb-6">  Full-Service Marketing and Advertising Services agency.
+                {/* The 6 Core<br />
                 <span className="text-primary">Service</span><br />
-                Pillars
+                Pillars */}
               </h1>
               <p className="text-muted-foreground text-lg leading-relaxed max-w-md">
                 Explore our specialised services below to turn your brand identity into a high-yielding corporate asset. Every pillar is fully staffed, fully equipped, and ready to deploy.

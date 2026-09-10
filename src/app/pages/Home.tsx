@@ -196,21 +196,19 @@ function Hero() {
           <div className="grid grid-cols-1 lg:grid-cols-[1fr_auto] gap-10 lg:gap-20 items-end">
             <div>
               <p className="font-mono text-xs text-primary tracking-[0.22em] uppercase mb-8">
-                Strategic Capability — Enterprise Profile & Service Catalogue
+               Integrated Marketing and Advertising Agency in Lagos, Nigeria
               </p>
               <h3 className="font-display text-[clamp(3.2rem,9vw,7rem)] font-black leading-[0.92] tracking-tight text-foreground">
-                Great Brands Don't Compete for{" "}
-                <em className="not-italic text-primary">Attention</em>
-                <br /> They Earn{" "}
-                <em className="not-italic text-primary">Influence</em>.
+                A  <em className="not-italic text-primary">Marketing</em>  and  <em className="not-italic text-primary">Advertising</em>{"  "}Agency Building Influential Brands
+
+
+              
               </h3>
             </div>
 
             <div className="lg:max-w-sm pb-2">
               <p className="text-foreground/90 text-lg leading-relaxed mb-8">
-                We partner with ambitious organisations to shape perception,
-                inspire action, and accelerate growth through strategy,
-                creativity, media, marketing, and experiences.
+                EchooRoom helps global businesses grow through brand strategy, digital marketing, social media, creative content, PR, advertising campaigns, and experiential production.
               </p>
               <div className="flex flex-col sm:flex-row gap-3">
                 <a
@@ -263,14 +261,10 @@ function EditorialStatement() {
 
           <div className="lg:pt-2">
             <p className="font-mono text-xs text-primary tracking-[0.2em] uppercase mb-5">
-              Why We Exist
+              Why We Exist.
             </p>
             <p className="text-foreground text-xl md:text-2xl leading-relaxed max-w-2xl">
-              Brands are no longer built by advertising alone. They are built
-              through every experience they create. Every conversation, every
-              campaign, every customer interaction, and every promise shapes
-              perception. Echooroom exists to help organisations intentionally
-              design those experiences.
+             As an integrated creative and marketing agency in Lagos, we connect brand strategy, content, advertising, media and customer experiences to help organisations earn trust and generate measurable growth.
             </p>
           </div>
         </div>
@@ -356,8 +350,7 @@ function Advantage() {
             How We Create Value
           </h2>
           <p className="text-muted-foreground mt-4 text-lg max-w-xl leading-relaxed">
-            From first insight to final execution, we connect the disciplines
-            that make brands matter.
+          Our Marketing, Advertising and Creative Services. Grow your brand with professional marketing services and results-driven advertising services globally.
           </p>
           <br/>
                <a
@@ -694,9 +687,9 @@ function Contact() {
               Get in touch
             </p>
             <h2 className="font-display text-4xl md:text-6xl font-black leading-tight text-foreground mb-8">
-              Start something
-              <br />
-              significant.
+             Start Your Next Campaign  with us.
+            
+              
             </h2>
             <p className="text-muted-foreground text-lg leading-relaxed mb-12">
               How can we help you? We respond
