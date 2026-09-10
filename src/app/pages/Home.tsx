@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { ArrowRight, ArrowUpRight, Play, CheckCircle2 } from "lucide-react";
 import { WhatsAppButton } from "../components/WhatsAppButton";
+import { usePageMeta } from "../hooks/usePageMeta";
 
 const INDUSTRIES = [
   "Commercial Banking",
@@ -816,6 +817,12 @@ function Contact() {
 }
 
 export default function Home() {
+  usePageMeta({
+    title: "Marketing & Advertising Agency in Lagos | EchooRoom",
+    description: "EchooRoom is a full-service marketing and advertising agency in Lagos, Nigeria, providing brand strategy, digital marketing, content production, PR, experiential campaigns and media production.",
+    url: "https://echooroom.com",
+  });
+
   return (
     <>
       <Hero />

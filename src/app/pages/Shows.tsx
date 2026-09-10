@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useRef, useState, type TouchEvent } from "react";
 import { useLocation } from "react-router";
 import { ArrowUpRight, Volume2, VolumeX } from "lucide-react";
+import { usePageMeta } from "../hooks/usePageMeta";
 import gsap from "gsap";
 import * as THREE from "three";
 import {
@@ -73,6 +74,12 @@ const getYouTubeEmbedUrl = (value: string) => {
 };
 
 export default function ShowsPage() {
+  usePageMeta({
+    title: "Shows & Events | Live Sessions, Podcasts & More | EchooRoom",
+    description: "Explore EchooRoom's shows and events: live sessions, podcasts, behind-the-scenes content, interviews, and special productions.",
+    url: "https://echooroom.com/shows",
+  });
+
   const location = useLocation();
   const selectedCategory = useMemo(() => {
     const rawValue = new URLSearchParams(location.search).get("category");

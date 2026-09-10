@@ -1,5 +1,6 @@
 import { useMemo } from "react";
 import { type LucideIcon, Radio, Sparkles, Video, Headphones, BookOpen, Mic2 } from "lucide-react";
+import { usePageMeta } from "../hooks/usePageMeta";
 import { SHOW_CATEGORY_DATA, type ContentKind } from "../data/showCategories";
 
 const CATEGORIES: { label: ContentKind; icon: LucideIcon }[] = [
@@ -56,6 +57,12 @@ function CategoryCard({ label }: { label: ContentKind }) {
 }
 
 export default function Studio() {
+  usePageMeta({
+    title: "Studio & Creative Space | Content Categories | EchooRoom",
+    description: "Explore EchooRoom's creative studio featuring live sessions, specials, behind-the-scenes content, podcasts, stories, and interviews.",
+    url: "https://echooroom.com/studio",
+  });
+
   const categories = useMemo(() => CATEGORIES, []);
 
   return (

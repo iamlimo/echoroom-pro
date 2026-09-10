@@ -2,6 +2,7 @@ import { useState, useEffect, useRef, useCallback } from "react";
 import { ArrowRight, ArrowUpRight, CheckCircle2, ChevronDown } from "lucide-react";
 import { useNavigate } from "react-router";
 import { WhatsAppButton } from "../components/WhatsAppButton";
+import { usePageMeta } from "../hooks/usePageMeta";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -343,6 +344,12 @@ function ServiceSection({ service }: { service: Service }) {
 // ─── Page ─────────────────────────────────────────────────────────────────────
 
 export default function Services() {
+  usePageMeta({
+    title: "Services | Full-Service Marketing & Advertising | EchooRoom",
+    description: "Explore our 6 core service pillars: Brand Strategy, Creative & Content, Digital Marketing, PR & Communications, Campaigns & Events, and 360° Marketing Partnerships.",
+    url: "https://echooroom.com/services",
+  });
+
   const [activeId, setActiveId] = useState(SERVICES[0].id);
   const navigate = useNavigate();
 

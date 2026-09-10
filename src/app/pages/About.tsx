@@ -16,6 +16,7 @@ import {
   BookOpen,
 } from "lucide-react";
 import { useLocation, useNavigate } from "react-router";
+import { usePageMeta } from "../hooks/usePageMeta";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "../components/ui/tabs";
 import {
   Accordion,
@@ -82,6 +83,12 @@ function scrollToHash(hash: string) {
 }
 
 export default function About() {
+  usePageMeta({
+    title: "About Us | Building Brands That Matter | EchooRoom",
+    description: "Meet EchooRoom: a creative, marketing, and advertising agency helping organisations build stronger brands through strategy, digital marketing, content production, PR, media, and experiential campaigns.",
+    url: "https://echooroom.com/about",
+  });
+
   const navigate = useNavigate();
   const location = useLocation();
 

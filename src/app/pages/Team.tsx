@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { ArrowRight, BadgeCheck, Check, Sparkles } from "lucide-react";
 import { useLocation, useNavigate } from "react-router";
+import { usePageMeta } from "../hooks/usePageMeta";
 
 function useInView(threshold = 0.12) {
   const ref = useRef<HTMLDivElement>(null);
@@ -174,6 +175,12 @@ function ProfileCard({ member }: { member: TeamMember }) {
 }
 
 export default function Team() {
+  usePageMeta({
+    title: "Our Team | Marketing & Advertising Professionals | EchooRoom",
+    description: "Meet the talented team of marketing, creative, and advertising professionals at EchooRoom who help build influential brands.",
+    url: "https://echooroom.com/team",
+  });
+
   const navigate = useNavigate();
   const location = useLocation();
   const contactHash = useMemo(() => "#contact", []);
