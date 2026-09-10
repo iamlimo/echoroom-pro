@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import { ArrowRight, ArrowUpRight, CheckCircle2, ChevronDown } from "lucide-react";
 import { useNavigate } from "react-router";
+import { WhatsAppButton } from "../components/WhatsAppButton";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -501,6 +502,7 @@ export default function Services() {
                 >
                   Echooroom@starksltd.com <ArrowUpRight size={14} />
                 </a>
+                <WhatsAppButton variant="outline" size="md" message="Hi EchooRoom, I'd like to discuss our marketing needs." className="border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10" />
               </div>
             </div>
           </div>

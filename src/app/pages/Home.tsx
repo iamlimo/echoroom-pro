@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { ArrowRight, ArrowUpRight, Play, CheckCircle2 } from "lucide-react";
+import { WhatsAppButton } from "../components/WhatsAppButton";
 
 const INDUSTRIES = [
   "Commercial Banking",
@@ -706,6 +707,12 @@ function Contact() {
                 >
                   Echooroom@starksltd.com
                 </a>
+              </div>
+              <div>
+                <p className="font-mono text-[10px] text-muted-foreground tracking-widest uppercase mb-2">
+                  WhatsApp
+                </p>
+                <WhatsAppButton variant="primary" size="md" message="Hi EchooRoom, I have a project to discuss." />
               </div>
               <div>
                 <p className="font-mono text-[10px] text-muted-foreground tracking-widest uppercase mb-2">

@@ -120,7 +120,7 @@ export default function About() {
                 Building brands that matter. Creating impact that lasts.
               </h1>
               <p className="text-muted-foreground text-lg leading-relaxed max-w-2xl mt-6">
-                EchooRoom is an integrated creative company that helps ambitious organisations build influential brands, create meaningful experiences, and accelerate growth through strategy, storytelling, media, marketing, and technology.
+                 EchooRoom is a creative, marketing, and advertising agency helping organisations build stronger brands through strategy, digital marketing, content production, PR, media, and experiential campaigns.
               </p>
 
               <div className="mt-10 flex flex-col gap-3 sm:flex-row">
