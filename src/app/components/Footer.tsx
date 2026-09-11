@@ -1,4 +1,14 @@
 import React from "react";
+import { Facebook, Instagram, Linkedin, Music2, Twitter, Youtube } from "lucide-react";
+
+const SOCIAL_LINKS = [
+  { label: "Instagram", href: "https://www.instagram.com/echooroom_?stkn=bDlzcGpkb3NsdjJq&utm_source=qr", icon: Instagram },
+  { label: "Facebook", href: "https://www.facebook.com/share/18Nj96pwdg/?mibextid=wwXIfr", icon: Facebook },
+  { label: "LinkedIn", href: "https://www.linkedin.com/company/echooroom", icon: Linkedin },
+  { label: "YouTube", href: "https://www.youtube.com/@echooroom", icon: Youtube },
+  { label: "TikTok", href: "https://www.tiktok.com/@echooroom", icon: Music2 },
+  { label: "X", href: "https://x.com/echooroom", icon: Twitter },
+];
 
 export default function Footer() {
   return (
@@ -32,6 +42,21 @@ export default function Footer() {
           <a href="/#contact" className="text-sm text-muted-foreground hover:text-foreground transition-colors tracking-wide">
             Contact
           </a>
+        </div>
+
+        <div className="flex items-center gap-3">
+          {socialLinks.map(({ label, href, icon: Icon }) => (
+            <a
+              key={label}
+              href={href}
+              target="_blank"
+              rel="noreferrer"
+              aria-label={label}
+              className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-border bg-background text-muted-foreground transition-colors hover:border-primary/40 hover:text-primary"
+            >
+              <Icon size={16} />
+            </a>
+          ))}
         </div>
 
         <a href="mailto:Echooroom@starksltd.com" className="font-mono text-xs text-muted-foreground hover:text-primary transition-colors tracking-wide">

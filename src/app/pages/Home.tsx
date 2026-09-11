@@ -1,7 +1,16 @@
 import { useState } from "react";
-import { ArrowRight, ArrowUpRight, Play, CheckCircle2 } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Play, CheckCircle2, Facebook, Instagram, Linkedin, Music2, Twitter, Youtube } from "lucide-react";
 import { WhatsAppButton } from "../components/WhatsAppButton";
 import { usePageMeta } from "../hooks/usePageMeta";
+
+const SOCIAL_LINKS = [
+  { label: "Instagram", href: "https://www.instagram.com/echooroom_?stkn=bDlzcGpkb3NsdjJq&utm_source=qr", icon: Instagram },
+  { label: "Facebook", href: "https://www.facebook.com/share/18Nj96pwdg/?mibextid=wwXIfr", icon: Facebook },
+  { label: "LinkedIn", href: "https://www.linkedin.com/company/echooroom", icon: Linkedin },
+  { label: "YouTube", href: "https://www.youtube.com/@echooroom", icon: Youtube },
+  { label: "TikTok", href: "https://www.tiktok.com/@echooroom", icon: Music2 },
+  { label: "X", href: "https://x.com/echooroom", icon: Twitter },
+];
 
 const INDUSTRIES = [
   "Commercial Banking",
@@ -714,6 +723,25 @@ function Contact() {
                   WhatsApp
                 </p>
                 <WhatsAppButton variant="primary" size="md" message="Hi EchooRoom, I have a project to discuss." />
+              </div>
+              <div>
+                <p className="font-mono text-[10px] text-muted-foreground tracking-widest uppercase mb-3">
+                  Follow us
+                </p>
+                <div className="flex flex-wrap items-center gap-3">
+                  {SOCIAL_LINKS.map(({ label, href, icon: Icon }) => (
+                    <a
+                      key={label}
+                      href={href}
+                      target="_blank"
+                      rel="noreferrer"
+                      aria-label={label}
+                      className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-border bg-background text-foreground transition-colors hover:border-primary/40 hover:text-primary"
+                    >
+                      <Icon size={17} />
+                    </a>
+                  ))}
+                </div>
               </div>
               <div>
                 <p className="font-mono text-[10px] text-muted-foreground tracking-widest uppercase mb-2">
