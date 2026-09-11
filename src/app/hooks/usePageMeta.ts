@@ -8,7 +8,9 @@ interface PageMetaProps {
 
 export function usePageMeta({ title, description, url }: PageMetaProps) {
   const siteUrl = "https://echooroom.com";
-  const previewImage = `${siteUrl}/assets/echoroom-logo.png`;
+  const previewImage = `${siteUrl}/assets/echooroom-preview.png`;
+  const shareTitle = title.length > 60 ? `${title.slice(0, 57).trim()}...` : title;
+  const shareDescription = description.length > 160 ? `${description.slice(0, 157).trim()}...` : description;
 
   useEffect(() => {
     // Update page title
@@ -21,7 +23,7 @@ export function usePageMeta({ title, description, url }: PageMetaProps) {
       metaDescription.setAttribute("name", "description");
       document.head.appendChild(metaDescription);
     }
-    metaDescription.setAttribute("content", description);
+    metaDescription.setAttribute("content", shareDescription);
 
     // Update og:title (optional, for social sharing)
     let ogTitle = document.querySelector('meta[property="og:title"]');
@@ -30,7 +32,7 @@ export function usePageMeta({ title, description, url }: PageMetaProps) {
       ogTitle.setAttribute("property", "og:title");
       document.head.appendChild(ogTitle);
     }
-    ogTitle.setAttribute("content", title);
+    ogTitle.setAttribute("content", shareTitle);
 
     // Update og:description (optional, for social sharing)
     let ogDescription = document.querySelector('meta[property="og:description"]');
@@ -39,7 +41,7 @@ export function usePageMeta({ title, description, url }: PageMetaProps) {
       ogDescription.setAttribute("property", "og:description");
       document.head.appendChild(ogDescription);
     }
-    ogDescription.setAttribute("content", description);
+    ogDescription.setAttribute("content", shareDescription);
 
     // Update og:image and social share preview image
     let ogImage = document.querySelector('meta[property="og:image"]');
@@ -72,7 +74,7 @@ export function usePageMeta({ title, description, url }: PageMetaProps) {
       ogImageHeight.setAttribute("property", "og:image:height");
       document.head.appendChild(ogImageHeight);
     }
-    ogImageHeight.setAttribute("content", "630");
+    ogImageHeight.setAttribute("content", "1200");
 
     let ogType = document.querySelector('meta[property="og:type"]');
     if (!ogType) {
@@ -97,6 +99,14 @@ export function usePageMeta({ title, description, url }: PageMetaProps) {
       document.head.appendChild(twitterImage);
     }
     twitterImage.setAttribute("content", previewImage);
+
+    let ogImageAlt = document.querySelector('meta[property="og:image:alt"]');
+    if (!ogImageAlt) {
+      ogImageAlt = document.createElement("meta");
+      ogImageAlt.setAttribute("property", "og:image:alt");
+      document.head.appendChild(ogImageAlt);
+    }
+    ogImageAlt.setAttribute("content", shareTitle);
 
     // Update canonical URL (optional)
     if (url) {
