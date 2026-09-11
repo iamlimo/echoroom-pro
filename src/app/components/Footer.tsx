@@ -1,13 +1,13 @@
 import React from "react";
 import { Facebook, Instagram, Linkedin, Music2, Twitter, Youtube } from "lucide-react";
 
-const SOCIAL_LINKS = [
+const socialLinks = [
   { label: "Instagram", href: "https://www.instagram.com/echooroom_?stkn=bDlzcGpkb3NsdjJq&utm_source=qr", icon: Instagram },
   { label: "Facebook", href: "https://www.facebook.com/share/18Nj96pwdg/?mibextid=wwXIfr", icon: Facebook },
   { label: "LinkedIn", href: "https://www.linkedin.com/company/echooroom", icon: Linkedin },
   { label: "YouTube", href: "https://www.youtube.com/@echooroom", icon: Youtube },
   { label: "TikTok", href: "https://www.tiktok.com/@echooroom", icon: Music2 },
-  { label: "X", href: "https://x.com/echooroom", icon: Twitter },
+  { label: "X", href: "https://x.com/echooroom_?s=11", icon: Twitter },
 ];
 
 export default function Footer() {
