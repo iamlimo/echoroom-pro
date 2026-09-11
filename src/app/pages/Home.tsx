@@ -9,7 +9,7 @@ const SOCIAL_LINKS = [
   { label: "LinkedIn", href: "https://www.linkedin.com/company/echooroom", icon: Linkedin },
   { label: "YouTube", href: "https://www.youtube.com/@echooroom", icon: Youtube },
   { label: "TikTok", href: "https://www.tiktok.com/@echooroom", icon: Music2 },
-  { label: "X", href: "https://x.com/echooroom", icon: Twitter },
+  { label: "X", href: "https://x.com/echooroom_?s=11", icon: Twitter },
 ];
 
 const INDUSTRIES = [

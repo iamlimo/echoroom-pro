@@ -519,7 +519,7 @@ export default function Services() {
       {/* Footer strip */}
       <div className="bg-background border-t border-border px-6 md:px-12 py-8 max-w-[1400px] mx-auto">
         <div className="flex flex-col sm:flex-row justify-between gap-2">
-          <p className="font-mono text-[10px] text-muted-foreground tracking-wide">© 2024 EchooRoom Studio Ltd. All rights reserved.</p>
+          <p className="font-mono text-[10px] text-muted-foreground tracking-wide">© 2026 EchooRoom Studio Ltd. All rights reserved.</p>
           <p className="font-mono text-[10px] text-muted-foreground tracking-wide">6 Core Service Pillars · Enterprise Profile & Service Catalogue</p>
         </div>
       </div>
