@@ -20,8 +20,8 @@ export default function BlogPost() {
       return;
     }
 
-    const search = new URLSearchParams(location.search)
-    const preview = search.get('preview') === 'true'
+    const search = new URLSearchParams(location.search);
+    const preview = search.get('preview') === 'true';
 
     (async () => {
       try {
