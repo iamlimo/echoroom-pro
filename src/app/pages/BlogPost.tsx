@@ -7,6 +7,7 @@ import PortableText from "../../components/PortableText";
 export default function BlogPost() {
   const params = useParams();
   const navigate = useNavigate();
+  const location = useLocation();
   const slug = params.slug as string | undefined;
 
   const [post, setPost] = useState<BlogPost | null>(null);
@@ -36,7 +37,7 @@ export default function BlogPost() {
     return () => {
       mounted = false;
     };
-  }, [slug]);
+  }, [slug, location.search]);
 
   usePageMeta({
     title: post?.title ? `${post.title} | EchooRoom` : "Blog | EchooRoom",
