@@ -4,8 +4,8 @@ import { usePageMeta } from "../hooks/usePageMeta";
 
 export default function Blog() {
   usePageMeta({
-    title: "Our Opinion| Insights on Marketing & Branding | EchooRoom",
-    description: "Explore EchooRoom’s opinions and insights on marketing, advertising, branding, creativity, media and business growth in Nigeria and across Africa.",
+    title: "Blog | Insights on Marketing & Branding | EchooRoom",
+    description: "Fresh insights and stories about marketing, branding, creativity, and advertising from the EchooRoom team.",
     url: "https://echooroom.com/blog",
   });
 
