@@ -15,7 +15,7 @@ const formatDate = (value?: string) => {
 
 export default function Blog() {
   usePageMeta({
-    title: "Blog | Insights on Marketing & Branding | EchooRoom",
+    title: "Our Opinions | Insights on Marketing & Branding | EchooRoom",
     description:
       "Fresh insights and stories about marketing, branding, creativity, and advertising from the EchooRoom team.",
     url: "https://echooroom.com/blog",
