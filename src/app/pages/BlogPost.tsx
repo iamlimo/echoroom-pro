@@ -40,7 +40,7 @@ export default function BlogPost() {
   }, [slug, location.search]);
 
   usePageMeta({
-    title: post?.title ? `${post.title} | EchooRoom` : "Blog | EchooRoom",
+    title: post?.title ? `${post.title} | EchooRoom` : "Our Opininon | EchooRoom",
     description: post?.excerpt || "EchooRoom blog",
   });
 
