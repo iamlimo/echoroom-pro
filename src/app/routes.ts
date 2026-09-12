@@ -7,6 +7,7 @@ import About from "./pages/About";
 import Team from "./pages/Team";
 import Shows from "./pages/Shows";
 import Blog from "./pages/Blog";
+import BlogPost from "./pages/BlogPost";
 
 export const router = createBrowserRouter([
   {
@@ -20,6 +21,7 @@ export const router = createBrowserRouter([
       { path: "studio", Component: Studio },
       { path: "shows", Component: Shows },
       { path: "blog", Component: Blog },
+      { path: "blog/:slug", Component: BlogPost },
     ],
   },
 ]);
