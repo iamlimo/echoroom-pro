@@ -78,7 +78,9 @@ export default function Bio() {
             </div>
 
             <p className="text-center font-mono text-[10px] uppercase tracking-[0.35em] text-[#d9d5cf]">
-              Africa&apos;s home of real stories
+             Integrated Marketing and Advertising Agency in Lagos, Nigeria
+
+
             </p>
 
             <h1 className="mt-4 text-center text-5xl font-black tracking-[-0.06em] text-white sm:text-6xl">
@@ -86,9 +88,7 @@ export default function Bio() {
             </h1>
 
             <p className="mt-5 text-center text-[15px] leading-relaxed text-[#d9d5cf]">
-              EchooRoom is a storytelling and media platform spotlighting real culture,
-              voices, conversations, and experiences that move people across Africa and
-              beyond.
+            EchooRoom is a creative, marketing, and advertising agency helping organisations build stronger brands through strategy, digital marketing, content production, PR, media, and experiential campaigns.
             </p>
 
             <div className="mt-8">
