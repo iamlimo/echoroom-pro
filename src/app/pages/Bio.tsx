@@ -78,7 +78,7 @@ export default function Bio() {
             </div>
 
             <p className="text-center font-mono text-[10px] uppercase tracking-[0.35em] text-[#d9d5cf]">
-             Integrated Marketing and Advertising Agency in Lagos, Nigeria
+             Integrated Marketing and Advertising Agency
 
 
             </p>
