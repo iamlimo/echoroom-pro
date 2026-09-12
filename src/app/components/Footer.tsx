@@ -30,6 +30,9 @@ export default function Footer() {
           <a href="/about" className="text-sm text-muted-foreground hover:text-foreground transition-colors tracking-wide">
             About
           </a>
+          <a href="/bio" className="text-sm text-muted-foreground hover:text-foreground transition-colors tracking-wide">
+            Bio
+          </a>
           <a href="/services" className="text-sm text-muted-foreground hover:text-foreground transition-colors tracking-wide">
             Services
           </a>
