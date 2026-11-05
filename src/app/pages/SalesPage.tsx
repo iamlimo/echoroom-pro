@@ -42,6 +42,7 @@ const serviceCards = [
 
 export default function SalesPage() {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const [selectedFileName, setSelectedFileName] = useState<string>("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -99,6 +100,7 @@ export default function SalesPage() {
         preferredChannel: "",
       });
       setSelectedFile(null);
+      setSelectedFileName("");
     } catch (submissionError) {
       setError(
         submissionError instanceof Error
@@ -326,7 +328,7 @@ export default function SalesPage() {
                   >
                     <span className="flex items-center gap-2 font-medium">
                       <Upload size={16} />
-                      {selectedFile ? selectedFile : "Upload brief or reference files"}
+                      {selectedFileName || "Upload brief or reference files"}
                     </span>
                     <span className="rounded-full border border-[#d7d4d1] px-2 py-1 text-[10px] uppercase tracking-[0.12em] text-[#171717]/70">
                       PDF / DOC / JPG
@@ -340,6 +342,7 @@ export default function SalesPage() {
                     onChange={(event) => {
                       const file = event.target.files?.[0] ?? null;
                       setSelectedFile(file);
+                      setSelectedFileName(file ? file.name : "");
                     }}
                   />
                 </div>
