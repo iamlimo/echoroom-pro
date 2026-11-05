@@ -1,6 +1,6 @@
-const fs = require('fs');
-const nodemailer = require('nodemailer');
-const formidable = require('formidable');
+import fs from 'node:fs/promises';
+import nodemailer from 'nodemailer';
+import formidable from 'formidable';
 
 const DEFAULT_EMAIL = 'echooroom.enquiries@starkscpl.com';
 
@@ -9,7 +9,7 @@ function normalizeValue(value) {
   return value || '';
 }
 
-module.exports = async function contactHandler(req, res) {
+export default async function contactHandler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
@@ -109,7 +109,7 @@ module.exports = async function contactHandler(req, res) {
 
     const attachments = [];
     if (uploadedFile) {
-      const fileContents = await fs.promises.readFile(uploadedFile.filepath);
+      const fileContents = await fs.readFile(uploadedFile.filepath);
       attachments.push({
         filename: briefFileName,
         content: fileContents,
@@ -133,4 +133,4 @@ module.exports = async function contactHandler(req, res) {
     console.error('Send mail error', error);
     res.status(500).json({ error: 'Server error' });
   }
-};
+}
