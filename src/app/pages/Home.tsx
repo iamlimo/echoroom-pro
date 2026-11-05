@@ -712,10 +712,10 @@ function Contact() {
                   Email
                 </p>
                 <a
-                  href="mailto:Echooroom@starksltd.com"
+                  href="mailto:echooroom.agency@starkscpl.com"
                   className="text-foreground hover:text-primary transition-colors"
                 >
-                  Echooroom@starksltd.com
+                  echooroom.agency@starkscpl.com
                 </a>
               </div>
               <div>

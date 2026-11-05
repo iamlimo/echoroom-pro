@@ -129,11 +129,11 @@ export default function Bio() {
 
             <div className="mt-8 flex justify-center">
               <a
-                href="mailto:Echooroom@starksltd.com"
+                href="mailto:echooroom.agency@starkscpl.com"
                 className="inline-flex items-center gap-2 rounded-md border border-white/10 bg-[#111821]/80 px-3 py-2 text-xs text-[#e7e1db] transition-colors hover:border-[#f58c2d]/50 hover:text-white"
               >
                 <Mail size={12} className="text-[#f58c2d]" />
-                Echooroom@starksltd.com
+                echooroom.agency@starkscpl.com
               </a>
             </div>
           </div>

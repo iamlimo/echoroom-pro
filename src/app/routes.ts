@@ -9,6 +9,7 @@ import Shows from "./pages/Shows";
 import Blog from "./pages/Blog";
 import BlogPost from "./pages/BlogPost";
 import Bio from "./pages/Bio";
+import SalesPage from "./pages/SalesPage";
 
 export const router = createBrowserRouter([
   {
@@ -23,6 +24,7 @@ export const router = createBrowserRouter([
       { path: "shows", Component: Shows },
       { path: "blog", Component: Blog },
       { path: "blog/:slug", Component: BlogPost },
+      { path: "sales", Component: SalesPage },
     ],
   },
   { path: "/bio", Component: Bio },
