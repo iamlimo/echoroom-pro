@@ -1,3 +1,4 @@
+import { useState } from "react";
 import {
   ArrowRight,
   ArrowUpRight,
@@ -6,7 +7,11 @@ import {
   MessageSquareText,
   PenLine,
   Sparkles,
+  Upload,
 } from "lucide-react";
+import { Button } from "../components/ui/button";
+import { Input } from "../components/ui/input";
+import { Textarea } from "../components/ui/textarea";
 
 const serviceCards = [
   {
@@ -36,6 +41,75 @@ const serviceCards = [
 ];
 
 export default function SalesPage() {
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    company: "",
+    budget: "",
+    projectGoals: "",
+    timeline: "",
+    preferredChannel: "",
+  });
+
+  const handleChange = (
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
+    const { name, value } = event.target;
+    setFormData((current) => ({ ...current, [name]: value }));
+  };
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    setError(null);
+    setIsSubmitting(true);
+
+    try {
+      const payload = new FormData();
+
+      Object.entries(formData).forEach(([key, value]) => {
+        payload.append(key, value);
+      });
+
+      if (selectedFile) {
+        payload.append("brief", selectedFile);
+      }
+
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        body: payload,
+      });
+
+      if (!response.ok) {
+        const message = await response.text();
+        throw new Error(message || "Unable to send your brief right now.");
+      }
+
+      setIsSuccess(true);
+      setFormData({
+        name: "",
+        email: "",
+        company: "",
+        budget: "",
+        projectGoals: "",
+        timeline: "",
+        preferredChannel: "",
+      });
+      setSelectedFile(null);
+    } catch (submissionError) {
+      setError(
+        submissionError instanceof Error
+          ? submissionError.message
+          : "Unable to send your brief right now.",
+      );
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   return (
     <div className="min-h-screen bg-[#f3f1ee] text-[#171717]">
       <main className="mx-auto max-w-[1280px] px-5 pt-24 md:px-8 lg:px-10">
@@ -54,9 +128,12 @@ export default function SalesPage() {
                 Strategy, content, advertising and campaigns that turn attention into growth.
               </p>
 
-              <button className="mt-8 inline-flex items-center gap-2 bg-[#f4d90d] px-6 py-3 text-sm font-bold text-[#111111] shadow-[inset_0_0_0_1px_rgba(0,0,0,0.15)] transition-transform hover:-translate-y-0.5">
-                Start a Project
-              </button>
+              <a
+                href="#brief-form"
+                className="mt-8 inline-flex items-center gap-2 bg-[#f4d90d] px-6 py-3 text-sm font-bold text-[#111111] shadow-[inset_0_0_0_1px_rgba(0,0,0,0.15)] transition-transform hover:-translate-y-0.5"
+              >
+                Start a Project <ArrowRight size={15} />
+              </a>
             </div>
 
             <div className="relative h-[380px] overflow-hidden md:h-[460px]">
@@ -119,9 +196,181 @@ export default function SalesPage() {
               </p>
             </div>
 
-            <button className="inline-flex items-center justify-center bg-[#111111] px-6 py-3 text-sm font-bold uppercase tracking-[0.02em] text-white transition-transform hover:-translate-y-0.5">
+            <a
+              href="#brief-form"
+              className="inline-flex items-center justify-center bg-[#111111] px-6 py-3 text-sm font-bold uppercase tracking-[0.02em] text-white transition-transform hover:-translate-y-0.5"
+            >
               Submit Your Brief
-            </button>
+            </a>
+          </div>
+        </section>
+
+        <section id="brief-form" className="pb-16 pt-4 md:pb-20">
+          <div className="overflow-hidden rounded-[28px] border border-[#d7d4d1] bg-[#f8f7f5] p-4 md:p-8">
+            <div className="grid gap-8 lg:grid-cols-[0.9fr_1.4fr] lg:items-start">
+              <div className="rounded-[22px] bg-[#171717] p-6 text-white md:p-7">
+                <p className="font-mono text-[11px] uppercase tracking-[0.24em] text-white/70">
+                  Project brief
+                </p>
+                <h3 className="mt-4 text-[2rem] font-black leading-none tracking-[-0.06em] text-white">
+                  Share your goals.
+                </h3>
+                <p className="mt-4 text-sm leading-relaxed text-white/75">
+                  Tell us what you need, your timeline, and any reference materials. We’ll use this to match the right team and next steps.
+                </p>
+
+                <ul className="mt-6 space-y-3 text-sm text-white/80">
+                  <li>• Brand objectives and campaign focus</li>
+                  <li>• Audience, channels and target markets</li>
+                  <li>• Timeline, budget and deliverables</li>
+                  <li>• Supporting files, references and notes</li>
+                </ul>
+              </div>
+
+              <form
+                onSubmit={handleSubmit}
+                className="grid gap-5 rounded-[20px] border border-[#d7d4d1] bg-white p-4 md:p-6"
+              >
+                <div className="grid gap-5 md:grid-cols-2">
+                  <label className="grid gap-2 text-sm font-medium text-[#171717]">
+                    Full name
+                    <Input
+                      name="name"
+                      value={formData.name}
+                      onChange={handleChange}
+                      placeholder="Your name"
+                      required
+                      className="h-11 rounded-xl border-[#d7d4d1] bg-[#f8f7f5]"
+                    />
+                  </label>
+
+                  <label className="grid gap-2 text-sm font-medium text-[#171717]">
+                    Email address
+                    <Input
+                      name="email"
+                      type="email"
+                      value={formData.email}
+                      onChange={handleChange}
+                      placeholder="you@company.com"
+                      required
+                      className="h-11 rounded-xl border-[#d7d4d1] bg-[#f8f7f5]"
+                    />
+                  </label>
+                </div>
+
+                <div className="grid gap-5 md:grid-cols-2">
+                  <label className="grid gap-2 text-sm font-medium text-[#171717]">
+                    Company
+                    <Input
+                      name="company"
+                      value={formData.company}
+                      onChange={handleChange}
+                      placeholder="Your company"
+                      className="h-11 rounded-xl border-[#d7d4d1] bg-[#f8f7f5]"
+                    />
+                  </label>
+
+                  <label className="grid gap-2 text-sm font-medium text-[#171717]">
+                    Budget range
+                    <Input
+                      name="budget"
+                      value={formData.budget}
+                      onChange={handleChange}
+                      placeholder="e.g. $10k - $25k"
+                      className="h-11 rounded-xl border-[#d7d4d1] bg-[#f8f7f5]"
+                    />
+                  </label>
+                </div>
+
+                <label className="grid gap-2 text-sm font-medium text-[#171717]">
+                  Project goals and brief
+                  <Textarea
+                    name="projectGoals"
+                    value={formData.projectGoals}
+                    onChange={handleChange}
+                    rows={5}
+                    required
+                    placeholder="Tell us about your brand, target audience, objectives, campaign scope, and any timing or deliverable needs."
+                    className="rounded-xl border-[#d7d4d1] bg-[#f8f7f5] text-sm"
+                  />
+                </label>
+
+                <div className="grid gap-5 md:grid-cols-[1.1fr_0.9fr]">
+                  <label className="grid gap-2 text-sm font-medium text-[#171717]">
+                    Timeline
+                    <Input
+                      name="timeline"
+                      value={formData.timeline}
+                      onChange={handleChange}
+                      placeholder="e.g. 6-8 weeks"
+                      className="h-11 rounded-xl border-[#d7d4d1] bg-[#f8f7f5]"
+                    />
+                  </label>
+
+                  <label className="grid gap-2 text-sm font-medium text-[#171717]">
+                    Preferred channel
+                    <Input
+                      name="preferredChannel"
+                      value={formData.preferredChannel}
+                      onChange={handleChange}
+                      placeholder="Social, PR, Content, Events"
+                      className="h-11 rounded-xl border-[#d7d4d1] bg-[#f8f7f5]"
+                    />
+                  </label>
+                </div>
+
+                <div className="rounded-[16px] border border-dashed border-[#bdb6af] bg-[#f8f7f5] p-4">
+                  <label
+                    htmlFor="brief-upload"
+                    className="flex cursor-pointer items-center justify-between gap-4 rounded-xl border border-transparent bg-white px-3 py-3 text-sm text-[#171717] shadow-sm"
+                  >
+                    <span className="flex items-center gap-2 font-medium">
+                      <Upload size={16} />
+                      {selectedFile ? selectedFile : "Upload brief or reference files"}
+                    </span>
+                    <span className="rounded-full border border-[#d7d4d1] px-2 py-1 text-[10px] uppercase tracking-[0.12em] text-[#171717]/70">
+                      PDF / DOC / JPG
+                    </span>
+                  </label>
+                  <input
+                    id="brief-upload"
+                    type="file"
+                    className="hidden"
+                    accept=".pdf,.doc,.docx,.ppt,.pptx,.png,.jpg,.jpeg"
+                    onChange={(event) => {
+                      const file = event.target.files?.[0] ?? null;
+                      setSelectedFile(file);
+                    }}
+                  />
+                </div>
+
+                <div className="flex flex-col gap-4 pt-2 sm:flex-row sm:items-center sm:justify-between">
+                  <p className="text-xs leading-relaxed text-[#171717]/60">
+                    By sending this brief, you agree to be contacted about your project request.
+                  </p>
+
+                  <Button
+                    type="submit"
+                    disabled={isSubmitting}
+                    className="h-12 rounded-xl bg-[#111111] px-6 text-sm font-bold text-white hover:bg-[#111111]/90 disabled:cursor-not-allowed disabled:opacity-70"
+                  >
+                    {isSubmitting ? "Sending…" : "Send Brief"}
+                  </Button>
+                </div>
+
+                {isSuccess && (
+                  <div className="rounded-xl border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm text-emerald-700">
+                    Your brief has been sent successfully. We’ll be in touch soon.
+                  </div>
+                )}
+
+                {error && (
+                  <div className="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
+                    {error}
+                  </div>
+                )}
+              </form>
+            </div>
           </div>
         </section>
       </main>

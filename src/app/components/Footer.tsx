@@ -62,8 +62,8 @@ export default function Footer() {
           ))}
         </div>
 
-        <a href="mailto:echooroom.agency@starkscpl.com" className="font-mono text-xs text-muted-foreground hover:text-primary transition-colors tracking-wide">
-          echooroom.agency@starkscpl.com
+        <a href="mailto:echooroom.enquiries@starkscpl.com" className="font-mono text-xs text-muted-foreground hover:text-primary transition-colors tracking-wide">
+          echooroom.enquiries@starkscpl.com
         </a>
       </div>
       <div className="mt-10 pt-6 border-t border-border flex flex-col sm:flex-row justify-between gap-2">

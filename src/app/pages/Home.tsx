@@ -668,7 +668,7 @@ function Contact() {
     setLoading(true);
 
     try {
-      const resp = await fetch("/.netlify/functions/contact", {
+      const resp = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form),
@@ -712,10 +712,10 @@ function Contact() {
                   Email
                 </p>
                 <a
-                  href="mailto:echooroom.agency@starkscpl.com"
+                  href="mailto:echooroom.enquiries@starkscpl.com"
                   className="text-foreground hover:text-primary transition-colors"
                 >
-                  echooroom.agency@starkscpl.com
+                  echooroom.enquiries@starkscpl.com
                 </a>
               </div>
               <div>

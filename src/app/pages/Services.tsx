@@ -504,10 +504,10 @@ export default function Services() {
                   Book your alignment brief <ArrowRight size={15} />
                 </button>
                 <a
-                  href="mailto:echooroom.agency@starkscpl.com"
+                  href="mailto:echooroom.enquiries@starkscpl.com"
                   className="inline-flex items-center justify-center gap-2 border border-primary-foreground/30 text-primary-foreground px-7 py-4 text-sm tracking-wide hover:border-primary-foreground/60 transition-colors"
                 >
-                  echooroom.agency@starkscpl.com <ArrowUpRight size={14} />
+                  echooroom.enquiries@starkscpl.com <ArrowUpRight size={14} />
                 </a>
                 <WhatsAppButton variant="outline" size="md" message="Hi EchooRoom, I'd like to discuss our marketing needs." className="border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10" />
               </div>

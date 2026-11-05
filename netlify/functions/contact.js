@@ -1,6 +1,6 @@
 const nodemailer = require('nodemailer');
 
-const DEFAULT_EMAIL = 'echooroom.agency@starkscpl.com';
+const DEFAULT_EMAIL = 'echooroom.enquiries@starkscpl.com';
 
 exports.handler = async function (event) {
   if (event.httpMethod !== 'POST') {
@@ -9,9 +9,21 @@ exports.handler = async function (event) {
 
   try {
     const data = JSON.parse(event.body || '{}');
-    const { name, email, company, size, message } = data;
+    const {
+      name,
+      email,
+      company,
+      budget,
+      projectGoals,
+      timeline,
+      preferredChannel,
+      briefFileName,
+      message,
+    } = data;
 
-    if (!name || !email || !message) {
+    const requiredMessage = message || projectGoals;
+
+    if (!name || !email || !requiredMessage) {
       return { statusCode: 400, body: 'Missing required fields' };
     }
 
@@ -36,16 +48,40 @@ exports.handler = async function (event) {
     });
 
     const recipient = process.env.RECIPIENT_EMAIL || DEFAULT_EMAIL;
-    const subject = `Website contact from ${name}`;
-    const text = `Name: ${name}\nEmail: ${email}\nCompany: ${company || ''}\nSize: ${size || ''}\n\nMessage:\n${message}`;
+    const subject = `New project brief from ${name}`;
+    const text = [
+      `Name: ${name}`,
+      `Email: ${email}`,
+      `Company: ${company || ''}`,
+      `Budget: ${budget || ''}`,
+      `Timeline: ${timeline || ''}`,
+      `Preferred channel: ${preferredChannel || ''}`,
+      `Attachment: ${briefFileName || 'None'}`,
+      '',
+      'Project brief:',
+      requiredMessage,
+    ].join('\n');
+
+    const html = `
+      <p><strong>Name:</strong> ${name}</p>
+      <p><strong>Email:</strong> ${email}</p>
+      <p><strong>Company:</strong> ${company || ''}</p>
+      <p><strong>Budget:</strong> ${budget || ''}</p>
+      <p><strong>Timeline:</strong> ${timeline || ''}</p>
+      <p><strong>Preferred channel:</strong> ${preferredChannel || ''}</p>
+      <p><strong>Attachment:</strong> ${briefFileName || 'None'}</p>
+      <hr />
+      <p><strong>Project brief:</strong></p>
+      <p>${(requiredMessage || '').replace(/\n/g, '<br/>')}</p>
+    `;
 
     const info = await transporter.sendMail({
-      from: process.env.SMTP_FROM || smtpUser,
+      from: process.env.SMTP_FROM || `EchooRoom Enquiries <${smtpUser}>`,
       replyTo: email,
       to: recipient,
       subject,
       text,
-      html: `<p><strong>Name:</strong> ${name}</p><p><strong>Email:</strong> ${email}</p><p><strong>Company:</strong> ${company || ''}</p><p><strong>Size:</strong> ${size || ''}</p><hr/><p>${message.replace(/\n/g, '<br/>')}</p>`,
+      html,
     });
 
     console.log('Email sent', info.messageId);
